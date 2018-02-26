@@ -1,0 +1,14 @@
+function [a,b,c] = parametre_sp6(x,y)
+G = 6.67259e-11;
+M = 5.974e24;
+m = 7.348e22;
+mustar = M/(m+M);
+mu = m/(m+M);
+L = 3.844e8;
+l = 4.669e6;
+Omega = 2.661e-6;
+r1 = ((x+l)^2+y^2)^(1/2);
+r2 = ((L-l-x)^2+y^2)^(1/2);
+a = Omega^2-G*M/r1^3-G*m/r2^3;
+b = -G*M*mu*L/r1^3+G*m*mustar*L/r2^3;
+c = Omega^2-G*M/r1^3-G*m/r2^3;

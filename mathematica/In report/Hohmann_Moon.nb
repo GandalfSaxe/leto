@@ -1,0 +1,1549 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     59864,       1540]
+NotebookOptionsPosition[     55488,       1384]
+NotebookOutlinePosition[     56249,       1411]
+CellTagsIndexPosition[     56206,       1408]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quiet", "@", 
+  RowBox[{"Remove", "[", "\"\<`*\>\"", "]"}]}]], "Input",
+ CellChangeTimes->{{3.64277559233116*^9, 3.642775593268837*^9}}],
+
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{
+   RowBox[{"SelectedNotebook", "[", "]"}], ",", 
+   RowBox[{"PrintingStyleEnvironment", "\[Rule]", "\"\<Printout\>\""}], ",", 
+   RowBox[{"ShowSyntaxStyles", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6427755989529552`*^9, 3.6427755989639997`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Setup", "Section",
+ CellChangeTimes->{{3.642409889333692*^9, 3.642409889916172*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Pariapsis", ":", " ", 
+   RowBox[{
+   "Point", " ", "of", " ", "least", " ", "distance", " ", "in", " ", 
+    "elliptical", " ", "orbit", "\[IndentingNewLine]", "Apoapsis"}], ":", " ", 
+   RowBox[{
+   "Point", " ", "of", " ", "greatest", " ", "distance", " ", "in", " ", 
+    "elliptical", " ", "orbit"}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.642412579230541*^9, 3.6424126196956787`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Mu]E", "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{
+    RowBox[{
+     TemplateBox[{Null},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{
+           StyleBox[
+            StyleBox["\"G\"", Italic, StripOnInput -> False], 
+            "QuantityUnitTraditionalInput"]}], ShowStringCharacters -> False],
+         "Unit: Newtonian gravitational constants"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{"1", ",", "\"GravitationalConstant\""}], "]"}]& )], "*", 
+     RowBox[{"PlanetData", "[", 
+      RowBox[{
+       TemplateBox[{"\"Earth\"",RowBox[{"Entity", "[", 
+           RowBox[{"\"Planet\"", ",", "\"Earth\""}], "]"}],
+         "\"Entity[\\\"Planet\\\", \\\"Earth\\\"]\"","\"planet\""},
+        "Entity"], ",", " ", "\"\<Mass\>\""}], "]"}]}], ",", 
+    "\"\<km^3/s^2\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6424099749001207`*^9, 3.6424099828026342`*^9}, 
+   3.6426204912176247`*^9, {3.642624814633383*^9, 3.642624830828034*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"398574.9790462400051218295`3.6202376932267666"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          RowBox[{
+            SuperscriptBox["\"km\"", "3"], "\[InvisibleSpace]", "\"/\"", 
+            "\[InvisibleSpace]", 
+            SuperscriptBox["\"s\"", "2"]}]}], 
+        "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+    "Unit: kilometers cubed per second squared"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox[
+        SuperscriptBox["\"Kilometers\"", "3"], 
+        SuperscriptBox["\"Seconds\"", "2"]]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.6424093482094107`*^9, {3.64240945634735*^9, 3.6424094688085318`*^9}, 
+   3.6424099845544147`*^9, 3.6424117420552883`*^9, 3.642620492982338*^9, {
+   3.6426248192864647`*^9, 3.642624832271042*^9}, 3.642625602971245*^9, 
+   3.6426260265988617`*^9, {3.642629971042346*^9, 3.642629973291834*^9}, 
+   3.642631334825527*^9, 3.642631392458865*^9, {3.6426314338880167`*^9, 
+   3.642631451002193*^9}, {3.642631556645619*^9, 3.6426315810984497`*^9}, 
+   3.642654713069709*^9, 3.642658077704217*^9, 3.642658648794697*^9, 
+   3.64267590280949*^9, 3.64267954817666*^9, 3.642721175360421*^9, 
+   3.642775831049653*^9, 3.64285422233853*^9, 3.642854382587484*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Mu]M", "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{
+    RowBox[{
+     TemplateBox[{Null},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{
+           StyleBox[
+            StyleBox["\"G\"", Italic, StripOnInput -> False], 
+            "QuantityUnitTraditionalInput"]}], ShowStringCharacters -> False],
+         "Unit: Newtonian gravitational constants"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{"1", ",", "\"GravitationalConstant\""}], "]"}]& )], "*", 
+     RowBox[{"PlanetaryMoonData", "[", 
+      RowBox[{
+       TemplateBox[{"\"Moon\"",RowBox[{"Entity", "[", 
+           RowBox[{"\"PlanetaryMoon\"", ",", "\"Moon\""}], "]"}],
+         "\"Entity[\\\"PlanetaryMoon\\\", \\\"Moon\\\"]\"",
+         "\"planetary moon\""},
+        "Entity"], ",", " ", "\"\<Mass\>\""}], "]"}]}], ",", 
+    "\"\<km^3/s^2\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6426204882494164`*^9, 3.6426204991706123`*^9}, {
+  3.642624845528604*^9, 3.642624848287203*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"4902.5365475772377843742`3.6023344869080733"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          RowBox[{
+            SuperscriptBox["\"km\"", "3"], "\[InvisibleSpace]", "\"/\"", 
+            "\[InvisibleSpace]", 
+            SuperscriptBox["\"s\"", "2"]}]}], 
+        "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+    "Unit: kilometers cubed per second squared"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox[
+        SuperscriptBox["\"Kilometers\"", "3"], 
+        SuperscriptBox["\"Seconds\"", "2"]]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642620500534088*^9, 3.6426248550820913`*^9, 3.642625603392025*^9, 
+   3.642626027076293*^9, 3.642629974166613*^9, 3.642631335363542*^9, 
+   3.642631392835363*^9, {3.642631434556085*^9, 3.642631451592176*^9}, {
+   3.6426315570704117`*^9, 3.6426315815920773`*^9}, 3.6426547135063066`*^9, 
+   3.6426580783145247`*^9, 3.642658649297669*^9, 3.642675903513452*^9, 
+   3.642679548591916*^9, 3.642721176016349*^9, 3.642775831726672*^9, 
+   3.642854222831061*^9, 3.6428543830678873`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Distance", " ", "of", " ", 
+    RowBox[{"Satellite", "'"}], "s", " ", "cicular", " ", "orbit", " ", 
+    "around", " ", "Earth", " ", "in", " ", "Earth", " ", "system"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"r1", "=", 
+   RowBox[{
+    RowBox[{"PlanetData", "[", 
+     RowBox[{
+      TemplateBox[{"\"Earth\"",RowBox[{"Entity", "[", 
+          RowBox[{"\"Planet\"", ",", "\"Earth\""}], "]"}],
+        "\"Entity[\\\"Planet\\\", \\\"Earth\\\"]\"","\"planet\""},
+       "Entity"], ",", " ", "\"\<Radius\>\""}], "]"}], " ", "+", " ", 
+    TemplateBox[{"160"},
+     "QuantityUnit",
+     DisplayFunction->(TooltipBox[
+       StyleBox[
+        RowBox[{#, "\[InvisibleSpace]", 
+          StyleBox[
+           RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+        ShowStringCharacters -> False], "Unit: kilometers"]& ),
+     InterpretationFunction->(RowBox[{"Quantity", "[", 
+        RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]}]}]}]], "Input",
+ CellChangeTimes->{
+  3.642409316402687*^9, {3.642412387911425*^9, 3.6424123962352533`*^9}, 
+   3.642412519365941*^9, 3.642419050073165*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"6527.4446571`8.31064672769672"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.64240934864462*^9, {3.642409456711337*^9, 3.642409469178485*^9}, 
+   3.6424099868079348`*^9, 3.642411742617138*^9, 3.6426256038516703`*^9, 
+   3.642626027541275*^9, 3.642629974827648*^9, 3.642631335928956*^9, 
+   3.6426313935591497`*^9, {3.642631435073637*^9, 3.6426314521987123`*^9}, {
+   3.6426315574827547`*^9, 3.642631582112063*^9}, 3.642654713972783*^9, 
+   3.642658078691683*^9, 3.6426586498428183`*^9, 3.6426759039046097`*^9, 
+   3.6426795490199757`*^9, 3.642721176685317*^9, 3.642775832266942*^9, 
+   3.642854223651526*^9, 3.642854401032868*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Distance", " ", "of", " ", 
+    RowBox[{"Satellite", "'"}], "s", " ", "elliptical", " ", "orbit", " ", 
+    "around", " ", "Earth", " ", "at", " ", "apoapsis", " ", "in", " ", 
+    "Earth", " ", "system"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"r2", "=", 
+   RowBox[{"PlanetaryMoonData", "[", 
+    RowBox[{
+     TemplateBox[{"\"Moon\"",RowBox[{"Entity", "[", 
+         RowBox[{"\"PlanetaryMoon\"", ",", "\"Moon\""}], "]"}],
+       "\"Entity[\\\"PlanetaryMoon\\\", \\\"Moon\\\"]\"","\"planetary moon\""},
+      "Entity"], ",", " ", "\"\<AverageDistanceFromEarth\>\""}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.642409326150505*^9, 3.642409411860354*^9}, {
+   3.6424123980933104`*^9, 3.6424124266343184`*^9}, {3.642412493699944*^9, 
+   3.6424125417542753`*^9}, {3.642412629279641*^9, 3.6424126366959343`*^9}, 
+   3.642419056422792*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"384989.892552`3.9868910790445775"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.642409349168704*^9, 3.6424093523447247`*^9}, 
+   3.6424094126119967`*^9, {3.6424094570960903`*^9, 3.642409469569607*^9}, 
+   3.642409987877501*^9, 3.642411743148465*^9, 3.6426256043736057`*^9, 
+   3.642626028065419*^9, 3.642629975336025*^9, 3.642631336415544*^9, 
+   3.642631394022175*^9, {3.64263143553544*^9, 3.6426314527013683`*^9}, {
+   3.642631558092677*^9, 3.6426315826365643`*^9}, 3.642654714481084*^9, 
+   3.6426580790839*^9, 3.642658650325445*^9, 3.642675904384275*^9, 
+   3.642679549576721*^9, 3.642721177427629*^9, 3.642775832801031*^9, 
+   3.6428542242368727`*^9, 3.642854401564118*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Distance", " ", "of", " ", 
+   RowBox[{"Satellite", "'"}], "s", " ", "circular", " ", "orbit", " ", 
+   "around", " ", "Moon", " ", "in", " ", "Moon", " ", "system"}], 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.642625116656583*^9, 3.642625129306409*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"r3", "=", 
+  RowBox[{
+   RowBox[{"PlanetaryMoonData", "[", 
+    RowBox[{
+     TemplateBox[{"\"Moon\"",RowBox[{"Entity", "[", 
+         RowBox[{"\"PlanetaryMoon\"", ",", "\"Moon\""}], "]"}],
+       "\"Entity[\\\"PlanetaryMoon\\\", \\\"Moon\\\"]\"","\"planetary moon\""},
+      "Entity"], ",", " ", "\"\<Radius\>\""}], "]"}], "+", 
+   TemplateBox[{"100"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+       ShowStringCharacters -> False], "Unit: kilometers"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]}]}]], "Input",
+ CellChangeTimes->{{3.6426250983493223`*^9, 3.642625113964367*^9}, {
+  3.642631330727944*^9, 3.6426313313704653`*^9}, {3.642631388098485*^9, 
+  3.642631389104774*^9}, {3.642631431761842*^9, 3.642631449647624*^9}, {
+  3.642631555141006*^9, 3.642631579749432*^9}, {3.642654711039012*^9, 
+  3.642654711661338*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"1837.5`5.024302534494081"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642625134199977*^9, 3.642625604821952*^9, 3.642626028703588*^9, 
+   3.642629975805091*^9, 3.642631336962263*^9, 3.6426313945356607`*^9, {
+   3.642631436046501*^9, 3.642631453235333*^9}, {3.6426315589817953`*^9, 
+   3.642631583204419*^9}, 3.642654714952895*^9, 3.642658079952132*^9, 
+   3.6426586510830517`*^9, 3.642675904774839*^9, 3.6426795500512857`*^9, 
+   3.6427211780768547`*^9, 3.642775833173773*^9, 3.642854224688676*^9, 
+   3.642854402121855*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Hohmann transfer orbit to the Moon", "Section",
+ CellChangeTimes->{{3.642409904877192*^9, 3.642409909251944*^9}, {
+  3.64242148956658*^9, 3.642421494228875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Impulse A", "Subsection",
+ CellChangeTimes->{{3.642410208411675*^9, 3.642410213258315*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Speed", " ", "in", " ", "circular", " ", "orbit"}], ",", " ", 
+    RowBox[{"distance", " ", "r1"}], ",", " ", 
+    RowBox[{
+    "at", " ", "point", " ", "A", " ", "in", " ", "Earth", " ", "system"}]}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"vEarth", "=", 
+   SqrtBox[
+    FractionBox["\[Mu]E", "r1"]]}]}]], "Input",
+ CellChangeTimes->{{3.6424099443627167`*^9, 3.6424099629545803`*^9}, {
+   3.642411901886677*^9, 3.642411940700444*^9}, {3.6424190500813026`*^9, 
+   3.642419050085829*^9}, 3.642419095194771*^9, 3.642625530278558*^9, {
+   3.642854214640149*^9, 3.642854245067251*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"7.81418010431590570239955205060984478787`3.92125883017335"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.642409965602565*^9, 3.642409988851129*^9}, 
+   3.642410078995578*^9, 3.642411743258903*^9, 3.6426256048766823`*^9, 
+   3.6426260287452593`*^9, 3.642629975870075*^9, 3.642631337007744*^9, 
+   3.6426313945882673`*^9, {3.642631436164714*^9, 3.642631453295788*^9}, {
+   3.642631559097624*^9, 3.642631583261922*^9}, 3.642654715083972*^9, 
+   3.642658080013083*^9, 3.642658651144534*^9, 3.6426759048312674`*^9, 
+   3.6426795501940403`*^9, 3.642721178238326*^9, 3.6427758332246237`*^9, 
+   3.6428544022570353`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Speed", " ", "in", " ", "elliptical", " ", "orbit"}], ",", " ", 
+    RowBox[{"distance", " ", "r1"}], ",", " ", 
+    RowBox[{
+    "at", " ", "point", " ", "A", " ", "in", " ", "Earth", " ", "system"}]}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"vp", "=", 
+   SqrtBox[
+    RowBox[{
+     FractionBox["\[Mu]E", "r1"], 
+     FractionBox[
+      RowBox[{"2", "r2"}], 
+      RowBox[{"r1", "+", "r2"}]]}]]}]}]], "Input",
+ CellChangeTimes->{{3.642410085762431*^9, 3.642410120982046*^9}, {
+   3.6424119746841583`*^9, 3.6424119750771847`*^9}, {3.6424190500949497`*^9, 
+   3.6424190564361153`*^9}, 3.642625535467346*^9, {3.642854238946106*^9, 
+   3.642854239147818*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"10.95841086278052194307346292999690431241`3.653483104587825"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642410121942608*^9, 3.6424117433093*^9, 3.642625605010751*^9, 
+   3.642626028803999*^9, 3.642629976023443*^9, 3.642631337062667*^9, 
+   3.642631394710688*^9, {3.64263143621737*^9, 3.642631453348691*^9}, {
+   3.6426315591907578`*^9, 3.642631583324079*^9}, 3.6426547151374273`*^9, 
+   3.642658080074182*^9, 3.642658651197871*^9, 3.64267590489742*^9, 
+   3.6426795502578917`*^9, 3.642721178300252*^9, 3.642775833278923*^9, 
+   3.642854402315042*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Necessary", " ", "\[CapitalDelta]v", " ", "in", " ", "point", " ", "A"}],
+     ",", " ", 
+    RowBox[{
+     RowBox[{"a", " ", "speed"}], "-", 
+     RowBox[{"up", " ", "of", " ", "3.14", " ", 
+      RowBox[{"km", "/", "s"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"\[CapitalDelta]vEarth", "=", 
+   RowBox[{
+    RowBox[{
+     SqrtBox[
+      FractionBox["\[Mu]E", "r1"]], 
+     RowBox[{"(", 
+      RowBox[{
+       SqrtBox[
+        FractionBox[
+         RowBox[{"2", "r2"}], 
+         RowBox[{"r1", "+", "r2"}]]], "-", "1"}], ")"}]}], "//", "N", 
+    RowBox[{"(*", 
+     RowBox[{"vp", "-", "vEarth"}], "*)"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.642408455595083*^9, 3.642408468649067*^9}, {
+   3.6424084994400387`*^9, 3.642408509032242*^9}, {3.6424094163598537`*^9, 
+   3.642409443828616*^9}, {3.6424097552819843`*^9, 3.642409756106979*^9}, {
+   3.642410004286848*^9, 3.642410011321319*^9}, {3.642410143958708*^9, 
+   3.642410149061811*^9}, {3.642411977124631*^9, 3.642411998508164*^9}, 
+   3.6424129172456083`*^9, {3.642419050113846*^9, 3.6424190564493313`*^9}, 
+   3.642419095202753*^9, 3.642625537429163*^9, {3.642854249123185*^9, 
+   3.6428542650575733`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"3.1442307584646163`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.6424094166269608`*^9, 3.642409469688095*^9}, 
+   3.6424097564600697`*^9, {3.642410009248004*^9, 3.642410011874083*^9}, 
+   3.642411743360449*^9, 3.642625605077229*^9, 3.6426260288710203`*^9, 
+   3.642629976190564*^9, 3.642631337113755*^9, 3.64263139476523*^9, {
+   3.642631436274734*^9, 3.642631453409747*^9}, {3.642631559281146*^9, 
+   3.64263158337539*^9}, 3.642654715186397*^9, 3.6426580801562243`*^9, 
+   3.642658651253256*^9, 3.642675904951236*^9, 3.642679550312325*^9, 
+   3.642721178375846*^9, 3.64277583338126*^9, 3.642854402388049*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Impulse B   - neglecting circular motion around moon", "Subsection",
+ CellChangeTimes->{{3.6424102165688877`*^9, 3.642410217784965*^9}, {
+  3.642411405302258*^9, 3.642411418588728*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Speed", " ", "in", " ", "elliptical", " ", "orbit"}], ",", " ", 
+    RowBox[{"distance", " ", "r2"}], ",", " ", 
+    RowBox[{
+    "at", " ", "point", " ", "B", " ", "in", " ", "Earth", " ", "system"}]}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"va", "=", 
+   SqrtBox[
+    RowBox[{
+     FractionBox["\[Mu]E", "r2"], 
+     FractionBox[
+      RowBox[{"2", "r1"}], 
+      RowBox[{"r1", "+", "r2"}]]}]]}]}]], "Input",
+ CellChangeTimes->{{3.642410224585115*^9, 3.642410256969791*^9}, {
+   3.6424120419389153`*^9, 3.642412063257504*^9}, {3.642419050131719*^9, 
+   3.642419056469274*^9}, 3.642625540155532*^9, {3.642854281643469*^9, 
+   3.642854281816223*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"0.1857981776155378260255396669656734709`3.653483104587825"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642410259675337*^9, 3.642411743409425*^9, 3.6426256051327887`*^9, 
+   3.642626028927915*^9, 3.642629976323656*^9, 3.642631337165557*^9, 
+   3.6426313948199*^9, {3.642631436329914*^9, 3.642631453465603*^9}, {
+   3.642631559335803*^9, 3.6426315834287243`*^9}, 3.642654715236614*^9, 
+   3.6426580802796507`*^9, 3.6426586513059893`*^9, 3.6426759051064167`*^9, 
+   3.642679550374846*^9, 3.642721178446707*^9, 3.642775833440074*^9, 
+   3.642854402486465*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Speed", " ", "in", " ", "circular", " ", "orbit"}], ",", " ", 
+    RowBox[{"distance", " ", "r2"}], ",", " ", 
+    RowBox[{
+    "at", " ", "point", " ", "B", " ", "in", " ", "Earth", " ", "system", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"i", ".", "e", ".", " ", "speed"}], " ", "of", " ", "the", " ",
+        "Moon", " ", "in", " ", "Earth", " ", "system"}], ")"}]}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"vNoMoon", "=", 
+   SqrtBox[
+    FractionBox["\[Mu]E", "r2"]]}]}]], "Input",
+ CellChangeTimes->{{3.642410263571913*^9, 3.642410269897176*^9}, {
+   3.642412088440566*^9, 3.6424120927760897`*^9}, {3.6424121237112637`*^9, 
+   3.6424121905799427`*^9}, {3.64241905648096*^9, 3.642419056485667*^9}, {
+   3.642620646965918*^9, 3.642620647565116*^9}, 3.6426255422441893`*^9, {
+   3.642625993246285*^9, 3.6426259940299997`*^9}, 3.6428542862019033`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"1.01749047432204235564513231119075321536`3.765968285454865"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642410271372069*^9, 3.6424117434611588`*^9, 3.6424121769693604`*^9, 
+   3.642625605173624*^9, 3.642626029004299*^9, 3.642629976538803*^9, 
+   3.642631337228801*^9, 3.642631394886838*^9, {3.642631436389889*^9, 
+   3.642631453525517*^9}, {3.642631559392952*^9, 3.6426315834771442`*^9}, 
+   3.6426547153068247`*^9, 3.642658080346468*^9, 3.642658651368449*^9, 
+   3.642675905161687*^9, 3.6426795504382553`*^9, 3.642721178502087*^9, 
+   3.6427758334917994`*^9, 3.642854402582445*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.64241220383505*^9, 3.642412204576386*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Change", " ", "of", " ", "speed", " ", "needed", " ", "to", " ", 
+     "\"\<follow along with the moon\>\""}], ",", " ", 
+    RowBox[{
+     RowBox[{"a", " ", "speed"}], "-", 
+     RowBox[{"up", " ", "of", " ", "0.831", " ", 
+      RowBox[{"km", "/", "s"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"\[CapitalDelta]vNoMoon", "=", 
+   RowBox[{
+    RowBox[{
+     SqrtBox[
+      FractionBox["\[Mu]E", "r2"]], 
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{"2", "r1"}], 
+         RowBox[{"r1", "+", "r2"}]]]}], ")"}]}], "//", "N", 
+    RowBox[{"(*", 
+     RowBox[{"v3NoMoon", "-", "v2B"}], "*)"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.642408510848826*^9, 3.6424085272234364`*^9}, {
+   3.642409431627075*^9, 3.642409472758687*^9}, {3.6424097580020027`*^9, 
+   3.642409758393735*^9}, {3.642410016822526*^9, 3.6424100219179363`*^9}, {
+   3.6424101586053543`*^9, 3.642410195140048*^9}, {3.642411489189063*^9, 
+   3.642411495291497*^9}, {3.6424122063332577`*^9, 3.642412244900497*^9}, 
+   3.642412917252967*^9, {3.642419050148465*^9, 3.642419056415937*^9}, {
+   3.642620864311405*^9, 3.642620864557637*^9}, 3.6426255441098757`*^9, {
+   3.6426260014540462`*^9, 3.642626014893465*^9}, 3.6428542935216*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"0.8316922967065046`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642410351811198*^9, 3.6424115046490793`*^9, 3.642411743509877*^9, 
+   3.642625605245708*^9, 3.642626029127036*^9, 3.642629976908854*^9, 
+   3.642631337331036*^9, 3.642631394981125*^9, {3.642631436493503*^9, 
+   3.642631453633111*^9}, {3.642631559494687*^9, 3.642631583580427*^9}, 
+   3.642654715401301*^9, 3.642658080458921*^9, 3.642658651508451*^9, 
+   3.642675905258782*^9, 3.642679550532488*^9, 3.64272117860277*^9, 
+   3.6427758335854273`*^9, 3.642854402769866*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Moon circular orbit correction", "Subsection",
+ CellChangeTimes->{{3.642410357535091*^9, 3.642410361437942*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"However", " ", "we", " ", 
+   RowBox[{"can", "'"}], "t", " ", "follow", " ", "the", " ", "moon", " ", 
+   "stationary", " ", "along", " ", 
+   RowBox[{"it", "'"}], "s", " ", "orbit", " ", "since", " ", "the", " ", 
+   "Moon", " ", "attracts", " ", "the", " ", "satellite", " ", "and", " ", 
+   "it", " ", "would", " ", "crash", " ", "into", " ", "the", " ", 
+   RowBox[{"surface", ".", " ", "We"}], " ", "need", " ", "to", " ", "go", 
+   " ", "into", " ", "a", " ", "circular", " ", "orbit", " ", "around", " ", 
+   "the", " ", "moon"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.642412253700821*^9, 3.642412315897602*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Speed", " ", "v3", " ", "in", " ", "circular", " ", "orbit"}], 
+    ",", " ", 
+    RowBox[{
+    "distance", " ", "100", " ", "km", " ", "above", " ", "the", " ", "Moon", 
+     " ", "surface"}], ",", " ", 
+    RowBox[{"in", " ", "Moon", " ", "system"}]}], "*)"}], " ", 
+  "\[IndentingNewLine]", 
+  RowBox[{"vMoon", "=", 
+   RowBox[{
+    RowBox[{"\[Sqrt]", 
+     RowBox[{"(", 
+      FractionBox["\[Mu]M", "r3"], ")"}]}], "//", "N"}]}]}]], "Input",
+ CellChangeTimes->{{3.6424095609029503`*^9, 3.642409561790303*^9}, {
+  3.6424097730482483`*^9, 3.642409843303338*^9}, {3.642410425651909*^9, 
+  3.6424104434221277`*^9}, {3.642412317432674*^9, 3.642412331897122*^9}, {
+  3.642412373976391*^9, 3.6424123816955843`*^9}, {3.642412698509295*^9, 
+  3.642412702841859*^9}, {3.6426204705424833`*^9, 3.642620472444869*^9}, {
+  3.642620516066359*^9, 3.642620570121303*^9}, {3.642620625239594*^9, 
+  3.642620626615817*^9}, {3.642625110414918*^9, 3.642625111627322*^9}, {
+  3.642854304777782*^9, 3.642854305564435*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"1.6334157770519746`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642411438910858*^9, 3.642411744555606*^9, 3.642620628081093*^9, 
+   3.642625605320972*^9, 3.6426260292314167`*^9, 3.6426299771204567`*^9, 
+   3.642631337390238*^9, 3.6426313950448437`*^9, {3.642631436549528*^9, 
+   3.642631453690583*^9}, {3.6426315595547237`*^9, 3.6426315836329193`*^9}, 
+   3.642654715463871*^9, 3.642658080528775*^9, 3.642658651610592*^9, 
+   3.64267590531536*^9, 3.6426795505916967`*^9, 3.642721178703578*^9, 
+   3.64277583365818*^9, 3.642854403038656*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+  "We", " ", "can", " ", "choose", " ", "to", " ", "add", " ", "or", " ", 
+   "subtract", " ", "this", " ", "value", " ", "to", " ", 
+   "\[CapitalDelta]vBNoMoon", " ", "since", " ", "we", " ", "can", " ", "go", 
+   " ", "around", " ", "in", " ", "orbit", " ", "both", " ", 
+   RowBox[{"ways", ".", " ", "Subtracting"}], " ", "v3", " ", "from", " ", 
+   "\[CapitalDelta]vBNoMoon", " ", "gives", " ", "numerically", " ", "the", 
+   " ", "smallest", " ", "\[CapitalDelta]v", " ", "so", " ", 
+   RowBox[{"that", "'"}], "s", " ", "what", " ", 
+   RowBox[{"we", "'"}], "ll", " ", "do"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.64241270783035*^9, 3.64241279721839*^9}, {
+  3.6426287122913427`*^9, 3.64262871348671*^9}, {3.6426287489729013`*^9, 
+  3.642628778436545*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Change", " ", "in", " ", "speed", " ", "needed", " ", "to", " ", "go", 
+     " ", "from", " ", "geocentric", " ", "elliptical", " ", "orbit", " ", 
+     "to", " ", "circular", " ", "Moon", " ", "orbit"}], ",", " ", 
+    RowBox[{
+     RowBox[{"a", " ", "speed"}], "-", 
+     RowBox[{"down", " ", "of", " ", "0.802", " ", 
+      RowBox[{"km", "/", "s"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"\[CapitalDelta]vMoon", "=", 
+   RowBox[{"\[CapitalDelta]vNoMoon", "-", "vMoon"}]}]}]], "Input",
+ CellChangeTimes->{{3.6424114636160583`*^9, 3.642411502179249*^9}, {
+  3.6424128024578857`*^9, 3.64241289285572*^9}, {3.642625593788288*^9, 
+  3.642625594434705*^9}, {3.642626008949395*^9, 3.64262600980542*^9}, {
+  3.642654631407922*^9, 3.6426546365922823`*^9}, {3.642854309400735*^9, 
+  3.6428543118168364`*^9}, {3.642854347055297*^9, 3.642854347455945*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{RowBox[{"-", "0.80172348034547`"}]},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.642411502662579*^9, 3.642411506530813*^9}, 
+   3.642411744632844*^9, 3.642625605367395*^9, 3.642626029279064*^9, 
+   3.642629977199849*^9, 3.64263133741298*^9, 3.6426313951026773`*^9, {
+   3.642631436600215*^9, 3.642631453756422*^9}, {3.6426315596185913`*^9, 
+   3.642631583753232*^9}, 3.642654637280233*^9, 3.642654715548439*^9, 
+   3.642658080590214*^9, 3.642658651674273*^9, 3.642675905365076*^9, 
+   3.642679550636703*^9, 3.6427211787329483`*^9, 3.642775833712315*^9, 
+   3.64285440319178*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Total", "Subsection",
+ CellChangeTimes->{{3.642410343703341*^9, 3.642410346853854*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Regarding", " ", 
+     RowBox[{"fuel", "/", "energy"}], " ", "cost"}], ",", " ", 
+    RowBox[{
+     RowBox[{"we", "'"}], "re", " ", "interested", " ", "in", " ", "in", " ", 
+     "how", " ", "much", " ", "we", " ", "need", " ", "to", " ", "change", 
+     " ", "the", " ", "speed"}], ",", " ", 
+    RowBox[{"irregardless", " ", "of", " ", 
+     RowBox[{"directio", ".", " ", "Total"}], " ", "\[CapitalDelta]v", " ", 
+     "for", " ", "the", " ", "whole", " ", 
+     RowBox[{"trip", ":", " ", 
+      RowBox[{
+      "impulse", " ", "at", " ", "A", " ", "plus", " ", "impulse", " ", "at", 
+       " ", "B"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"\[CapitalDelta]vTotal", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Abs", "[", "\[CapitalDelta]vEarth", "]"}], "+", 
+     RowBox[{"Abs", "[", "\[CapitalDelta]vMoon", "]"}]}], "//", 
+    "N"}]}]}]], "Input",
+ CellChangeTimes->{{3.642409034349152*^9, 3.642409065326721*^9}, {
+  3.642409462032489*^9, 3.64240946573416*^9}, {3.6424114426033382`*^9, 
+  3.6424114448841743`*^9}, {3.642411510063369*^9, 3.642411516626587*^9}, {
+  3.64241173450312*^9, 3.642411738379471*^9}, {3.6424117919617643`*^9, 
+  3.642411809062039*^9}, {3.642412999995049*^9, 3.642413024811429*^9}, {
+  3.642629946311301*^9, 3.642629950934864*^9}, {3.642630288318418*^9, 
+  3.642630292731868*^9}, {3.642654280081452*^9, 3.6426543024783783`*^9}, {
+  3.6426545232744713`*^9, 3.642654523674801*^9}, {3.642854365182794*^9, 
+  3.6428543890191193`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"3.9459542388100863`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.642411809315748*^9, 3.642625605459107*^9, 3.642626029387899*^9, {
+   3.642629951772483*^9, 3.642629977312396*^9}, 3.642630294846978*^9, 
+   3.642631337584343*^9, 3.6426313952037153`*^9, {3.642631436695262*^9, 
+   3.642631453896859*^9}, {3.642631559712075*^9, 3.642631583847507*^9}, 
+   3.642654523961926*^9, 3.642654639853115*^9, 3.6426547156104393`*^9, 
+   3.642658080644753*^9, 3.6426586517331543`*^9, 3.642675905412299*^9, 
+   3.64267955068974*^9, 3.642721178778677*^9, 3.642775833759313*^9, 
+   3.6428544102896957`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Result", " ", "if", " ", "we", " ", "had", " ", "neglected", " ", "the", 
+     " ", "circular", " ", "motion", " ", "around", " ", "the", " ", "moon", 
+     " ", "at", " ", "the", " ", 
+     RowBox[{"end", ".", " ", "Close"}]}], ",", " ", 
+    RowBox[{"but", " ", "not", " ", "identical"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"\[CapitalDelta]vTotalNoMoon", "=", 
+   RowBox[{
+    RowBox[{"Abs", "[", "\[CapitalDelta]vMoon", "]"}], "+", 
+    RowBox[{"Abs", "[", "\[CapitalDelta]vNoMoon", "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.642409034349152*^9, 3.642409065326721*^9}, {
+  3.642409462032489*^9, 3.64240946573416*^9}, {3.6424114426033382`*^9, 
+  3.6424114448841743`*^9}, {3.642411510063369*^9, 3.642411516626587*^9}, {
+  3.64241173450312*^9, 3.642411738379471*^9}, {3.6424117919617643`*^9, 
+  3.642411792233511*^9}, {3.6424130314429417`*^9, 3.6424130608503323`*^9}, {
+  3.6426260225181932`*^9, 3.642626024356777*^9}, {3.642630297699843*^9, 
+  3.6426303057716503`*^9}, {3.642630796957139*^9, 3.6426308024196653`*^9}, {
+  3.6428543963424177`*^9, 3.642854398869561*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"1.6334157770519746`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.642409469760807*^9, 3.642409473787569*^9}, 
+   3.642409759693265*^9, 3.642410029757113*^9, 3.642410353671294*^9, 
+   3.6424114473652267`*^9, {3.642411739064151*^9, 3.642411744726659*^9}, 
+   3.642411792541267*^9, 3.642625605507229*^9, 3.6426260294367437`*^9, 
+   3.642629977355654*^9, 3.6426303063612432`*^9, 3.642630802941057*^9, 
+   3.6426313376293583`*^9, 3.642631395262309*^9, {3.642631436742531*^9, 
+   3.642631453944888*^9}, {3.642631559758521*^9, 3.6426315838956747`*^9}, 
+   3.6426545777033243`*^9, 3.6426547157201023`*^9, 3.642658080709197*^9, 
+   3.642658651783248*^9, 3.6426759054622593`*^9, 3.642679550738628*^9, 
+   3.642721178828106*^9, 3.6427758338100777`*^9, 3.642854410399527*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Flight time", "Subsection",
+ CellChangeTimes->{{3.6426852533985558`*^9, 3.6426852544608507`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tHohmann", "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{
+    RowBox[{
+     FractionBox["1", "2"], 
+     SqrtBox[
+      FractionBox[
+       RowBox[{"4", 
+        RowBox[{"\[Pi]", "^", "2"}], "*", 
+        RowBox[{
+         RowBox[{"(", 
+          FractionBox[
+           RowBox[{"r1", "+", "r2"}], "2"], ")"}], "^", "3"}]}], "\[Mu]E"]]}],
+     ",", "\"\<Days\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.642685255895773*^9, 3.642685381489315*^9}, {
+  3.642685551740406*^9, 3.64268555827594*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"4.98841547921964445783523056209549301415`3.565598196633246"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"days\""}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: days"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Days\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{3.642685381770588*^9, 3.642685559304223*^9, 
+  3.6427211788815737`*^9, 3.6427758338656397`*^9, 3.642854419311575*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Trying to minimize \[CapitalDelta]vTotal by choosing appropriate moon oribt \
+altitude\
+\>", "Section",
+ CellChangeTimes->{{3.6426568712956543`*^9, 3.642656895525256*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RMoon", "=", 
+  RowBox[{"PlanetaryMoonData", "[", 
+   RowBox[{
+    TemplateBox[{"\"Moon\"",RowBox[{"Entity", "[", 
+        RowBox[{"\"PlanetaryMoon\"", ",", "\"Moon\""}], "]"}],
+      "\"Entity[\\\"PlanetaryMoon\\\", \\\"Moon\\\"]\"","\"planetary moon\""},
+     
+     "Entity"], ",", " ", "\"\<Radius\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.642682039295236*^9, 3.642682049184609*^9}, {
+  3.642682353920217*^9, 3.6426823543233833`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"1737.5`5."},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{3.64268205589415*^9, 3.642682357640173*^9, 
+  3.642721179525041*^9, 3.64277583440921*^9, 3.642854444145837*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Plot", "Subsection",
+ CellChangeTimes->{{3.642721200378693*^9, 3.642721200786192*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Abs", "[", 
+     RowBox[{
+      SqrtBox[
+       FractionBox["\[Mu]E", "r1"]], 
+      RowBox[{"(", 
+       RowBox[{
+        SqrtBox[
+         FractionBox[
+          RowBox[{"2", "r2"}], 
+          RowBox[{"r1", "+", "r2"}]]], "-", "1"}], ")"}]}], "]"}], "+", 
+    RowBox[{"Abs", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        SqrtBox[
+         FractionBox["\[Mu]E", "r2"]], 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          SqrtBox[
+           FractionBox[
+            RowBox[{"2", "r1"}], 
+            RowBox[{"r1", "+", "r2"}]]]}], ")"}]}], "-", 
+       RowBox[{"\[Sqrt]", 
+        RowBox[{"(", 
+         FractionBox["\[Mu]M", 
+          RowBox[{"RMoon", "+", "altitude"}]], ")"}]}]}], "/.", 
+      RowBox[{"altitude", "\[Rule]", 
+       RowBox[{"Quantity", "[", 
+        RowBox[{"x", ",", "\"\<Kilometers\>\""}], "]"}]}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", 
+     RowBox[{"10", "^", "4"}]}], "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<Moon orbit altitude over surface\>\"", ",", 
+      "\"\<\[CapitalDelta]vTotal\>\""}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6426548602971373`*^9, 3.642654930519451*^9}, 
+   3.6426550000767*^9, {3.6426569036186533`*^9, 3.6426569036946287`*^9}, {
+   3.642657067860035*^9, 3.642657121951692*^9}, {3.642658676865546*^9, 
+   3.642658684670471*^9}, {3.6426758780112543`*^9, 3.6426758982745743`*^9}, {
+   3.642682014329687*^9, 3.642682014702182*^9}, {3.642682057993346*^9, 
+   3.642682077747301*^9}, {3.642682203579225*^9, 3.64268221178027*^9}, {
+   3.64268236004175*^9, 3.642682375954336*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], Opacity[
+    1.], LineBox[CompressedData["
+1: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
+pV0mf5xm4bPl972qF2n8D9brYvE=
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 3.1},
+  DisplayFunction->Identity,
+  Frame->{{True, True}, {True, True}},
+  FrameLabel->{{
+     FormBox["\"\[CapitalDelta]vTotal\"", TraditionalForm], None}, {
+     FormBox["\"Moon orbit altitude over surface\"", TraditionalForm], None}},
+  
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{"DefaultBoundaryStyle" -> Automatic, "ScalingFunctions" -> None},
+  PlotRange->{{0, 10000}, {3.1442799066904574`, 3.992301372698982}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.642654899702347*^9, 3.642654913828104*^9}, 
+   3.642655022808618*^9, 3.642655169212675*^9, 3.642656919386263*^9, 
+   3.6426570915692987`*^9, 3.642657138619475*^9, 3.642658085729569*^9, 
+   3.642658656938786*^9, 3.642676033608201*^9, 3.642679574648485*^9, 
+   3.642679649120575*^9, 3.642682028077326*^9, {3.642682080840686*^9, 
+   3.642682097492299*^9}, 3.6426822277989063`*^9, {3.64268237687236*^9, 
+   3.64268239258952*^9}, 3.642721195215267*^9, 3.642775848797823*^9, 
+   3.6428544595292587`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Moon orbit altitude that gives minimum \[CapitalDelta]vTotal", \
+"Subsection",
+ CellChangeTimes->{{3.6427212088588257`*^9, 3.642721225971072*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       SqrtBox[
+        FractionBox["\[Mu]E", "r2"]], 
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         SqrtBox[
+          FractionBox[
+           RowBox[{"2", "r1"}], 
+           RowBox[{"r1", "+", "r2"}]]]}], ")"}]}], "-", 
+      RowBox[{"\[Sqrt]", 
+       RowBox[{"(", 
+        FractionBox["\[Mu]M", 
+         RowBox[{"RMoon", "+", "altitude"}]], ")"}]}]}], "\[Equal]", "0"}], 
+    ",", "altitude"}], "]"}], "//", "N"}]], "Input",
+ CellChangeTimes->{{3.642655091848988*^9, 3.642655103544609*^9}, {
+  3.642657216934236*^9, 3.642657217700211*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{"altitude", "\[Rule]", 
+    TemplateBox[{"5350.039331517406`"},
+     "QuantityUnit",
+     DisplayFunction->(TooltipBox[
+       StyleBox[
+        RowBox[{#, "\[InvisibleSpace]", 
+          StyleBox[
+           RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+        ShowStringCharacters -> False], "Unit: kilometers"]& ),
+     InterpretationFunction->(RowBox[{"Quantity", "[", 
+        RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]}], "}"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.6426551040631313`*^9, 3.6426551210426693`*^9}, 
+   3.6426551694548273`*^9, 3.64265721812996*^9, 3.642658086173192*^9, 
+   3.6426586572755003`*^9, {3.642682345308494*^9, 3.642682348088108*^9}, 
+   3.6426823927454977`*^9, 3.6427211955707407`*^9, 3.642775849114181*^9, 
+   3.642854459883415*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Minimum \[CapitalDelta]vTotal", "Subsection",
+ CellChangeTimes->{{3.642721229692231*^9, 3.642721236146847*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[CapitalDelta]vTotalMin", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Abs", "[", 
+     RowBox[{
+      SqrtBox[
+       FractionBox["\[Mu]E", "r1"]], 
+      RowBox[{"(", 
+       RowBox[{
+        SqrtBox[
+         FractionBox[
+          RowBox[{"2", "r2"}], 
+          RowBox[{"r1", "+", "r2"}]]], "-", "1"}], ")"}]}], "]"}], "+", 
+    RowBox[{"Abs", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        SqrtBox[
+         FractionBox["\[Mu]E", "r2"]], 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          SqrtBox[
+           FractionBox[
+            RowBox[{"2", "r1"}], 
+            RowBox[{"r1", "+", "r2"}]]]}], ")"}]}], "-", 
+       RowBox[{"\[Sqrt]", 
+        RowBox[{"(", 
+         FractionBox["\[Mu]M", 
+          RowBox[{"RMoon", "+", "x"}]], ")"}]}]}], "/.", 
+      RowBox[{"x", "\[Rule]", 
+       TemplateBox[{"5350.0393315174060602869`2.9098829878759"},
+        "QuantityUnit",
+        DisplayFunction->(TooltipBox[
+          StyleBox[
+           RowBox[{#, "\[InvisibleSpace]", 
+             StyleBox[
+              RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalLabel"]}], 
+           ShowStringCharacters -> False], "Unit: kilometers"]& ),
+        InterpretationFunction->(RowBox[{"Quantity", "[", 
+           RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]}]}], "]"}]}], "//", 
+   "N"}]}]], "Input",
+ CellChangeTimes->{{3.642654334609476*^9, 3.642654419140964*^9}, {
+  3.6426545119739923`*^9, 3.642654512349855*^9}, {3.642654737144157*^9, 
+  3.642654774923798*^9}, {3.6426548071714163`*^9, 3.642654820330565*^9}, {
+  3.642654850949259*^9, 3.6426548517855177`*^9}, {3.6426552035821466`*^9, 
+  3.642655214459289*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"3.1442307584646163`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"km\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]",
+             "\"s\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers per second"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Kilometers\"", "\"Seconds\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{3.642655219094265*^9, 3.642658086290265*^9, 
+  3.6426586573895617`*^9, 3.642682392908268*^9, 3.642721195709045*^9, 
+  3.642775849230526*^9, 3.642854460008732*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Yes", " ", "but", " ", "not", " ", "practical"}], "*)"}]], "Input",\
+
+ CellChangeTimes->{{3.6426569394695663`*^9, 3.642656946276469*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Moon hill sphere", "Subsection",
+ CellChangeTimes->{{3.64265751616319*^9, 3.6426575175937567`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"rHillMoon", "=", 
+  RowBox[{"N", "@", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"PlanetaryMoonData", "[", 
+       RowBox[{
+        TemplateBox[{"\"Moon\"",RowBox[{"Entity", "[", 
+            RowBox[{"\"PlanetaryMoon\"", ",", "\"Moon\""}], "]"}],
+          "\"Entity[\\\"PlanetaryMoon\\\", \\\"Moon\\\"]\"",
+          "\"planetary moon\""},
+         "Entity"], ",", " ", "\"\<Mass\>\""}], "]"}], "/", 
+      RowBox[{"(", 
+       RowBox[{"3", "*", 
+        NamespaceBox["LinguisticAssistant",
+         DynamicModuleBox[{WolframAlphaClient`Private`query$$ = "earth mass", 
+          WolframAlphaClient`Private`boxes$$ = RowBox[{"PlanetData", "[", 
+            RowBox[{
+              TemplateBox[{"\"Earth\"", 
+                RowBox[{"Entity", "[", 
+                  RowBox[{"\"Planet\"", ",", "\"Earth\""}], "]"}], 
+                "\"Entity[\\\"Planet\\\", \\\"Earth\\\"]\"", "\"planet\""}, 
+               "Entity"], ",", " ", "\"Mass\""}], "]"}], 
+          WolframAlphaClient`Private`allassumptions$$ = {}, 
+          WolframAlphaClient`Private`assumptions$$ = {}, 
+          WolframAlphaClient`Private`open$$ = {1, 2}}, 
+          DynamicBox[ToBoxes[
+            AlphaIntegration`LinguisticAssistantBoxes["", 1, 
+             Dynamic[WolframAlphaClient`Private`query$$], 
+             Dynamic[WolframAlphaClient`Private`boxes$$], 
+             Dynamic[WolframAlphaClient`Private`allassumptions$$], 
+             Dynamic[WolframAlphaClient`Private`assumptions$$], 
+             Dynamic[WolframAlphaClient`Private`open$$]], StandardForm],
+           ImageSizeCache->{268., {11., 18.}},
+           
+           TrackedSymbols:>{
+            WolframAlphaClient`Private`query$$, 
+             WolframAlphaClient`Private`boxes$$, 
+             WolframAlphaClient`Private`allassumptions$$, 
+             WolframAlphaClient`Private`assumptions$$, 
+             WolframAlphaClient`Private`open$$}],
+          DynamicModuleValues:>{},
+          UndoTrackedVariables:>{WolframAlphaClient`Private`open$$}],
+         BaseStyle->{"Deploy"},
+         DeleteWithContents->True,
+         Editable->False,
+         SelectWithContents->True]}], ")"}]}], ")"}], "^", 
+    RowBox[{"(", 
+     RowBox[{"1", "/", "3"}], ")"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.642657526815503*^9, 3.642657538897558*^9}, {
+  3.642657597359571*^9, 3.6426576735032883`*^9}, {3.64267582602686*^9, 
+  3.6426758307249737`*^9}}],
+
+Cell[BoxData["0.16005276618167108`"], "Output",
+ CellChangeTimes->{{3.642657647696396*^9, 3.642657677384351*^9}, 
+   3.6426580870758123`*^9, 3.642658658326002*^9, 3.64267584471069*^9, 
+   3.642682393865189*^9, 3.642721197972555*^9, 3.64277584999413*^9, 
+   3.642854460769363*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"rHillMoon", "*", 
+  NamespaceBox["LinguisticAssistant",
+   DynamicModuleBox[{WolframAlphaClient`Private`query$$ = 
+    "average moon orbital distance", WolframAlphaClient`Private`boxes$$ = 
+    RowBox[{"PlanetaryMoonData", "[", 
+      RowBox[{
+        TemplateBox[{"\"Moon\"", 
+          RowBox[{"Entity", "[", 
+            RowBox[{"\"PlanetaryMoon\"", ",", "\"Moon\""}], "]"}], 
+          "\"Entity[\\\"PlanetaryMoon\\\", \\\"Moon\\\"]\"", 
+          "\"planetary moon\""}, "Entity"], ",", " ", 
+        "\"AverageOrbitDistance\""}], "]"}], 
+    WolframAlphaClient`Private`allassumptions$$ = {}, 
+    WolframAlphaClient`Private`assumptions$$ = {}, 
+    WolframAlphaClient`Private`open$$ = {1, 2}}, 
+    DynamicBox[ToBoxes[
+      AlphaIntegration`LinguisticAssistantBoxes["", 1, 
+       Dynamic[WolframAlphaClient`Private`query$$], 
+       Dynamic[WolframAlphaClient`Private`boxes$$], 
+       Dynamic[WolframAlphaClient`Private`allassumptions$$], 
+       Dynamic[WolframAlphaClient`Private`assumptions$$], 
+       Dynamic[WolframAlphaClient`Private`open$$]], StandardForm],
+     ImageSizeCache->{505., {11., 18.}},
+     TrackedSymbols:>{
+      WolframAlphaClient`Private`query$$, WolframAlphaClient`Private`boxes$$, 
+       WolframAlphaClient`Private`allassumptions$$, 
+       WolframAlphaClient`Private`assumptions$$, 
+       WolframAlphaClient`Private`open$$}],
+    DynamicModuleValues:>{},
+    UndoTrackedVariables:>{WolframAlphaClient`Private`open$$}],
+   BaseStyle->{"Deploy"},
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True]}]], "Input",
+ CellChangeTimes->{{3.64265785445013*^9, 3.642657856496339*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"61618.69725493193`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"km\""}], "QuantityUnitTraditionalInput"]}], 
+     ShowStringCharacters -> False], "Unit: kilometers"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Kilometers\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{3.642657863293717*^9, 3.64265808763733*^9, 
+  3.642658659005809*^9, 3.64268239442915*^9, 3.64272119865517*^9, 
+  3.6427758506238194`*^9, 3.6428544613094883`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+PrintingStyleEnvironment->"Printout",
+WindowSize->{720, 851},
+WindowMargins->{{Automatic, 0}, {Automatic, -1}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+ShowSyntaxStyles->True,
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData[All, "Printout"], ShowSyntaxStyles -> True]}, Visible -> False, 
+  FrontEndVersion -> 
+  "10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, 2014)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 160, 3, 28, "Input"],
+Cell[721, 25, 321, 6, 46, "Input"],
+Cell[CellGroupData[{
+Cell[1067, 35, 90, 1, 64, "Section"],
+Cell[1160, 38, 434, 9, 46, "Input"],
+Cell[CellGroupData[{
+Cell[1619, 51, 1047, 24, 42, "Input"],
+Cell[2669, 77, 1404, 28, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4110, 110, 1058, 25, 70, "Input"],
+Cell[5171, 137, 1234, 26, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6442, 168, 1153, 27, 58, "Input"],
+Cell[7598, 197, 1004, 19, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8639, 221, 898, 18, 75, "Input"],
+Cell[9540, 241, 1050, 19, 32, "Output"]
+}, Open  ]],
+Cell[10605, 263, 295, 6, 28, "Input"],
+Cell[CellGroupData[{
+Cell[10925, 273, 1075, 23, 42, "Input"],
+Cell[12003, 298, 900, 18, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12952, 322, 167, 2, 64, "Section"],
+Cell[CellGroupData[{
+Cell[13144, 328, 97, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[13266, 333, 655, 15, 75, "Input"],
+Cell[13924, 350, 1136, 22, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15097, 377, 730, 19, 75, "Input"],
+Cell[15830, 398, 1079, 22, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16946, 425, 1241, 31, 82, "Input"],
+Cell[18190, 458, 1135, 22, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19374, 486, 191, 2, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[19590, 492, 724, 19, 75, "Input"],
+Cell[20317, 513, 1083, 22, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21437, 540, 964, 21, 92, "Input"],
+Cell[22404, 563, 1110, 22, 28, "Output"]
+}, Open  ]],
+Cell[23529, 588, 91, 1, 28, "Input"],
+Cell[CellGroupData[{
+Cell[23645, 593, 1324, 31, 99, "Input"],
+Cell[24972, 626, 1062, 22, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26083, 654, 118, 1, 44, "Subsection"],
+Cell[26204, 657, 662, 11, 63, "Input"],
+Cell[CellGroupData[{
+Cell[26891, 672, 1068, 23, 91, "Input"],
+Cell[27962, 697, 1069, 22, 28, "Output"]
+}, Open  ]],
+Cell[29046, 722, 806, 14, 63, "Input"],
+Cell[CellGroupData[{
+Cell[29877, 740, 928, 18, 63, "Input"],
+Cell[30808, 760, 1101, 22, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31958, 788, 93, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[32076, 793, 1533, 31, 97, "Input"],
+Cell[33612, 826, 1116, 23, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34765, 854, 1154, 22, 63, "Input"],
+Cell[35922, 878, 1288, 24, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37259, 908, 103, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[37387, 913, 525, 16, 69, "Input"],
+Cell[37915, 931, 582, 12, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38558, 950, 181, 4, 99, "Section"],
+Cell[CellGroupData[{
+Cell[38764, 958, 468, 10, 42, "Input"],
+Cell[39235, 970, 537, 12, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39809, 987, 92, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[39926, 992, 1758, 48, 175, "Input"],
+Cell[41687, 1042, 4051, 77, 246, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45787, 1125, 152, 2, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[45964, 1131, 659, 21, 62, "Input"],
+Cell[46626, 1154, 845, 19, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47520, 1179, 117, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[47662, 1184, 1664, 46, 167, "Input"],
+Cell[49329, 1232, 750, 17, 28, "Output"]
+}, Open  ]],
+Cell[50094, 1252, 178, 4, 28, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50309, 1261, 105, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[50439, 1266, 2429, 52, 117, "Input"],
+Cell[52871, 1320, 279, 4, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53187, 1329, 1662, 35, 46, "Input"],
+Cell[54852, 1366, 596, 13, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

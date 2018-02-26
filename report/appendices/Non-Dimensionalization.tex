@@ -1,0 +1,49 @@
+%!TEX root = ../Thesis.tex
+\chapter{Non-Dimensionalization of Hamiltons Equations} \label{app:non-dimensionalization}
+We set:
+\begin{align}
+t &= k_t T \\
+x &= k_x X \\
+y &= k_y Y \\
+p_x &= k_{px} P_x \\
+p_y &= k_{py} P_Y ,
+\end{align}
+with
+\begin{align}
+k_t &= \dfrac{1}{\omega} = \sqrt{\dfrac{(R+r)^3}{G(M+m)}} \\[0.5cm]
+k_x &= k_y = R+r \\[0.5cm]
+k_{px} &= k_{py} = m_s \sqrt{\dfrac{G(M+m)}{(R+r)}} .
+\end{align}
+So we get for $\dot{X}$
+\begin{align}
+\dfrac{k_x}{k_t} \dod{X}{T} &= \dfrac{k_{px} P_x}{m_s} + \omega k_y Y \\[0.3cm]
+\Leftrightarrow \qquad \dod{X}{T} &= \dfrac{k_t k_{px}}{k_x} \dfrac{P_x}{m_s} + \omega k_t \dfrac{k_y}{k_x} Y \\[0.3cm]
+\Leftrightarrow \qquad \dot{X} &= P_x + Y .
+\end{align}
+And for $\dot{Y}$ by symmetry
+\begin{align}
+\dot{Y} = P_Y - X \ ,
+\end{align}
+For $\dot{P_x}$ we get
+\begin{align}
+\dod{P_x}{T} &= \dfrac{k_{py}}{k_{px}} k_t\omega P_y - \dfrac{k_t}{k_{px}}G m_s \left[\dfrac{M(k_x X + R)}{\left(k_x X + R)^2 + k_y^2 Y^2\right)^{3/2}} + \dfrac{m (k_x X - r)}{\left((k_x X - r)^2 + k_y^2 Y^2\right)^{3/2}} \right] \\
+&= P_y - \left(\sqrt{\dfrac{(R+r)^3}{G(M+m)}}\right) \left(\dfrac{1}{m_s} \sqrt{\dfrac{(R+r)}{G(M+m)}}\right) G m_s \cdot \\
+\nonumber &\left[\dfrac{M[(R+r) X + R]}{[((R+r) X + R)^2 + (R+r)^2 Y^2]^{3/2}} + \dfrac{m[(R+r) X - r]}{[((R+r) X - r)^2 + (R+r)^2 Y^2]^{3/2}} \right] \\[1cm]
+&= P_y - \dfrac{(R+r)^2}{M+m} \cdot \\ 
+\nonumber &\left[\dfrac{M(R+r)\left(X + \dfrac{R}{R+r}\right)}{(R+r)^3\left[\left(X + \dfrac{R}{R+r}\right)^2 + Y^2\right]^{3/2}} + \dfrac{m (R+r)\left(X - \dfrac{r}{R+r}\right)}{(R+r)^3\left[\left(X - \dfrac{r}{R+r}\right)^2 + Y^2\right]^{3/2}} \right] \\[1cm]
+&= P_y - \left[\dfrac{\dfrac{M}{M+m}\left(X + \dfrac{R}{R+r}\right)}{\left(\left(X + \dfrac{R}{R+r}\right)^2 + Y^2\right)^{3/2}} + \dfrac{\dfrac{m}{M+m} \left(X - \dfrac{r}{R+r}\right)}{\left(\left(X - \dfrac{r}{R+r}\right)^2 + Y^2\right)^{3/2}} \right] ,
+\end{align}
+where $\dfrac{M}{M+m}$ and $\dfrac{R}{R+r}$ are dimensionless parameters. There is a simple relation between the two given by the equation for the center of mass:
+\begin{align}
+M\vec{R} + m\vec{r} &= \vec{0} \\[0.5cm]
+\Rightarrow \qquad \dfrac{m}{M+m} &= \dfrac{R}{R+r} = k \\[0.5cm]
+\Leftrightarrow \qquad \dfrac{M}{M+m} &= \dfrac{r}{R+r} = 1-k  
+\end{align}
+With that in mind we finally get
+\begin{align}
+\dot{P_x} = P_y - \dfrac{(1-k)(X+k)}{((X+k)^2+Y^2)^{3/2}} - \dfrac{k(X-1-k)}{((X-1-k)^2+Y^2)^{3/2}}
+\end{align}
+by symmetry for $P_y$ we get
+\begin{align}
+\dot{P_y} = -P_x - \dfrac{(1-k)Y}{((X+k)^2+Y^2)^{3/2}} - \dfrac{k Y}{((X-1-k)^2+Y^2)^{3/2}}
+\end{align}

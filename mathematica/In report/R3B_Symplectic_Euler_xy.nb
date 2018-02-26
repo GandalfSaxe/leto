@@ -1,0 +1,128 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3165,        118]
+NotebookOptionsPosition[      2636,         95]
+NotebookOutlinePosition[      3051,        113]
+CellTagsIndexPosition[      3008,        110]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quiet", "@", 
+  RowBox[{"Remove", "[", "\"\<`*\>\"", "]"}]}]], "Input",
+ CellChangeTimes->{{3.642775972445425*^9, 3.64277597245335*^9}}],
+
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{
+   RowBox[{"SelectedNotebook", "[", "]"}], ",", 
+   RowBox[{"PrintingStyleEnvironment", "->", "\"\<Printout\>\""}], ",", 
+   RowBox[{"ShowSyntaxStyles", "->", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6427759776945066`*^9, 3.6427759777031612`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"eqn1", "=", 
+   RowBox[{"x1", "==", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"px1", "+", "y1"}], ")"}], "h"}], "+", "x0"}]}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.642775982656*^9, 3.642775982665012*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"eqn2", "=", 
+   RowBox[{"y1", "==", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"py1", "-", "x1"}], ")"}], "h"}], "+", "y0"}]}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.642775989286322*^9, 3.642775989298595*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"eqn1", ",", "eqn2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x1", ",", "y1"}], "}"}]}], "]"}], "//", 
+  "FullSimplify"}]], "Input",
+ CellChangeTimes->{{3.6427759933837214`*^9, 3.6427759933923063`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"x1", "\[Rule]", 
+     FractionBox[
+      RowBox[{"x0", "+", 
+       RowBox[{"h", " ", 
+        RowBox[{"(", 
+         RowBox[{"px1", "+", 
+          RowBox[{"h", " ", "py1"}], "+", "y0"}], ")"}]}]}], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["h", "2"]}]]}], ",", 
+    RowBox[{"y1", "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "h"}], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"h", " ", "px1"}], "-", "py1", "+", "x0"}], ")"}]}], "+", 
+       "y0"}], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["h", "2"]}]]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.642776004240141*^9}]
+}, Open  ]]
+},
+PrintingStyleEnvironment->"Printout",
+WindowSize->{720, 851},
+WindowMargins->{{Automatic, 0}, {Automatic, -1}},
+ShowSyntaxStyles->True,
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 160, 3, 28, "Input"],
+Cell[721, 25, 311, 6, 46, "Input"],
+Cell[1035, 33, 267, 9, 28, "Input"],
+Cell[1305, 44, 270, 9, 28, "Input"],
+Cell[CellGroupData[{
+Cell[1600, 57, 300, 9, 28, "Input"],
+Cell[1903, 68, 717, 24, 48, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

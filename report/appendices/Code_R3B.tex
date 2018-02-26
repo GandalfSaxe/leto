@@ -1,0 +1,1060 @@
+%!TEX root = ../Thesis.tex
+\chapter{Python Code for Restricted 3-Body Problem} \label{app:code-r3b}
+
+\section{Main Script} \label{app:code-testing}
+Calling all the other functions, initiating searches, and storing interesting orbits that has been found (filename: testing.py).
+\begin{adjustwidth*}{0cm}{-0.4cm}
+\begin{lstlisting}[language=Python]
+import os
+import time
+from math import pi,cos,sin
+import numpy as np
+import matplotlib.pyplot as plt
+from const import *
+import reduced3body as r3b
+
+try:  
+    threads = int(os.environ["OMP_NUM_THREADS"])
+except KeyError: 
+    threads = 1
+
+runtime = time.time()
+
+# Precalculated initial Conditions
+#demo = 'earth_orbit'
+#demo = 'lunar_orbit'
+#demo = 'hohmann'
+#demo = '3_day_hohmann'
+#demo = '1_day_hohmann'
+#demo = 'reverse_hohmann'
+demo = 'low_energy_short'
+#demo = 'low_energy_long'
+#demo = 'earth_to_L1'
+
+# or Search for trajectories
+#demo = 'search_hohmann'
+#demo = 'search_low_energy'
+#demo = 'search_low_energy_parts8'
+#demo = 'search_refine'
+
+n = 1000000
+
+# Set coordinates
+if demo == 'earth_orbit':
+    duration = (2.0*pi*leo_orbit/leo_orbit_vel)/(unit_time*day)
+    r = leo_orbit/unit_len
+    v = 0.99732*leo_orbit_vel/unit_vel
+    theta = 0
+    x = r*cos(theta)
+    y = r*sin(theta)
+    vx = -v*y/r
+    vy = v*x/r
+    pos = 0
+    ang = 0
+    burn = 0
+    x0 = earth_pos_x+x
+    y0 = y
+    px0 = vx-y0
+    py0 = vy+x0
+elif demo == 'lunar_orbit':
+    duration = (2.0*pi*lunar_orbit/lunar_orbit_vel)/(unit_time*day)
+    r = lunar_orbit/unit_len
+    v = 0.99732*lunar_orbit_vel/unit_vel
+    theta = 0
+    x = r*cos(theta)
+    y = r*sin(theta)
+    vx = -v*y/r
+    vy = v*x/r
+    pos = 0
+    ang = 0
+    burn = 0
+    x0 = moon_pos_x+x
+    y0 = y
+    px0 = vx-y0
+    py0 = vy+x0
+elif demo == 'hohmann':
+    #demo = 'search_refine'
+# --------------------------------------------------------------------------
+    duration = 5/unit_time
+    pos      = -2.086814820119193
+    ang      = -0.000122173047640
+    burn     = 3.111181716545691/unit_vel
+    x0       = -0.020532317163607
+    y0       = -0.014769797663479
+    px0      = 9.302400979050308
+    py0      = -5.289712560652044
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.111182 km/s
+# dV(moon-capture) = 0.800682 km/s
+# dV(total)        = 3.911863 km/s
+# Flight-time      = 4.300078 days
+# --------------------------------------------------------------------------
+elif demo == 'reverse_hohmann':
+# --------------------------------------------------------------------------
+    duration = 4/unit_time
+    pos      = -2.282942228154665
+    ang      = 0.000000000000000
+    burn     = -3.149483130653266/unit_vel
+    x0       = -0.023249912090507
+    y0       = -0.012853859046429
+    px0      = -8.098481905534163
+    py0      = 6.978997254692934
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.149483 km/s
+# dV(moon-capture) = 0.968488 km/s
+# dV(total)        = 4.117971 km/s
+# Flight-time      = 3.875497 days
+# --------------------------------------------------------------------------
+elif demo == 'low_energy_long':
+# --------------------------------------------------------------------------
+    duration = 195/unit_time
+    pos      = 3.794182930145708
+    ang      = 0.023901745288554
+    burn     = 3.090702702702703/unit_vel
+    x0       = -0.025645129237870
+    y0       = -0.010311570301966
+    px0      = 6.539303578815582
+    py0      = -8.449205705334165
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.090703 km/s
+# dV(moon-capture) = 0.704114 km/s
+# dV(total)        = 3.794816 km/s
+# Flight-time      = 194.275480 days
+# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+    #demo = 'search_refine'
+#    duration = 195/unit_time
+#    pos      = 3.794182930145708
+#    ang      = 0.023901745288554
+#    burn     = 3.090702702702703/unit_vel
+#    x0       = -0.025645129237870
+#    y0       = -0.010311570301966
+#    px0      = 6.539303578815583
+#    py0      = -8.449205705334164
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.090703 km/s
+# dV(moon-capture) = 0.704114 km/s
+# dV(total)        = 3.794817 km/s
+# Flight-time      = 194.275480 days
+# --------------------------------------------------------------------------
+elif demo == 'low_energy_short':
+    #demo = 'search_refine'
+# --------------------------------------------------------------------------
+    duration = 41/unit_time
+    pos      = -0.138042744751570
+    ang      = -0.144259374836607
+    burn     = 3.127288444444444/unit_vel
+    x0       = 0.004665728429046
+    y0       = -0.002336647636098
+    px0      = 1.904735175752430
+    py0      = 10.504985512873279
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.127288 km/s
+# dV(moon-capture) = 0.768534 km/s
+# dV(total)        = 3.895822 km/s
+# Flight-time      = 40.617871 days
+# --------------------------------------------------------------------------
+elif demo == '3_day_hohmann':
+    #demo = 'search_refine'
+# --------------------------------------------------------------------------
+    duration = 3/unit_time
+    pos      = -2.272183066647597
+    ang      = -0.075821466029764
+    burn     = 3.135519748743719/unit_vel
+    x0       = -0.023110975767437
+    y0       = -0.012972499765730
+    px0      = 8.032228991913522
+    py0      = -7.100537706154897
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.135520 km/s
+# dV(moon-capture) = 0.879826 km/s
+# dV(total)        = 4.015346 km/s
+# Flight-time      = 2.999939 days
+# --------------------------------------------------------------------------
+elif demo == '1_day_hohmann':
+    #demo = 'search_refine'
+    duration = 1/unit_time
+    pos      = -2.277654673852600
+    ang      = 0.047996554429844
+    burn     = 3.810000000000000/unit_vel
+    x0       = -0.023181791813268
+    y0       = -0.012912351430812
+    px0      = 8.764829132987316
+    py0      = -7.263069305305378
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.810000 km/s
+# dV(moon-capture) = 3.319455 km/s
+# dV(total)        = 7.129455 km/s
+# Flight-time      = 0.997234 days
+# --------------------------------------------------------------------------
+elif demo == 'earth_to_L1':
+    demo = 'search_refine'
+# --------------------------------------------------------------------------
+    duration = 191/unit_time
+    pos      = 2.843432239707429
+    ang      = 0.000000000000000
+    burn     = 3.091851851851852/unit_vel
+    x0       = -0.028385246222264
+    y0       = 0.004988337832881
+    px0      = -3.136296304910217
+    py0      = -10.217405925499762
+# --------------------------------------------------------------------------
+# dV(earth-escape) = 3.091852 km/s
+# dV(at L1)        = 0.676226 km/s
+# dV(total)        = 3.768078 km/s
+# Flight-time      = 190.001881 days
+# --------------------------------------------------------------------------
+
+#################### FUNCTION CALLS ####################
+
+if demo == 'search_hohmann':
+    tlist,xlist,ylist,pxlist,pylist,errlist,hlist = r3b.hohmann(threads,n)
+elif demo == 'search_low_energy':
+    tlist,xlist,ylist,pxlist,pylist,errlist,hlist = r3b.low_energy(threads,n)
+elif demo == 'search_low_energy_parts8':
+    tlist,xlist,ylist,pxlist,pylist,errlist,hlist = r3b.low_energy_parts8(threads,n)
+elif demo == 'search_refine':
+    tlist,xlist,ylist,pxlist,pylist,errlist,hlist = r3b.refine(threads,n,duration,pos,ang,burn,x0,y0,px0,py0)
+else:
+    tlist,xlist,ylist,pxlist,pylist,errlist,hlist = r3b.trajectory(n,duration,pos,ang,burn,x0,y0,px0,py0)
+Hlist = pxlist**2/2 + pylist**2/2 + ylist*pxlist - xlist*pylist - (1-mu)/np.sqrt(np.power(mu+xlist,2)+np.power(ylist,2)) - mu/np.sqrt(np.power(1-mu-xlist,2)+np.power(ylist,2))
+print("# Final position: %f %f" %(xlist[n-1],ylist[n-1]))
+print("# Final impulse: %f %f" % (pxlist[n-1],pylist[n-1]))
+print("# Final H: %f" % (Hlist[n-1]))
+runtime = time.time()-runtime
+print("# Total runtime = %3.2fs" % (runtime))
+print("# --------------------------------------------------------------------------")
+print("# --- Done with FUNCTION CALLS")
+#exit()
+
+#################### PLOTS: POSITION ####################
+
+xlist1 = xlist[:n/2]
+ylist1 = ylist[:n/2]
+xlist2 = xlist[n/2:]
+ylist2 = ylist[n/2:]
+
+Xlist1 = xlist[:n/2]*np.cos(tlist[:n/2]) - ylist[:n/2]*np.sin(tlist[:n/2])
+Ylist1 = xlist[:n/2]*np.sin(tlist[:n/2]) + ylist[:n/2]*np.cos(tlist[:n/2])
+Xlist2 = xlist[n/2:]*np.cos(tlist[n/2:]) - ylist[n/2:]*np.sin(tlist[n/2:])
+Ylist2 = xlist[n/2:]*np.sin(tlist[n/2:]) + ylist[n/2:]*np.cos(tlist[n/2:])
+
+Xlist_earth = earth_pos_x*np.cos(tlist)
+Ylist_earth = -earth_pos_x*np.sin(tlist)
+
+Xlist_moon = moon_pos_x*np.cos(tlist)
+Ylist_moon = moon_pos_x*np.sin(tlist)
+
+# Rel. err
+plt.figure()
+plt.plot(tlist*unit_time, errlist)
+plt.xlabel("time (days)")
+plt.ylabel("step error")
+plt.yscale('log')
+
+# Step sizes
+plt.figure()
+plt.plot(tlist*unit_time, hlist)
+plt.xlabel("time (days)")
+plt.ylabel("step size")
+plt.yscale('log')
+
+# Total energy
+havg = np.sum(Hlist)/n
+hrelerr = (Hlist-havg)/havg
+plt.figure()
+plt.plot(tlist*unit_time, hrelerr)
+plt.xlabel("time (days)")
+plt.ylabel("Hamiltonian rel. err (arbitrary units)")
+
+# Zoom earth
+xlim = 0.02
+ylim = 0.02
+xmin = earth_pos_x-xlim
+xmax = earth_pos_x+xlim
+ymin = -ylim
+ymax = ylim
+plt.figure()
+earth=plt.Circle((earth_pos_x,0),earth_radius/unit_len,color='blue')
+earthorbit1=plt.Circle((earth_pos_x,0),(leo_orbit-orbit_range)/unit_len,color='g',fill=False)
+earthorbit2=plt.Circle((earth_pos_x,0),(leo_orbit+orbit_range)/unit_len,color='g',fill=False)
+plt.gcf().gca().add_artist(earth)
+plt.gcf().gca().add_artist(earthorbit1)
+plt.gcf().gca().add_artist(earthorbit2)
+plt.plot(xlist1,ylist1,'r-')
+plt.plot(xlist2,ylist2,'k-')
+plt.xlim(xmin,xmax)
+plt.ylim(ymin,ymax)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.xlabel("x-position (arbitrary units)")
+plt.ylabel("y-position (arbitrary units)")
+
+# Zoom moon
+xlim = 0.0055
+ylim = 0.0055
+xmin = moon_pos_x-xlim
+xmax = moon_pos_x+xlim
+ymin = -ylim
+ymax = ylim
+plt.figure()
+moon=plt.Circle((moon_pos_x,0),moon_radius/unit_len,color='grey')
+moonorbit1=plt.Circle((moon_pos_x,0),(lunar_orbit-orbit_range)/unit_len,color='g',fill=False)
+moonorbit2=plt.Circle((moon_pos_x,0),(lunar_orbit+orbit_range)/unit_len,color='g',fill=False)
+plt.gcf().gca().add_artist(moon)
+plt.gcf().gca().add_artist(moonorbit1)
+plt.gcf().gca().add_artist(moonorbit2)
+plt.plot(xlist1,ylist1,'r-')
+plt.plot(xlist2,ylist2,'k-')
+plt.xlim(xmin,xmax)
+plt.ylim(ymin,ymax)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.xlabel("x-position (arbitrary units)")
+plt.ylabel("y-position (arbitrary units)")
+
+# View center of mass
+xlim = 1.3
+ylim = 1.3
+xmin = -xlim
+xmax = xlim
+ymin = -ylim
+ymax = ylim
+
+# Position plot (X,Y)
+plt.figure()
+plt.plot(Xlist1,Ylist1,'r')
+plt.plot(Xlist2,Ylist2,'k')
+plt.plot(Xlist_earth, Ylist_earth, 'blue')
+plt.plot(Xlist_moon, Ylist_moon, 'grey')
+plt.xlim(xmin,xmax)
+plt.ylim(ymin,ymax)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.xlabel("x-position (arbitrary units)")
+plt.ylabel("y-position (arbitrary units)")
+
+# Position plot (x,y)
+plt.figure()
+plt.plot(xlist1,ylist1,'r-')
+plt.plot(xlist2,ylist2,'k-')
+earth=plt.Circle((earth_pos_x,0),earth_radius/unit_len,color='blue')
+earthorbit1=plt.Circle((earth_pos_x,0),(leo_orbit-orbit_range)/unit_len,color='g',fill=False)
+earthorbit2=plt.Circle((earth_pos_x,0),(leo_orbit+orbit_range)/unit_len,color='g',fill=False)
+moon=plt.Circle((moon_pos_x,0),moon_radius/unit_len,color='grey')
+moonorbit1=plt.Circle((moon_pos_x,0),(lunar_orbit-orbit_range)/unit_len,color='g',fill=False)
+moonorbit2=plt.Circle((moon_pos_x,0),(lunar_orbit+orbit_range)/unit_len,color='g',fill=False)
+plt.gcf().gca().add_artist(earth)
+plt.gcf().gca().add_artist(earthorbit1)
+plt.gcf().gca().add_artist(earthorbit2)
+plt.gcf().gca().add_artist(moon)
+plt.gcf().gca().add_artist(moonorbit1)
+plt.gcf().gca().add_artist(moonorbit2)
+plt.plot(L1_pos_x,0,'gx')
+plt.xlim(xmin,xmax)
+plt.ylim(ymin,ymax)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.xlabel("x-position (arbitrary units)")
+plt.ylabel("y-position (arbitrary units)")
+#plt.savefig('fig/r3b/r3b_y(x)_euler_symplectic.pdf',bbox_inches='tight')
+plt.show()
+plt.close()
+print("# --- Done with PLOTS")
+\end{lstlisting}
+\end{adjustwidth*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constants} \label{app:code-constants}
+Constants defined for the rest of the program to use (filename: const.py)
+
+\begin{adjustwidth*}{0cm}{-0.4cm}
+\begin{lstlisting}[language=Python]
+from math import pi,sqrt,pow
+
+# Table constants
+earth_moon_distance = 384400.0 # km
+moon_orbit_duration = 27.322 # days
+earth_radius = 6367.4447 # km
+earth_mass = 5.9721986e24
+moon_mass = 7.34767309e22
+G = 6.67384e-11 # m^3 kg^-1 s^-2
+moon_radius = 1737.1 # km
+leo_orbit = 160.0+earth_radius # km
+lunar_orbit = 100.0+moon_radius # km
+orbit_range = 10.0 # km
+day = 24.0*3600.0 # s
+
+# Units
+unit_len = earth_moon_distance # km
+unit_time = moon_orbit_duration/(2.0*pi) # days
+unit_vel = unit_len/(unit_time*day) # km/s
+
+# Gravitational constants
+mu = moon_mass/(earth_mass+moon_mass) # 1
+
+# Calculation constants
+leo_orbit_vel = sqrt(G*earth_mass/(leo_orbit*1000.0))/1000.0 # km/s
+lunar_orbit_vel = sqrt(G*moon_mass/(lunar_orbit*1000.0))/1000.0 # km/s
+moon_pos_x = 1-mu
+earth_pos_x = -mu
+L1_pos_x = (1-pow(mu/3.0,1.0/3.0))
+
+\end{lstlisting}
+\end{adjustwidth*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plotter and Trajectory Finders} \label{app:code-plotter-trajectory}
+trajectory plot trajectories, hohmann and low\_energy finds transfer orbits (filename: reduced3body.py - most of it).
+
+\begin{adjustwidth*}{0cm}{-0.4cm}
+\begin{lstlisting}[language=Python]
+import time
+from math import pi,sqrt
+import numpy as np
+from const import *
+from numbapro import *
+from search import search_mt, search, print_search_results
+from symplectic import symplectic
+
+# **BRUGER IKKE pos, ang, burn til noget, kun til print
+def trajectory(n,duration,pos,ang,burn,x0,y0,px0,py0):
+    """Integrate trajectory for the reduced 3-body problem.
+
+    Args:
+        n (int): Positions stored.
+        duration (float): Time duration of simulation.
+        x0 (float): Initial x-coordinate
+        y0 (float): Initial y-coordinate
+        px0 (float): Initial generalized x-momentum
+        py0 (float): Initial generalized y-momentum
+
+    Returns:
+        Tuple of time-, x-, y-, px- and py lists.
+    
+    """
+    print("# Running trajectory.")
+
+    # Initialize arrays
+    tlist = np.linspace(0,duration,n)
+    xlist = np.zeros(n)
+    ylist = np.zeros(n)
+    pxlist = np.zeros(n)
+    pylist = np.zeros(n)
+    errlist = np.zeros(n)
+    hlist = np.zeros(n)
+    info = np.zeros(2)
+
+    # Find orbits
+    runtime = time.time()
+    status = symplectic(n,duration,x0,y0,px0,py0,xlist,ylist,pxlist,pylist,errlist,hlist,info)
+    runtime = time.time()-runtime
+
+    # Display result
+    print_search_results(status,pos,ang,burn,x0,y0,px0,py0,info[0],info[1])
+    print("# Runtime = %3.2fs" % (runtime))
+    return tlist,xlist,ylist,pxlist,pylist,errlist,hlist
+
+def hohmann(threads,n):
+    """Finding Hohmann trajectory for the reduced 3-body problem.
+
+    Args:
+        n (int): Positions stored.
+
+    Returns:
+        Tuple of time-, x-, y-, px- and py lists.
+    
+    """
+
+    print("# Running Hohmann.")
+
+    # Hohmann trajectory < 6 days
+    duration = 6/unit_time
+    best_total_dv = 1e9
+    positions = 100
+    angles = 1
+    burns = 200
+    pos = -3*pi/4
+    ang = 0
+    burn = 3.11/unit_vel # Forward Hohmann
+    #burn_low = -3.14/unit_vel # Reverse Hohmann
+
+    # Super fast Hohmann trajectory < 1 days
+    #duration = 3/unit_time
+    #best_total_dv = 1e9
+    #positions = 10
+    #angles = 10
+    #burns = 200
+    #pos = -3*pi/4
+    #ang = 0
+    #burn = 3.7/unit_vel # Forward Hohmann
+
+    pos_range = pi/4
+    ang_range = pi/8
+    burn_range = 0.1/unit_vel
+
+    # Start search
+    searches = 0
+    max_searches = 5
+    while searches < max_searches:
+        runtime = time.time()
+        searches += 1
+        print("############## Search %i ###############" % (searches))
+        print("# pos              = %f" % (pos))
+        print("# ang              = %f" % (ang))
+        print("# burn             = %f" % (burn))
+        pos_low = pos-pos_range
+        pos_high = pos+pos_range
+        ang_low = ang-ang_range
+        ang_high = ang+ang_range
+        burn_low = burn-burn_range
+        burn_high = burn+burn_range
+        stat,pos,ang,burn,x0,y0,px0,py0,dv,toa = search_mt(threads,1,duration,positions,angles,burns,pos_low,pos_high,ang_low,ang_high,burn_low,burn_high)
+
+        if stat < 0:
+            total_dv = abs(burn)+dv
+            if best_total_dv > total_dv:
+                best_total_dv = total_dv
+                best_stat = stat
+                best_pos = pos
+                best_ang = ang
+                best_burn = burn
+                best_x0 = x0
+                best_y0 = y0
+                best_px0 = px0
+                best_py0 = py0
+                best_dv = dv
+                best_toa = toa
+            else:
+                break
+
+        pos_range *= 0.1
+        ang_range *= 0.1
+        burn_range *= 0.1
+
+        runtime = time.time()-runtime
+        print("# Search runtime   = %3.2fs" % (runtime))
+
+    # Print best result
+    print("################ Best ################")
+    print("# Best dV(total)   = %f km/s" % (best_total_dv*unit_vel))
+    print_search_results(best_stat,best_pos,best_ang,best_burn,best_x0,best_y0,best_px0,best_py0,best_dv,best_toa)
+
+    # Initialize arrays
+    tlist = np.linspace(0,duration,n)
+    xlist = np.zeros(n)
+    ylist = np.zeros(n)
+    pxlist = np.zeros(n)
+    pylist = np.zeros(n)
+    errlist = np.zeros(n)
+    hlist = np.zeros(n)
+    info = np.zeros(2)
+
+    # Do trajectory
+    duration = 10/unit_time
+    status = symplectic(n,duration,x0,y0,px0,py0,xlist,ylist,pxlist,pylist,errlist,hlist,info)
+
+    return tlist,xlist,ylist,pxlist,pylist,errlist,hlist
+
+def low_energy(threads,n):
+    """Finding low energy transfer trajectory for the reduced 3-body problem.
+
+    Args:
+        n (int): Positions stored.
+
+    Returns:
+        Tuple of time-, x-, y-, px- and py lists.
+    
+    """
+
+    print("# Running low_energy.")
+
+    # Low-energy trajectory < 200 days
+    duration = 200/unit_time
+    best_total_dv = 1e9
+    positions = 100
+    angles = 1
+    burns = 200
+    pos = -3*pi/4
+    ang = 0
+    burn = 3.12/unit_vel
+    pos_range = pi
+    ang_range = 0
+    burn_range = 0.01/unit_vel
+
+    # Start search
+    searches = 0
+    max_searches = 1
+    while searches < max_searches:
+        runtime = time.time()
+        searches += 1
+        print("############## Search %i ###############" % (searches))
+        print("# pos              = %f" % (pos))
+        print("# ang              = %f" % (ang))
+        print("# burn             = %f" % (burn))
+        pos_low = pos-pos_range
+        pos_high = pos+pos_range
+        ang_low = ang-ang_range
+        ang_high = ang+ang_range
+        burn_low = burn-burn_range
+        burn_high = burn+burn_range
+        stat,pos,ang,burn,x0,y0,px0,py0,dv,toa = search_mt(threads,1,duration,positions,angles,burns,pos_low,pos_high,ang_low,ang_high,burn_low,burn_high)
+
+        if stat < 0:
+            total_dv = abs(burn)+dv
+            if best_total_dv > total_dv:
+                best_total_dv = total_dv
+                best_stat = stat
+                best_pos = pos
+                best_ang = ang
+                best_burn = burn
+                best_x0 = x0
+                best_y0 = y0
+                best_px0 = px0
+                best_py0 = py0
+                best_dv = dv
+                best_toa = toa
+            else:
+                break
+
+        pos_range *= 0.1
+        ang_range *= 0.1
+        burn_range *= 0.1
+
+        runtime = time.time()-runtime
+        print("# Search runtime   = %3.2fs" % (runtime))
+
+    # Initialize arrays
+    tlist = np.linspace(0,duration,n)
+    xlist = np.zeros(n)
+    ylist = np.zeros(n)
+    pxlist = np.zeros(n)
+    pylist = np.zeros(n)
+    errlist = np.zeros(n)
+    hlist = np.zeros(n)
+    info = np.zeros(2)
+
+    # Do trajectory
+    duration = toa+(2.0*pi*lunar_orbit/lunar_orbit_vel)/(unit_time*day)
+    status = symplectic(n,duration,x0,y0,px0,py0,xlist,ylist,pxlist,pylist,errlist,hlist,info)
+    exit()
+    return tlist,xlist,ylist,pxlist,pylist,errlist,hlist
+\end{lstlisting}
+\end{adjustwidth*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Search Helper Functions} \label{app:code-search}
+Search helper functions, also implements all the paralellization (filename: search.py).
+\begin{adjustwidth*}{0cm}{-0.4cm}
+\begin{lstlisting}[language=Python]
+"""
+Brute-force search Module for reduced 3-body solver
+===================================================
+
+"""
+
+from __future__ import print_function
+import sys
+import time
+from math import ceil
+import numpy as np
+from multiprocessing import Pool
+from const import *
+from symplectic import symplectic
+
+def print_search_results(stat,pos,ang,burn,x0,y0,px0,py0,dv,toa):
+    print("# --------------------------------------------------------------------------")
+    print("duration = %i/unit_time" % (max(1,int(ceil(toa*unit_time)))))
+    print("pos      = %.15lf" % (pos))
+    print("ang      = %.15lf" % (ang))
+    print("burn     = %.15lf/unit_vel" % (burn*unit_vel))
+    print("x0       = %.15lf" % (x0))
+    print("y0       = %.15lf" % (y0))
+    print("px0      = %.15lf" % (px0))
+    print("py0      = %.15lf" % (py0))
+    print("# --------------------------------------------------------------------------")
+    print("# dV(earth-escape) = %f km/s" % (abs(burn)*unit_vel))
+    if stat > 0 and stat < 100:
+        print("# Min moon distance= %f" % (stat))
+    elif stat < 0:
+        print("# dV(moon-capture) = %f km/s" % (dv*unit_vel))
+        print("# dV(total)        = %f km/s" % ((abs(burn)+dv)*unit_vel))
+        print("# Flight-time      = %f days" % (toa*unit_time))
+    else:
+        print("# Crashed on earth!")
+    print("# --------------------------------------------------------------------------")
+    sys.stdout.flush()
+
+def search(thread,threads,n,duration,positions,angles,burns):
+
+    #print("Start thread=%i" % (thread))
+
+    # Initialize arrays
+    xlist = np.zeros(n)
+    ylist = np.zeros(n)
+    pxlist = np.zeros(n)
+    pylist = np.zeros(n)
+    errlist = np.zeros(n)
+    hlist = np.zeros(n)
+    info = np.zeros(2)
+
+    # Search for orbits
+    trials = len(positions)*len(angles)*len(burns)
+    ld1 = len(angles)*len(burns)
+    ld2 = len(burns)
+    trial = 0
+    hit_earth = 0
+    hit_moon = 0
+    best_status = 1e9
+    progress = -1
+    i = thread
+    while i < trials:
+
+        # One-to-one mapping of i -> (pos_i,ang_i,burn_i)
+        pos_i = i//ld1
+        ang_i = (i-pos_i*ld1)//ld2
+        burn_i = i-pos_i*ld1-ang_i*ld2
+        i += threads
+
+        # Find launch setup
+        pos = positions[pos_i]
+        ang = angles[ang_i]
+        burn = burns[burn_i]
+
+        # Calculate initial conditions
+        r = leo_orbit/unit_len
+        x0 = np.cos(pos)*r
+        y0 = np.sin(pos)*r
+        rx = -y0/r
+        ry = x0/r
+        vx = (leo_orbit_vel/unit_vel)*rx
+        vy = (leo_orbit_vel/unit_vel)*ry
+        x0 += earth_pos_x
+        bx = np.cos(ang)*rx-np.sin(ang)*ry
+        by = np.sin(ang)*rx+np.cos(ang)*ry
+        px0 = (burn/abs(burn))*vx+burn*bx-y0 # Sign of burn decides rotational direction of launch
+        py0 = (burn/abs(burn))*vy+burn*by+x0
+
+        # Call symplectic integration
+        # status > 0     : Closest distance to moon achieved 
+        # status < 0     : Hit the moon using status=dV(moon)-10000 to get into orbit
+        # status == 100  : Collided with earth
+        #if thread == 1:
+        #    print(n,duration,x0,y0,px0,py0)
+        status = symplectic(n,duration,x0,y0,px0,py0,xlist,ylist,pxlist,pylist,errlist,hlist,info)
+        if status == 100:
+            hit_earth += 1
+        if status < 0:
+            hit_moon += 1
+        if status < best_status:
+            best_status = status
+            best_pos = pos
+            best_ang = ang
+            best_burn = burn
+            best_x0 = x0
+            best_y0 = y0
+            best_px0 = px0
+            best_py0 = py0
+            best_dv = info[0]
+            best_toa = info[1]
+
+        # Show progress
+        if thread == 0: # only thread 0
+            if (100*trial/(1+trials//threads))//10 > progress:
+                progress = (100*trial/(1+trials//threads))//10
+                print(progress*10,end="% ")
+                sys.stdout.flush()
+            trial += 1
+        #if thread == 13:
+         #   print("thread=%i status=%f best_status=%f trial=%i(%i) pos=%f ang=%f burn=%f" % (thread,status,best_status,trial,trials,pos,ang,burn))
+
+    #print("End thread=%i" % (thread))
+
+    return best_status,best_pos,best_ang,best_burn,best_x0,best_y0,best_px0,best_py0,best_dv,best_toa,hit_earth,hit_moon
+
+def search_worker(args):
+    return search(args[0], args[1], args[2], args[3], args[4], args[5], args[6])
+
+def search_mt(threads,n,duration,num_pos,num_ang,num_burn,pos_low,pos_high,ang_low,ang_high,burn_low,burn_high):
+
+    # Time search
+    runtime = time.time()
+
+    # Set search space
+    positions = np.linspace(pos_low,pos_high,num_pos)
+    angles = np.linspace(ang_low,ang_high,num_ang)
+    burns = np.linspace(burn_low,burn_high,num_burn)
+    if num_pos == 1:
+        positions[0] = (pos_high+pos_low)/2.0
+    if num_ang == 1:
+        angles[0] = (ang_high+ang_low)/2.0
+    if num_burn == 1:
+        burns[0] = (burn_high+burn_low)/2.0
+    if num_burn == 2:
+        burns[0] = burn_low
+        burns[1] = burn_high
+    trials = num_pos*num_ang*num_burn
+    print(positions)
+    print(angles)
+    print(burns*unit_vel)
+
+    # Set threads
+    threads = min(threads,num_pos)
+
+    # Do multi-threaded search
+    print("# --------------------------------------------------------------------------")
+    print("# Threads:          %6i" % (threads))
+    print("# Trials:           %6i (" % (trials), end="")
+    if threads == 1:
+        # Single thread
+        best_status,best_pos,best_ang,best_burn,best_x0,best_y0,best_px0,best_py0,best_dv,best_toa,hit_earth,hit_moon = search(0,num_pos,n,duration,positions,angles,burns)
+    else:
+        # Multi-threading
+        chunk = num_pos/threads
+        args = [[i,threads,n,duration,positions,angles,burns] for i in range(threads)]
+        pool = Pool()
+        result = pool.map(search_worker, args)
+        pool.close()
+        pool.join()
+        
+        # Reduce results from all threads
+        best_status = 1e9
+        hit_earth = 0
+        hit_moon = 0
+        for i in range(threads):
+            status = result[i][0]
+            if status < best_status:
+                best_status = status
+                best_pos = result[i][1]
+                best_ang = result[i][2]
+                best_burn = result[i][3]
+                best_x0 = result[i][4]
+                best_y0 = result[i][5]
+                best_px0 = result[i][6]
+                best_py0 = result[i][7]
+                best_dv = result[i][8]
+                best_toa = result[i][9]
+                hit_earth += result[i][10]
+                hit_moon += result[i][11]
+
+    print("100%)")
+    print("# No interception:  %6i (%i%%)" % (trials-hit_earth-hit_moon,100*(trials-hit_earth-hit_moon)/trials))
+    print("# Crashed on earth: %6i (%i%%)" % (hit_earth,100*hit_earth/trials))
+    print("# Hit moon:         %6i (%i%%)" % (hit_moon,100*hit_moon/trials))
+    runtime = time.time()-runtime
+    print("# Runtime:          %6.2fs" % (runtime))
+    if best_status < 100:
+        print_search_results(best_status,best_pos,best_ang,best_burn,best_x0,best_y0,best_px0,best_py0,best_dv,best_toa)
+        return best_status,best_pos,best_ang,best_burn,best_x0,best_y0,best_px0,best_py0,best_dv,best_toa
+    else:
+        return best_status,0,0,0,0,0,0,0,0,0
+\end{lstlisting}
+\end{adjustwidth*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Symplectic Adaptive Verlet and Symplectic Euler Integrators} \label{app:code-symplectic}
+Implemeting the symplectic algorithms from Chapter \ref{ch:numerical-analysis} (filename: symplectic.py).
+
+\begin{adjustwidth*}{0cm}{-0.4cm}
+\begin{lstlisting}[language=Python]
+"""
+Reduced 3-Body Problem Solver Module
+====================================
+"""
+
+from math import pi,sqrt
+import numpy as np
+from numbapro import *
+from const import *
+
+@jit
+def F(x,y):
+    mux = mu+x
+    mux2 = mux*mux
+    mumx = 1-mux
+    mumx2 = mumx*mumx
+    y2 = y*y
+    denum1 = 1.0/((mux2+y2)*sqrt(mux2+y2))
+    denum2 = 1.0/((mumx2+y2)*sqrt(mumx2+y2))
+    Fx = (mu-1.0)*mux*denum1+mu*mumx*denum2
+    Fy = (mu-1.0)*y*denum1-mu*y*denum2
+    return Fx,Fy
+
+@jit
+def explicit_euler_step(h,x,y,px,py):
+    Fx,Fy = F(x,y)
+    vx = px+y
+    vy = py-x
+    vpx = Fx+py
+    vpy = Fy-px
+    x += vx*h
+    y += vy*h
+    px += vpx*h
+    py += vpy*h
+    return x,y,px,py
+
+@jit
+def symplectic_euler_step(h,x,y,px,py):
+    # Step 1
+    vx = px+y
+    x = (x+(vx+py*h)*h)/(1.0+h*h)
+    vy = py-x
+    y += vy*h
+    # Step 2
+    Fx,Fy = F(x,y)
+    vpx = Fx+py
+    vpy = Fy-px
+    px += vpx*h
+    py += vpy*h
+    return x,y,px,py
+
+@jit
+def symplectic_verlet_step(h,x,y,px,py):
+    hh = 0.5*h
+    denum = 1.0/(1.0+hh*hh)
+    # Step 1
+    vx = px+y
+    x = (x+(vx+py*hh)*hh)*denum
+    vy = py-x
+    y += vy*hh
+    # Step 2
+    Fx,Fy = F(x,y)
+    vpx = Fx+py
+    vpy = Fy-px
+    px = (px+(2.0*vpx+(vpy+Fy)*hh)*hh)*denum
+    py += (vpy+Fy-px)*hh
+    # Step 3
+    vx = px+y
+    vy = py-x
+    x += vx*hh
+    y += vy*hh
+    return x,y,px,py
+
+@jit #('void(int64, float64, float64, float64, float64, float64, float64, float64[:], float64[:], float64[:], float64[:])')
+def symplectic(n,duration,x0,y0,px0,py0,xlist,ylist,pxlist,pylist,errlist,hlist,info):
+
+    # Initialize initial conditions
+    h = 1e-6
+    hmin = 1e-10
+    # tol = 1e-9
+    tol = 10
+    maxsteps = duration
+    x = x0
+    y = y0
+    px = px0
+    py = py0
+    err = 1e-15
+    status = 1
+    target_dist = 1
+    target = 1; target_pos_x = moon_pos_x
+    #target = 2; target_pos_x = L1_pos_x
+    target_pos_y = 0
+    
+    # Time reset
+    t = 0
+    for i in range(n):
+
+        # Store position
+        xlist[i] = x
+        ylist[i] = y
+        pxlist[i] = px
+        pylist[i] = py
+        errlist[i] = err
+        hlist[i] = h
+
+        # Integrate time period
+        dt = duration*(i+1)/n
+        count = 0
+        while t < dt:
+            # Safety on iterations
+            count += 1
+            if count > 10000000:
+                count = 0
+                hmin = 2*hmin
+            
+            # Adaptive symplectic euler/midpoint
+            x1,y1,px1,py1 = symplectic_euler_step(h,x,y,px,py)
+            x2,y2,px2,py2 = symplectic_verlet_step(h,x,y,px,py)
+
+            # Relative local error of step
+            err = sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)/(x2*x2+y2*y2))
+
+            # Accept the step only if the weighted error is no more than the
+            # tolerance tol.  Estimate an h that will yield an error of tol on
+            # the next step and use 0.8 of this value to avoid failures.
+            if err < tol or h <= hmin:
+
+                # Accept step
+                x = x2
+                y = y2
+                px = px2
+                py = py2
+
+                # Forward time by step
+                t = t+h
+                # h = max(hmin, h*max(0.1, 0.8*sqrt(tol/err)))
+
+            else:
+                # No accept, reduce h to half
+                h = max(hmin, 0.5*h)
+
+            # How close are we to the moon?
+            rx = x-target_pos_x
+            ry = y-target_pos_y
+            r = sqrt(rx*rx+ry*ry)
+            target_dist = min(target_dist,r)
+
+            # Check if we hit the target
+            if status == 1:
+                if target == 1:
+                    r_low = (lunar_orbit-orbit_range)/unit_len
+                    r_high = (lunar_orbit+orbit_range)/unit_len
+                else:
+                    r_low = 0
+                    r_high = orbit_range/unit_len
+
+                if r > r_low and r < r_high:
+
+                    # Current velocity
+                    vx = px+y
+                    vy = py-x
+
+                    if target == 1:
+
+                        # Project velocity onto radius vector and subtract
+                        # so velocity vector is along orbit
+                        vr = (vx*rx+vy*ry)/r
+                        vx = vx-vr*rx/r
+                        vy = vy-vr*ry/r
+                    
+                        # Now ajust velocity to lunar orbit velocity
+                        vt = sqrt(vx*vx+vy*vy)
+                        px = (lunar_orbit_vel/unit_vel)*vx/vt-y
+                        py = (lunar_orbit_vel/unit_vel)*vy/vt+x
+
+                        # Total velocity change
+                        dv = sqrt(vr*vr+(vt-lunar_orbit_vel/unit_vel)*(vt-lunar_orbit_vel/unit_vel))
+                    else:
+                        dv = sqrt(vx*vx+vy*vy)
+                    
+                    # Store info
+                    info[0] = dv
+                    info[1] = t
+
+                    # Finish?
+                    status = -10000+dv
+                    if n == 1:
+                        return status
+
+            # Check if we hit the earth
+            r = (x-earth_pos_x)*(x-earth_pos_x)+y*y
+            r_high = earth_radius/unit_len
+            if r < r_high*r_high:
+                return 100 # Hit earth surface
+
+    if status >= 0:
+        status = target_dist
+
+    return status
+\end{lstlisting}
+\end{adjustwidth*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

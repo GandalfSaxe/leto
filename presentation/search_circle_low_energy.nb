@@ -1,0 +1,850 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     38514,        841]
+NotebookOptionsPosition[     37635,        806]
+NotebookOutlinePosition[     37988,        822]
+CellTagsIndexPosition[     37945,        819]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quiet", "@", 
+  RowBox[{"Remove", "[", "\"\<`*\>\"", "]"}]}]], "Input",
+ CellChangeTimes->{{3.643290368814579*^9, 3.643290369523737*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Constants", "Section",
+ CellChangeTimes->{{3.643289846343556*^9, 3.6432898470078287`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"angle1", "=", "0"}], ";"}]], "Input",
+ CellChangeTimes->{{3.643289651534705*^9, 3.6432896747636642`*^9}, {
+  3.643300742699664*^9, 3.643300752651226*^9}, {3.6433053708510027`*^9, 
+  3.643305374384769*^9}, {3.643305409757427*^9, 3.6433054106442413`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"angle2", "=", 
+   RowBox[{"2", "\[Pi]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.643289661333804*^9, 3.643289681484342*^9}, {
+  3.6433007466449413`*^9, 3.643300756621002*^9}, {3.6433053650756483`*^9, 
+  3.6433053772858458`*^9}, {3.643305412505777*^9, 3.6433054125408363`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nAngles", "=", "55"}], ";"}]], "Input",
+ CellChangeTimes->{{3.643300865281538*^9, 3.643300871848901*^9}, {
+  3.6433011808396883`*^9, 3.64330118100154*^9}, {3.643301431656465*^9, 
+  3.6433014317602587`*^9}, {3.6433041652694693`*^9, 3.6433041656164722`*^9}, {
+  3.6433042283262053`*^9, 3.643304284062799*^9}, {3.6433043525061483`*^9, 
+  3.643304352628933*^9}, {3.643305380170452*^9, 3.6433053830131607`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[CapitalDelta]Angles", "=", 
+  FractionBox[
+   RowBox[{"angle2", "-", "angle1"}], "nAngles"]}]], "Input",
+ CellChangeTimes->{{3.643301241764003*^9, 3.643301256649848*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"2", " ", "\[Pi]"}], "55"]], "Output",
+ CellChangeTimes->{
+  3.643301257074491*^9, {3.643301432830002*^9, 3.64330143818592*^9}, 
+   3.643301541771646*^9, {3.643301807261136*^9, 3.643301817547145*^9}, 
+   3.643304167166523*^9, {3.64330422969235*^9, 3.643304310843919*^9}, {
+   3.643304353735673*^9, 3.64330438737453*^9}, 3.643305414147355*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Graphical Elements", "Section",
+ CellChangeTimes->{{3.643289850215304*^9, 3.64328985271157*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"r", "=", "0.007"}], ";"}]], "Input",
+ CellChangeTimes->{{3.643290720442741*^9, 3.643290724734807*^9}, {
+   3.643290778578487*^9, 3.6432907786456547`*^9}, 3.6433014281245623`*^9, 
+   3.643304265361411*^9, {3.643304370219651*^9, 3.643304386220443*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"circle", "=", 
+   RowBox[{"circleArc", "=", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Thickness", "[", "r", "]"}], ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}], ",", "1", ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", 
+           RowBox[{"2", "Pi"}]}], "}"}]}], "]"}]}], "}"}], "]"}]}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.64328985468436*^9, 3.643289865887993*^9}, {
+  3.643290736623354*^9, 3.643290740942601*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"positionList", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Graphics", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Thickness", "[", "r", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+              RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}]}], "}"}], "]"}], 
+         "}"}]}], "}"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\[Theta]", ",", "angle1", ",", "angle2", ",", 
+       "\[CapitalDelta]Angles"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.643300910121543*^9, 3.643300915237252*^9}, {
+   3.643300958351316*^9, 3.643300969814287*^9}, {3.643301001303362*^9, 
+   3.643301011108618*^9}, {3.643301058116432*^9, 3.643301082278577*^9}, {
+   3.643301142891242*^9, 3.643301142946319*^9}, {3.643301270701188*^9, 
+   3.643301310352233*^9}, {3.643301344523205*^9, 3.643301365608865*^9}, 
+   3.643301436332694*^9, {3.643301615610064*^9, 3.643301616129602*^9}, {
+   3.643301706768627*^9, 3.6433017087176647`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"velocityList", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Graphics", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Thickness", "[", "r", "]"}], ",", "Gray", ",", 
+        RowBox[{"{", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+              RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Cos", "[", "\[Theta]", "]"}], "-", 
+               RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
+              RowBox[{
+               RowBox[{"Cos", "[", "\[Theta]", "]"}], "+", 
+               RowBox[{"Sin", "[", "\[Theta]", "]"}]}]}], "}"}]}], "}"}], 
+          "]"}], "}"}]}], "}"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\[Theta]", ",", "angle1", ",", "angle2", ",", 
+       "\[CapitalDelta]Angles"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.643300910121543*^9, 3.643300915237252*^9}, {
+   3.643300958351316*^9, 3.643300969814287*^9}, {3.643301001303362*^9, 
+   3.643301011108618*^9}, {3.643301058116432*^9, 3.643301082278577*^9}, {
+   3.643301142891242*^9, 3.643301142946319*^9}, {3.643301270701188*^9, 
+   3.643301310352233*^9}, {3.643301344523205*^9, 3.643301365608865*^9}, 
+   3.643301436332694*^9, {3.643301560908146*^9, 3.643301587618003*^9}, {
+   3.64330164928097*^9, 3.643301661680684*^9}, {3.6433016963428164`*^9, 
+   3.643301759636633*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"circle", ",", "positionList", ",", "velocityList"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6432891643004436`*^9, 3.6432892909950953`*^9}, {
+   3.6432895529438353`*^9, 3.643289600062859*^9}, {3.643289762786559*^9, 
+   3.643289767018602*^9}, {3.643289869232833*^9, 3.643289870120579*^9}, {
+   3.64329038346618*^9, 3.643290385151626*^9}, {3.643301087037882*^9, 
+   3.643301093621537*^9}, {3.6433018034702387`*^9, 3.643301816525405*^9}, 
+   3.643301917174958*^9, {3.6433041574183483`*^9, 3.643304159388154*^9}, {
+   3.64330429195092*^9, 3.643304309686418*^9}, {3.643304357168124*^9, 
+   3.643304357312934*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {Thickness[0.007], 
+    CircleBox[{0, 0}, 1, NCache[{0, 2 Pi}, {0, 6.283185307179586}]]}, 
+   {Thickness[0.007], ArrowBox[{{0, 0}, {1, 0}}]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[2, 55] Pi], Sin[Rational[2, 55] Pi]}}, {{0, 0}, {
+       0.9934817353485502, 0.11399140989054062`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[4, 55] Pi], Sin[Rational[4, 55] Pi]}}, {{0, 0}, {
+       0.9740119169423335, 0.22649676742576436`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[6, 55] Pi], Sin[Rational[6, 55] Pi]}}, {{0, 0}, {
+       0.9418443636395247, 0.3360493932154301}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[8, 55] Pi], Sin[Rational[8, 55] Pi]}}, {{0, 0}, {
+       0.8973984286913584, 0.4412211012432213}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[2, 11] Pi], Sin[Rational[2, 11] Pi]}}, {{0, 0}, {
+       0.8412535328311812, 0.5406408174555976}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[12, 55] Pi], Sin[Rational[12, 55] Pi]}}, {{0, 0}, {
+       0.7741416106390825, 0.6330124538088704}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[27, 110] Pi], Cos[Rational[27, 110] Pi]}}, {{0, 0}, {
+       0.6969375686552934, 0.7171318047589635}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[23, 110] Pi], Cos[Rational[23, 110] Pi]}}, {{0, 0}, {
+       0.6106478796354381, 0.7919022459222751}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[19, 110] Pi], Cos[Rational[19, 110] Pi]}}, {{0, 0}, {
+       0.5163974616389618, 0.856349030251589}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[3, 22] Pi], Cos[Rational[3, 22] Pi]}}, {{0, 0}, {
+       0.4154150130018864, 0.9096319953545184}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Rational[1, 4] (-1 + 5^Rational[1, 2]), (Rational[5, 8] + 
+         Rational[1, 8] 5^Rational[1, 2])^Rational[1, 2]}}, {{0, 0}, {
+       0.30901699437494745`, 0.9510565162951535}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[7, 110] Pi], Cos[Rational[7, 110] Pi]}}, {{0, 0}, {
+       0.19859046664574545`, 0.9800825610923934}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[3, 110] Pi], Cos[Rational[3, 110] Pi]}}, {{0, 0}, {
+       0.08557500847883974, 0.9963317308626913}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[1, 110] Pi], Cos[Rational[1, 110] Pi]}}, {{0, 
+       0}, {-0.02855605079369625, 0.9995921928281892}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[1, 22] Pi], Cos[Rational[1, 22] Pi]}}, {{0, 
+       0}, {-0.14231483827328514`, 0.9898214418809327}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[9, 110] Pi], Cos[Rational[9, 110] Pi]}}, {{0, 
+       0}, {-0.25421833419348694`, 0.9671468547019572}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[13, 110] Pi], Cos[Rational[13, 110] Pi]}}, {{0, 
+       0}, {-0.362807705350641, 0.9318640292114523}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[17, 110] Pi], Cos[Rational[17, 110] Pi]}}, {{0, 
+       0}, {-0.46666732322567367`, 0.8844329309978144}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[21, 110] Pi], Cos[Rational[21, 110] Pi]}}, {{0, 
+       0}, {-0.5644432188667692, 0.8254718969627739}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[5, 22] Pi], Cos[Rational[5, 22] Pi]}}, {{0, 
+       0}, {-0.654860733945285, 0.7557495743542584}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[13, 55] Pi], Sin[Rational[13, 55] Pi]}}, {{0, 
+       0}, {-0.7367411378764049, 0.6761749002740194}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Rational[1, 4] (-1 - 5^Rational[1, 2]), (Rational[5, 8] + 
+         Rational[-1, 8] 5^Rational[1, 2])^Rational[1, 2]}}, {{0, 
+       0}, {-0.8090169943749475, 0.5877852522924731}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[9, 55] Pi], Sin[Rational[9, 55] Pi]}}, {{0, 
+       0}, {-0.8707460771197771, 0.49173292464560375`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[7, 55] Pi], Sin[Rational[7, 55] Pi]}}, {{0, 
+       0}, {-0.9211236531148501, 0.38927010631739145`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[1, 11] Pi], Sin[Rational[1, 11] Pi]}}, {{0, 
+       0}, {-0.9594929736144974, 0.28173255684142967`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[3, 55] Pi], Sin[Rational[3, 55] Pi]}}, {{0, 
+       0}, {-0.985353835847693, 0.17052219263262378`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[1, 55] Pi], Sin[Rational[1, 55] Pi]}}, {{0, 
+       0}, {-0.9983691039261356, 0.05708881086276798}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[1, 55] Pi], -Sin[Rational[1, 55] Pi]}}, {{0, 
+       0}, {-0.9983691039261356, -0.05708881086276798}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[3, 55] Pi], -Sin[Rational[3, 55] Pi]}}, {{0, 
+       0}, {-0.985353835847693, -0.17052219263262378`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[1, 11] Pi], -Sin[Rational[1, 11] Pi]}}, {{0, 
+       0}, {-0.9594929736144974, -0.28173255684142967`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[7, 55] Pi], -Sin[Rational[7, 55] Pi]}}, {{0, 
+       0}, {-0.9211236531148501, -0.38927010631739145`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[9, 55] Pi], -Sin[Rational[9, 55] Pi]}}, {{0, 
+       0}, {-0.8707460771197771, -0.49173292464560375`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Rational[1, 4] (-1 - 5^
+         Rational[1, 2]), -(Rational[5, 8] + 
+          Rational[-1, 8] 5^Rational[1, 2])^Rational[1, 2]}}, {{0, 
+       0}, {-0.8090169943749475, -0.5877852522924731}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Cos[Rational[13, 55] Pi], -Sin[Rational[13, 55] Pi]}}, {{0, 
+       0}, {-0.7367411378764049, -0.6761749002740194}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[5, 22] Pi], -Cos[Rational[5, 22] Pi]}}, {{0, 
+       0}, {-0.654860733945285, -0.7557495743542584}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[21, 110] Pi], -Cos[Rational[21, 110] Pi]}}, {{0, 
+       0}, {-0.5644432188667692, -0.8254718969627739}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[17, 110] Pi], -Cos[Rational[17, 110] Pi]}}, {{0, 
+       0}, {-0.46666732322567367`, -0.8844329309978144}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[13, 110] Pi], -Cos[Rational[13, 110] Pi]}}, {{0, 
+       0}, {-0.362807705350641, -0.9318640292114523}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[9, 110] Pi], -Cos[Rational[9, 110] Pi]}}, {{0, 
+       0}, {-0.25421833419348694`, -0.9671468547019572}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[1, 22] Pi], -Cos[Rational[1, 22] Pi]}}, {{0, 
+       0}, {-0.14231483827328514`, -0.9898214418809327}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 
+       0}, {-Sin[Rational[1, 110] Pi], -Cos[Rational[1, 110] Pi]}}, {{0, 
+       0}, {-0.02855605079369625, -0.9995921928281892}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[3, 110] Pi], -Cos[Rational[3, 110] Pi]}}, {{0, 0}, {
+       0.08557500847883974, -0.9963317308626913}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[7, 110] Pi], -Cos[Rational[7, 110] Pi]}}, {{0, 0}, {
+       0.19859046664574545`, -0.9800825610923934}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Rational[1, 4] (-1 + 
+         5^Rational[1, 2]), -(Rational[5, 8] + 
+          Rational[1, 8] 5^Rational[1, 2])^Rational[1, 2]}}, {{0, 0}, {
+       0.30901699437494745`, -0.9510565162951535}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[3, 22] Pi], -Cos[Rational[3, 22] Pi]}}, {{0, 0}, {
+       0.4154150130018864, -0.9096319953545184}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[19, 110] Pi], -Cos[Rational[19, 110] Pi]}}, {{0, 0}, {
+       0.5163974616389618, -0.856349030251589}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[23, 110] Pi], -Cos[Rational[23, 110] Pi]}}, {{0, 0}, {
+       0.6106478796354381, -0.7919022459222751}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Sin[Rational[27, 110] Pi], -Cos[Rational[27, 110] Pi]}}, {{0, 0}, {
+       0.6969375686552934, -0.7171318047589635}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[12, 55] Pi], -Sin[Rational[12, 55] Pi]}}, {{0, 0}, {
+       0.7741416106390825, -0.6330124538088704}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[2, 11] Pi], -Sin[Rational[2, 11] Pi]}}, {{0, 0}, {
+       0.8412535328311812, -0.5406408174555976}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[8, 55] Pi], -Sin[Rational[8, 55] Pi]}}, {{0, 0}, {
+       0.8973984286913584, -0.4412211012432213}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[6, 55] Pi], -Sin[Rational[6, 55] Pi]}}, {{0, 0}, {
+       0.9418443636395247, -0.3360493932154301}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[4, 55] Pi], -Sin[Rational[4, 55] Pi]}}, {{0, 0}, {
+       0.9740119169423335, -0.22649676742576436`}}]]}, 
+   {Thickness[0.007], 
+    ArrowBox[NCache[{{0, 0}, {
+       Cos[Rational[2, 55] Pi], -Sin[Rational[2, 55] Pi]}}, {{0, 0}, {
+       0.9934817353485502, -0.11399140989054062`}}]]}, 
+   {Thickness[0.007], ArrowBox[{{0, 0}, {1, 0}}]}, 
+   {GrayLevel[0.5], Thickness[0.007], ArrowBox[{{1, 0}, {1, 1}}]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[2, 55] Pi], Sin[Rational[2, 55] Pi]}, {
+       Cos[Rational[2, 55] Pi] - Sin[Rational[2, 55] Pi], 
+        Cos[Rational[2, 55] Pi] + Sin[Rational[2, 55] Pi]}}, {{
+      0.9934817353485502, 0.11399140989054062`}, {0.8794903254580096, 
+      1.107473145239091}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[4, 55] Pi], Sin[Rational[4, 55] Pi]}, {
+       Cos[Rational[4, 55] Pi] - Sin[Rational[4, 55] Pi], 
+        Cos[Rational[4, 55] Pi] + Sin[Rational[4, 55] Pi]}}, {{
+      0.9740119169423335, 0.22649676742576436`}, {0.747515149516569, 
+      1.2005086843680979`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[6, 55] Pi], Sin[Rational[6, 55] Pi]}, {
+       Cos[Rational[6, 55] Pi] - Sin[Rational[6, 55] Pi], 
+        Cos[Rational[6, 55] Pi] + Sin[Rational[6, 55] Pi]}}, {{
+      0.9418443636395247, 0.3360493932154301}, {0.6057949704240946, 
+      1.2778937568549549`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[8, 55] Pi], Sin[Rational[8, 55] Pi]}, {
+       Cos[Rational[8, 55] Pi] - Sin[Rational[8, 55] Pi], 
+        Cos[Rational[8, 55] Pi] + Sin[Rational[8, 55] Pi]}}, {{
+      0.8973984286913584, 0.4412211012432213}, {0.45617732744813716`, 
+      1.3386195299345798`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[2, 11] Pi], Sin[Rational[2, 11] Pi]}, {
+       Cos[Rational[2, 11] Pi] - Sin[Rational[2, 11] Pi], 
+        Cos[Rational[2, 11] Pi] + Sin[Rational[2, 11] Pi]}}, {{
+      0.8412535328311812, 0.5406408174555976}, {0.30061271537558365`, 
+      1.3818943502867786`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[12, 55] Pi], Sin[Rational[12, 55] Pi]}, {
+       Cos[Rational[12, 55] Pi] - Sin[Rational[12, 55] Pi], 
+        Cos[Rational[12, 55] Pi] + Sin[Rational[12, 55] Pi]}}, {{
+      0.7741416106390825, 0.6330124538088704}, {0.1411291568302121, 
+      1.407154064447953}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[27, 110] Pi], Cos[
+        Rational[27, 110] Pi]}, {-Cos[Rational[27, 110] Pi] + 
+        Sin[Rational[27, 110] Pi], Cos[Rational[27, 110] Pi] + 
+        Sin[Rational[27, 110] Pi]}}, {{0.6969375686552934, 
+      0.7171318047589635}, {-0.020194236103670105`, 
+      1.4140693734142569`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[23, 110] Pi], Cos[
+        Rational[23, 110] Pi]}, {-Cos[Rational[23, 110] Pi] + 
+        Sin[Rational[23, 110] Pi], Cos[Rational[23, 110] Pi] + 
+        Sin[Rational[23, 110] Pi]}}, {{0.6106478796354381, 
+      0.7919022459222751}, {-0.181254366286837, 1.4025501255577133`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[19, 110] Pi], Cos[
+        Rational[19, 110] Pi]}, {-Cos[Rational[19, 110] Pi] + 
+        Sin[Rational[19, 110] Pi], Cos[Rational[19, 110] Pi] + 
+        Sin[Rational[19, 110] Pi]}}, {{0.5163974616389618, 
+      0.856349030251589}, {-0.3399515686126272, 1.3727464918905508`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[3, 22] Pi], Cos[
+        Rational[3, 22] Pi]}, {-Cos[Rational[3, 22] Pi] + 
+        Sin[Rational[3, 22] Pi], Cos[Rational[3, 22] Pi] + 
+        Sin[Rational[3, 22] Pi]}}, {{0.4154150130018864, 
+      0.9096319953545184}, {-0.49421698235263206`, 1.3250470083564048`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Rational[1, 4] (-1 + 5^Rational[1, 2]), (Rational[5, 8] + 
+         Rational[1, 8] 5^Rational[1, 2])^
+        Rational[
+         1, 2]}, {-(Rational[5, 8] + Rational[1, 8] 5^Rational[1, 2])^
+          Rational[1, 2] + 
+        Rational[1, 4] (-1 + 5^Rational[1, 2]), (Rational[5, 8] + 
+          Rational[1, 8] 5^Rational[1, 2])^Rational[1, 2] + 
+        Rational[1, 4] (-1 + 5^Rational[1, 2])}}, {{0.30901699437494745`, 
+      0.9510565162951535}, {-0.6420395219202061, 1.260073510670101}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[7, 110] Pi], Cos[
+        Rational[7, 110] Pi]}, {-Cos[Rational[7, 110] Pi] + 
+        Sin[Rational[7, 110] Pi], Cos[Rational[7, 110] Pi] + 
+        Sin[Rational[7, 110] Pi]}}, {{0.19859046664574545`, 
+      0.9800825610923934}, {-0.781492094446648, 1.178673027738139}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[3, 110] Pi], Cos[
+        Rational[3, 110] Pi]}, {-Cos[Rational[3, 110] Pi] + 
+        Sin[Rational[3, 110] Pi], Cos[Rational[3, 110] Pi] + 
+        Sin[Rational[3, 110] Pi]}}, {{0.08557500847883974, 
+      0.9963317308626913}, {-0.9107567223838516, 1.0819067393415311`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[1, 110] Pi], Cos[
+        Rational[1, 110] Pi]}, {-Cos[Rational[1, 110] Pi] - Sin[
+        Rational[1, 110] Pi], Cos[Rational[1, 110] Pi] - Sin[
+        Rational[1, 110] Pi]}}, {{-0.02855605079369625, 
+      0.9995921928281892}, {-1.0281482436218854`, 0.971036142034493}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[1, 22] Pi], Cos[
+        Rational[1, 22] Pi]}, {-Cos[Rational[1, 22] Pi] - Sin[
+        Rational[1, 22] Pi], Cos[Rational[1, 22] Pi] - Sin[
+        Rational[1, 22] Pi]}}, {{-0.14231483827328514`, 
+      0.9898214418809327}, {-1.1321362801542179`, 0.8475066036076475}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[9, 110] Pi], Cos[
+        Rational[9, 110] Pi]}, {-Cos[Rational[9, 110] Pi] - Sin[
+        Rational[9, 110] Pi], Cos[Rational[9, 110] Pi] - Sin[
+        Rational[9, 110] Pi]}}, {{-0.25421833419348694`, 
+      0.9671468547019572}, {-1.2213651888954442`, 0.7129285205084702}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[13, 110] Pi], Cos[
+        Rational[13, 110] Pi]}, {-Cos[Rational[13, 110] Pi] - Sin[
+        Rational[13, 110] Pi], Cos[Rational[13, 110] Pi] - Sin[
+        Rational[13, 110] Pi]}}, {{-0.362807705350641, 
+      0.9318640292114523}, {-1.2946717345620933`, 0.5690563238608113}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[17, 110] Pi], Cos[
+        Rational[17, 110] Pi]}, {-Cos[Rational[17, 110] Pi] - Sin[
+        Rational[17, 110] Pi], Cos[Rational[17, 110] Pi] - Sin[
+        Rational[17, 110] Pi]}}, {{-0.46666732322567367`, 
+      0.8844329309978144}, {-1.351100254223488, 0.4177656077721407}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[
+     NCache[{{-Sin[Rational[21, 110] Pi], Cos[
+        Rational[21, 110] Pi]}, {-Cos[Rational[21, 110] Pi] - Sin[
+        Rational[21, 110] Pi], Cos[Rational[21, 110] Pi] - Sin[
+        Rational[21, 110] Pi]}}, {{-0.5644432188667692, 
+      0.8254718969627739}, {-1.389915115829543, 0.2610286780960047}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[5, 22] Pi], Cos[
+        Rational[5, 22] Pi]}, {-Cos[Rational[5, 22] Pi] - Sin[
+        Rational[5, 22] Pi], Cos[Rational[5, 22] Pi] - Sin[
+        Rational[5, 22] Pi]}}, {{-0.654860733945285, 
+      0.7557495743542584}, {-1.4106103082995434`, 0.10088884040897339`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[13, 55] Pi], Sin[
+        Rational[13, 55] Pi]}, {-Cos[Rational[13, 55] Pi] - Sin[
+        Rational[13, 55] Pi], -Cos[Rational[13, 55] Pi] + 
+        Sin[Rational[13, 55] Pi]}}, {{-0.7367411378764049, 
+      0.6761749002740194}, {-1.4129160381504242`, -0.06056623760238555}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Rational[1, 4] (-1 - 5^Rational[1, 2]), (Rational[5, 8] + 
+         Rational[-1, 8] 5^Rational[1, 2])^Rational[1, 2]}, {
+       Rational[1, 4] (-1 - 5^Rational[1, 2]) - (Rational[5, 8] + 
+         Rational[-1, 8] 5^Rational[1, 2])^Rational[1, 2], 
+        Rational[1, 4] (-1 - 5^Rational[1, 2]) + (Rational[5, 8] + 
+          Rational[-1, 8] 5^Rational[1, 2])^
+         Rational[1, 2]}}, {{-0.8090169943749475, 
+      0.5877852522924731}, {-1.3968022466674206`, -0.22123174208247431`}}]]}, \
+
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[9, 55] Pi], Sin[
+        Rational[9, 55] Pi]}, {-Cos[Rational[9, 55] Pi] - Sin[
+        Rational[9, 55] Pi], -Cos[Rational[9, 55] Pi] + 
+        Sin[Rational[9, 55] Pi]}}, {{-0.8707460771197771, 
+      0.49173292464560375`}, {-1.362479001765381, -0.3790131524741734}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[7, 55] Pi], Sin[
+        Rational[7, 55] Pi]}, {-Cos[Rational[7, 55] Pi] - Sin[
+        Rational[7, 55] Pi], -Cos[Rational[7, 55] Pi] + 
+        Sin[Rational[7, 55] Pi]}}, {{-0.9211236531148501, 
+      0.38927010631739145`}, {-1.3103937594322415`, -0.5318535467974587}}]]}, \
+
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[1, 11] Pi], Sin[
+        Rational[1, 11] Pi]}, {-Cos[Rational[1, 11] Pi] - Sin[
+        Rational[1, 11] Pi], -Cos[Rational[1, 11] Pi] + 
+        Sin[Rational[1, 11] Pi]}}, {{-0.9594929736144974, 
+      0.28173255684142967`}, {-1.241225530455927, -0.6777604167730678}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[3, 55] Pi], Sin[
+        Rational[3, 55] Pi]}, {-Cos[Rational[3, 55] Pi] - Sin[
+        Rational[3, 55] Pi], -Cos[Rational[3, 55] Pi] + 
+        Sin[Rational[3, 55] Pi]}}, {{-0.985353835847693, 
+      0.17052219263262378`}, {-1.1558760284803167`, -0.8148316432150692}}]]}, \
+
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[1, 55] Pi], Sin[
+        Rational[1, 55] Pi]}, {-Cos[Rational[1, 55] Pi] - Sin[
+        Rational[1, 55] Pi], -Cos[Rational[1, 55] Pi] + 
+        Sin[Rational[1, 55] Pi]}}, {{-0.9983691039261356, 
+      0.05708881086276798}, {-1.0554579147889036`, -0.9412802930633677}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[1, 55] Pi], -
+        Sin[Rational[1, 55] Pi]}, {-Cos[Rational[1, 55] Pi] + 
+        Sin[Rational[1, 55] Pi], -Cos[Rational[1, 55] Pi] - Sin[
+        Rational[1, 55] 
+         Pi]}}, {{-0.9983691039261356, -0.05708881086276798}, \
+{-0.9412802930633677, -1.0554579147889036`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[3, 55] Pi], -
+        Sin[Rational[3, 55] Pi]}, {-Cos[Rational[3, 55] Pi] + 
+        Sin[Rational[3, 55] Pi], -Cos[Rational[3, 55] Pi] - Sin[
+        Rational[3, 55] 
+         Pi]}}, {{-0.985353835847693, -0.17052219263262378`}, \
+{-0.8148316432150692, -1.1558760284803167`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[1, 11] Pi], -
+        Sin[Rational[1, 11] Pi]}, {-Cos[Rational[1, 11] Pi] + 
+        Sin[Rational[1, 11] Pi], -Cos[Rational[1, 11] Pi] - Sin[
+        Rational[1, 11] 
+         Pi]}}, {{-0.9594929736144974, -0.28173255684142967`}, \
+{-0.6777604167730678, -1.241225530455927}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[7, 55] Pi], -
+        Sin[Rational[7, 55] Pi]}, {-Cos[Rational[7, 55] Pi] + 
+        Sin[Rational[7, 55] Pi], -Cos[Rational[7, 55] Pi] - Sin[
+        Rational[7, 55] 
+         Pi]}}, {{-0.9211236531148501, -0.38927010631739145`}, \
+{-0.5318535467974587, -1.3103937594322415`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[9, 55] Pi], -
+        Sin[Rational[9, 55] Pi]}, {-Cos[Rational[9, 55] Pi] + 
+        Sin[Rational[9, 55] Pi], -Cos[Rational[9, 55] Pi] - Sin[
+        Rational[9, 55] 
+         Pi]}}, {{-0.8707460771197771, -0.49173292464560375`}, \
+{-0.3790131524741734, -1.362479001765381}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Rational[1, 4] (-1 - 5^
+         Rational[1, 2]), -(Rational[5, 8] + 
+          Rational[-1, 8] 5^Rational[1, 2])^Rational[1, 2]}, {
+       Rational[1, 4] (-1 - 5^Rational[1, 2]) + (Rational[5, 8] + 
+          Rational[-1, 8] 5^Rational[1, 2])^Rational[1, 2], 
+        Rational[1, 4] (-1 - 5^Rational[1, 2]) - (Rational[5, 8] + 
+         Rational[-1, 8] 5^Rational[1, 2])^
+        Rational[
+         1, 2]}}, {{-0.8090169943749475, -0.5877852522924731}, \
+{-0.22123174208247431`, -1.3968022466674206`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Cos[Rational[13, 55] Pi], -
+        Sin[Rational[13, 55] Pi]}, {-Cos[Rational[13, 55] Pi] + 
+        Sin[Rational[13, 55] Pi], -Cos[Rational[13, 55] Pi] - Sin[
+        Rational[13, 55] 
+         Pi]}}, {{-0.7367411378764049, -0.6761749002740194}, \
+{-0.06056623760238555, -1.4129160381504242`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[5, 22] Pi], -Cos[Rational[5, 22] Pi]}, {
+       Cos[Rational[5, 22] Pi] - Sin[
+        Rational[5, 22] Pi], -Cos[Rational[5, 22] Pi] - Sin[
+        Rational[5, 22] Pi]}}, {{-0.654860733945285, -0.7557495743542584}, {
+      0.10088884040897339`, -1.4106103082995434`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[21, 110] Pi], -
+        Cos[Rational[21, 110] Pi]}, {
+       Cos[Rational[21, 110] Pi] - Sin[
+        Rational[21, 110] Pi], -Cos[Rational[21, 110] Pi] - Sin[
+        Rational[21, 110] 
+         Pi]}}, {{-0.5644432188667692, -0.8254718969627739}, {
+      0.2610286780960047, -1.389915115829543}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[17, 110] Pi], -
+        Cos[Rational[17, 110] Pi]}, {
+       Cos[Rational[17, 110] Pi] - Sin[
+        Rational[17, 110] Pi], -Cos[Rational[17, 110] Pi] - Sin[
+        Rational[17, 110] 
+         Pi]}}, {{-0.46666732322567367`, -0.8844329309978144}, {
+      0.4177656077721407, -1.351100254223488}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[13, 110] Pi], -
+        Cos[Rational[13, 110] Pi]}, {
+       Cos[Rational[13, 110] Pi] - Sin[
+        Rational[13, 110] Pi], -Cos[Rational[13, 110] Pi] - Sin[
+        Rational[13, 110] Pi]}}, {{-0.362807705350641, -0.9318640292114523}, {
+      0.5690563238608113, -1.2946717345620933`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[9, 110] Pi], -Cos[Rational[9, 110] Pi]}, {
+       Cos[Rational[9, 110] Pi] - Sin[
+        Rational[9, 110] Pi], -Cos[Rational[9, 110] Pi] - Sin[
+        Rational[9, 110] 
+         Pi]}}, {{-0.25421833419348694`, -0.9671468547019572}, {
+      0.7129285205084702, -1.2213651888954442`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[1, 22] Pi], -Cos[Rational[1, 22] Pi]}, {
+       Cos[Rational[1, 22] Pi] - Sin[
+        Rational[1, 22] Pi], -Cos[Rational[1, 22] Pi] - Sin[
+        Rational[1, 22] 
+         Pi]}}, {{-0.14231483827328514`, -0.9898214418809327}, {
+      0.8475066036076475, -1.1321362801542179`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{-Sin[Rational[1, 110] Pi], -Cos[Rational[1, 110] Pi]}, {
+       Cos[Rational[1, 110] Pi] - Sin[
+        Rational[1, 110] Pi], -Cos[Rational[1, 110] Pi] - Sin[
+        Rational[1, 110] 
+         Pi]}}, {{-0.02855605079369625, -0.9995921928281892}, {
+      0.971036142034493, -1.0281482436218854`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Sin[Rational[3, 110] Pi], -Cos[Rational[3, 110] Pi]}, {
+       Cos[Rational[3, 110] Pi] + 
+        Sin[Rational[3, 110] Pi], -Cos[Rational[3, 110] Pi] + 
+        Sin[Rational[3, 110] Pi]}}, {{
+      0.08557500847883974, -0.9963317308626913}, {
+      1.0819067393415311`, -0.9107567223838516}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Sin[Rational[7, 110] Pi], -Cos[Rational[7, 110] Pi]}, {
+       Cos[Rational[7, 110] Pi] + 
+        Sin[Rational[7, 110] Pi], -Cos[Rational[7, 110] Pi] + 
+        Sin[Rational[7, 110] Pi]}}, {{
+      0.19859046664574545`, -0.9800825610923934}, {
+      1.178673027738139, -0.781492094446648}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Rational[1, 4] (-1 + 
+         5^Rational[1, 2]), -(Rational[5, 8] + 
+          Rational[1, 8] 5^Rational[1, 2])^
+         Rational[1, 2]}, {(Rational[5, 8] + Rational[1, 8] 5^Rational[1, 2])^
+         Rational[1, 2] + 
+        Rational[1, 4] (-1 + 
+          5^Rational[1, 2]), -(Rational[5, 8] + 
+           Rational[1, 8] 5^Rational[1, 2])^Rational[1, 2] + 
+        Rational[1, 4] (-1 + 5^Rational[1, 2])}}, {{
+      0.30901699437494745`, -0.9510565162951535}, {
+      1.260073510670101, -0.6420395219202061}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Sin[Rational[3, 22] Pi], -Cos[Rational[3, 22] Pi]}, {
+       Cos[Rational[3, 22] Pi] + 
+        Sin[Rational[3, 22] Pi], -Cos[Rational[3, 22] Pi] + 
+        Sin[Rational[3, 22] Pi]}}, {{
+      0.4154150130018864, -0.9096319953545184}, {
+      1.3250470083564048`, -0.49421698235263206`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[19, 110] Pi], -Cos[Rational[19, 110] Pi]}, {
+       Cos[Rational[19, 110] Pi] + 
+        Sin[Rational[19, 110] Pi], -Cos[Rational[19, 110] Pi] + 
+        Sin[Rational[19, 110] Pi]}}, {{
+      0.5163974616389618, -0.856349030251589}, {
+      1.3727464918905508`, -0.3399515686126272}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[23, 110] Pi], -Cos[Rational[23, 110] Pi]}, {
+       Cos[Rational[23, 110] Pi] + 
+        Sin[Rational[23, 110] Pi], -Cos[Rational[23, 110] Pi] + 
+        Sin[Rational[23, 110] Pi]}}, {{
+      0.6106478796354381, -0.7919022459222751}, {
+      1.4025501255577133`, -0.181254366286837}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{
+       Sin[Rational[27, 110] Pi], -Cos[Rational[27, 110] Pi]}, {
+       Cos[Rational[27, 110] Pi] + 
+        Sin[Rational[27, 110] Pi], -Cos[Rational[27, 110] Pi] + 
+        Sin[Rational[27, 110] Pi]}}, {{
+      0.6969375686552934, -0.7171318047589635}, {
+      1.4140693734142569`, -0.020194236103670105`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[12, 55] Pi], -Sin[Rational[12, 55] Pi]}, {
+       Cos[Rational[12, 55] Pi] + Sin[Rational[12, 55] Pi], 
+        Cos[Rational[12, 55] Pi] - Sin[Rational[12, 55] Pi]}}, {{
+      0.7741416106390825, -0.6330124538088704}, {1.407154064447953, 
+      0.1411291568302121}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[2, 11] Pi], -Sin[Rational[2, 11] Pi]}, {
+       Cos[Rational[2, 11] Pi] + Sin[Rational[2, 11] Pi], 
+        Cos[Rational[2, 11] Pi] - Sin[Rational[2, 11] Pi]}}, {{
+      0.8412535328311812, -0.5406408174555976}, {1.3818943502867786`, 
+      0.30061271537558365`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[8, 55] Pi], -Sin[Rational[8, 55] Pi]}, {
+       Cos[Rational[8, 55] Pi] + Sin[Rational[8, 55] Pi], 
+        Cos[Rational[8, 55] Pi] - Sin[Rational[8, 55] Pi]}}, {{
+      0.8973984286913584, -0.4412211012432213}, {1.3386195299345798`, 
+      0.45617732744813716`}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[6, 55] Pi], -Sin[Rational[6, 55] Pi]}, {
+       Cos[Rational[6, 55] Pi] + Sin[Rational[6, 55] Pi], 
+        Cos[Rational[6, 55] Pi] - Sin[Rational[6, 55] Pi]}}, {{
+      0.9418443636395247, -0.3360493932154301}, {1.2778937568549549`, 
+      0.6057949704240946}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[4, 55] Pi], -Sin[Rational[4, 55] Pi]}, {
+       Cos[Rational[4, 55] Pi] + Sin[Rational[4, 55] Pi], 
+        Cos[Rational[4, 55] Pi] - Sin[Rational[4, 55] Pi]}}, {{
+      0.9740119169423335, -0.22649676742576436`}, {1.2005086843680979`, 
+      0.747515149516569}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], 
+    ArrowBox[NCache[{{Cos[Rational[2, 55] Pi], -Sin[Rational[2, 55] Pi]}, {
+       Cos[Rational[2, 55] Pi] + Sin[Rational[2, 55] Pi], 
+        Cos[Rational[2, 55] Pi] - Sin[Rational[2, 55] Pi]}}, {{
+      0.9934817353485502, -0.11399140989054062`}, {1.107473145239091, 
+      0.8794903254580096}}]]}, 
+   {GrayLevel[0.5], Thickness[0.007], ArrowBox[{{1, 0}, {1, 1}}]}}]], "Output",\
+
+ CellChangeTimes->{{3.643304363878652*^9, 3.643304387498263*^9}, 
+   3.643305414279574*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{720, 851},
+WindowMargins->{{Automatic, 0}, {Automatic, -1}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 161, 3, 28, "Input"],
+Cell[CellGroupData[{
+Cell[744, 27, 96, 1, 64, "Section"],
+Cell[843, 30, 288, 5, 28, "Input"],
+Cell[1134, 37, 313, 6, 28, "Input"],
+Cell[1450, 45, 441, 7, 28, "Input"],
+Cell[CellGroupData[{
+Cell[1916, 56, 196, 4, 51, "Input"],
+Cell[2115, 62, 380, 7, 48, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2544, 75, 102, 1, 64, "Section"],
+Cell[2649, 78, 285, 5, 28, "Input"],
+Cell[2937, 85, 579, 17, 28, "Input"],
+Cell[3519, 104, 1251, 30, 63, "Input"],
+Cell[4773, 136, 1584, 37, 97, "Input"],
+Cell[CellGroupData[{
+Cell[6382, 177, 658, 11, 28, "Input"],
+Cell[7043, 190, 30564, 612, 408, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

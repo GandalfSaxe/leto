@@ -1,0 +1,143 @@
+%!TEX root = ../Thesis.tex
+\chapter{Detailed Derivation: Coordinate Velocity Transform} \label{app:coordinate-transform}
+Recall $(\mathscr{X},\mathscr{Y})$ is the inertial frame coordinates and $(x,y)$ is the rotating frame coordinates \ref{fig:r3b}. The goal is to go from $\mathscr{X}(x,y)$ and $\mathscr{Y}(x,y)$ to $(\dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2)(x,y)$. This is used in \eqref{eq:r3b-T} to obtain the kinetic energy $T(x,y)$ From equation \eqref{eq:coordinate-transform} we had
+\begin{align}
+\nonumber
+\begin{cases}
+\ \mathscr{X} = x\cos{\omega t} - y\sin{\omega t} \\
+\ \mathscr{Y} = x\sin{\omega t} + y\cos{\omega t}
+\end{cases}
+\end{align}
+Taking the time derivative we get
+\begin{align}
+\begin{cases}
+\ \dot{\mathscr{X}} = \dot{x}\cos{\omega t} - \dot{y}\sin{\omega t} - \omega x\sin{\omega t} - \omega y\cos{\omega t} \\
+\ \dot{\mathscr{Y}} = \dot{x}\sin{\omega t} + \dot{y}\cos{\omega t} + \omega x\cos{\omega t} - \omega y\sin{\omega t}
+\end{cases}
+\end{align}
+We'll take the squares, but first, to get a good overview of the terms, we note that $\dot{\mathscr{X}}^2$ matches
+\begin{align}
+\begin{split}
+\label{eq:algebra}
+&(a-b-c-d)^2 \\
+&= a^2 + b^2 +c^2 +d^2 \\
+&- 2 a b -2 a c - 2 a d \\
+&+ 2 b c + 2 b d + 2 c d
+\end{split}
+\end{align}
+Now we take the squares, align the terms as in \eqref{eq:algebra} and note what terms add and cancel in the sum $\mathscr{X}^2 + \mathscr{Y}^2$:
+\begin{align}
+\begin{split}
+\dot{\mathscr{X}}^2 &= (\dot{x}\cos{\omega t} - \dot{y}\sin{\omega t} - \omega x\sin{\omega t} - \omega y\cos{\omega t})(\dot{x}\cos{\omega t} - \dot{y}\sin{\omega t} - \omega x\sin{\omega t} - \omega y\cos{\omega t}) \\
+&=
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\dot{x}^2\cos^2{t}$};
+} +
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\dot{y}^2\sin^2{t}$};
+} +
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\omega^2 x^2\sin^2{t}$};
+} +
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\omega^2 y^2\cos^2{t}$};
+} \\
+&-
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \dot{x}\dot{y}\cos{\omega t}\sin{\omega t}$};
+} -
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \omega x \dot{x} \cos{\omega t}\sin{\omega t}$};
+} -
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$2 \omega \dot{x}y\cos^2{t}$};
+} \\
+&+
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$2 \omega x \dot{y}\sin^2{t}$};
+} +
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \omega y \dot{y}\cos{\omega t}\sin{\omega t}$};
+} +
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \omega^2 x y \cos{\omega t}\sin{\omega t}$};
+}
+\end{split}
+\end{align}
+Likewise $\dot{\mathscr{Y}}^2$ matches
+\begin{align}
+\begin{split}
+&(a + b + c - d)^2 \\
+&= a^2 + b^2 +c^2 +d^2 \\
+&+ 2 a b + 2 a c - 2 a d \\
+&+ 2 b c - 2 b d - 2 c d 
+\end{split}
+\end{align}
+so we have
+\begin{align}
+\begin{split}
+\dot{\mathscr{Y}}^2 &= (\dot{x}\sin{\omega t} + \dot{y}\cos{\omega t} + \omega x\cos{\omega t} - \omega y\sin{\omega t})(\dot{x}\sin{\omega t} + \dot{y}\cos{\omega t} + \omega x\cos{\omega t} - \omega y\sin{\omega t}) \\
+&=
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\dot{x}^2\sin^2{t}$};
+} +
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\dot{y}^2\cos^2{t}$};
+} +
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\omega^2 x^2\cos^2{t}$};
+} +
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$\omega^2 y^2\sin^2{t}$};
+} \\
+&+
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \dot{x}\dot{y}\cos{\omega t}\sin{\omega t}$};
+} +
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \omega x \dot{x}\cos{\omega t}\sin{\omega t}$};
+} -
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$2 \omega \dot{x}y\sin^2{t}$};
+} \\
+&+
+\tikz[baseline]{
+    \node[fill=green!20,anchor=base]
+    {$2 \omega x \dot{y}\cos^2{t}$};
+} -
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \omega y \dot{y}\cos{\omega t}\sin{\omega t}$};
+} -
+\tikz[baseline]{
+    \node[fill=red!20,anchor=base]
+    {$2 \omega^2 x y \cos{\omega t}\sin{\omega t}$};
+}
+\end{split}
+\end{align}
+\begin{align}
+\nonumber &\tikz\node [fill=green!20,draw,circle]{};\ \text{Terms that add in $\mathscr{X}^2 + \mathscr{Y}^2$} \\
+\nonumber &\tikz\node [fill=red!20,draw,circle]{};\ \text{Terms that cancel in $\mathscr{X}^2 + \mathscr{Y}^2$} \\[1cm]
+\end{align}
+Cancelling terms and repeated use of $\cos^2{t} + \sin^2{t} = 1$ finally gives us
+\begin{align}
+\nonumber \dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2 &= \dot{x}^2 + \dot{y}^2 + \omega^2 x^2 + \omega^2 y^2 - 2 \omega \dot{x} y + 2 \omega x \dot{y} \\[0.2cm]
+&= (\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2
+\end{align}

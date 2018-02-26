@@ -1,0 +1,163 @@
+%!TEX root = ../Thesis.tex
+\chapter{Code} \label{app:code-ho-pe}
+
+\section{Harmonic Oscillator} \label{app:ho}
+\begin{adjustwidth*}{0cm}{-0.4cm}
+\begin{lstlisting}[language=Python]
+"""
+Harmonic Oscillator Numerical Solver Module
+===========================================
+A collection of various numerical solvers for the harmonic oscillator:
+    Euler:
+        Explicit
+        Implicit
+        Symplectic
+
+Functions:
+    euler: Solves harmonic oscillator by 1st order Euler method explicitely,
+           implicitely or symplectically.
+
+We assume k/m = 1 in all of the following.
+
+"""
+
+
+import numpy as np
+
+
+def euler(duration,h,kind,x0=0,v0=1):
+    """Euler algorithm for harmonic oscillator. Includes three variations: explicit, implicit and symplectic.
+
+    Args:
+        duration (float): Time duration of simulation.
+        h (int): Step size.
+        kind (str): Valid strings: 'explicit', 'implicit', 'symplectic'.
+        x0 (float): Initial position (default value: 0)
+        v0 (float): Initial velocity (default value: 1)
+
+    Returns:
+        Tuple of time-, position- and speed lists
+    
+    """
+    # Number of time steps
+    n = int(duration/h)
+    # Vector initialization
+    xlist=np.zeros(n+1) # n steps + ic's --> n+1
+    vlist=np.zeros(n+1)
+    # Initialize initial conditions
+    xlist[0] = x0
+    vlist[0] = v0
+
+    # Make tlist, ensure it always have length n+1
+    if (duration/h % 2) == 0:
+        tlist=np.arange(0,duration+h/2,h)  # Includes the endpoint
+    else:
+        tlist=np.arange(0,duration,h)
+
+    # Euler algorithms
+    if kind == 'explicit':
+        for i in range(n):
+            xlist[i+1] = xlist[i] + h*vlist[i]
+            vlist[i+1] = vlist[i] - h*xlist[i]
+
+    elif kind == 'implicit':
+        for i in range(n):
+            xlist[i+1] = 1/(h**2 + 1)*(xlist[i] + h*vlist[i])
+            vlist[i+1] = 1/(h**2 + 1)*(vlist[i] - h*xlist[i])
+    
+    elif kind == 'symplectic':
+        for i in range(n):
+            xlist[i+1] = xlist[i] + h*vlist[i]
+            vlist[i+1] = (1-h**2)*vlist[i] - h*xlist[i]
+
+    elif kind == 'symplectic2':
+        for i in range(n):
+            xlist[i+1] = (1-h**2)*xlist[i] + h*vlist[i]
+            vlist[i+1] = vlist[i] - h*xlist[i]
+    
+    else:
+        print("Error: 3rd argument 'kind' must be 'explicit', 'implicit' or 'symplectic'")
+    
+    return tlist,xlist,vlist
+\end{lstlisting}
+\end{adjustwidth*}
+
+\section{Pendulum} \label{app:pe}
+\begin{adjustwidth*}{0cm}{-0.4cm}
+\begin{lstlisting}[language=Python]
+"""
+Pendulum Numerical Solver Module
+================================
+A collection of various numerical solvers for the mathematical penduluim:
+    Euler:
+        Explicit
+        Implicit
+        Symplectic
+
+Functions:
+    euler: Solves the pendulum by Euler method explicitely, implicitely or symplectically.
+
+We assume 1/ml = 1  and  m*g*l = 1 in all of the following.
+
+"""
+
+
+import numpy as np
+import root_finding as rf
+
+
+def euler(duration,h,kind,theta0=0,omega0=1):
+    """Euler algorithm for the pendulum. Includes three variations: explicit, implicit and symplectic.
+
+    Args:
+        duration (float): Time duration of simulation.
+        h (int): Step size.
+        kind (str): Valid strings: 'explicit', 'implicit', 'symplectic'.
+        theta0 (float): Initial angle (default value: 0)
+        omega0 (float): Initial angular velocity (default value: 1)
+
+    Returns:
+        Tuple of time-, angle- and angular velocity lists
+    
+    """
+    # Number of time steps
+    n = int(duration/h)
+    # Vector initialization
+    thetalist=np.zeros(n+1) # n steps + ic's --> n+1
+    omegalist=np.zeros(n+1)
+    # Initialize initial conditions
+    thetalist[0] = theta0
+    omegalist[0] = omega0
+
+    # Make tlist, ensure it always have length n+1
+    if (duration/h % 2) == 0:
+        tlist=np.arange(0,duration+h/2,h)  # Includes the endpoint
+    else:
+        tlist=np.arange(0,duration,h)
+
+    # Euler algorithms
+    if kind == 'explicit':
+        for i in range(n):
+            thetalist[i+1] = thetalist[i] + h*omegalist[i]
+            omegalist[i+1] = omegalist[i] - h*np.sin(thetalist[i])
+
+    elif kind == 'implicit':
+        for i in range(n):
+            # f(x) and f'(x) used in Newton-Raphson root finder below
+            f = lambda x: thetalist[i] - x + (omegalist[i] - np.sin(x)*h)*h
+            g = lambda x: -1 - np.cos(x)*h*h  # g = f'
+            # Find thetalist[i+1] numerically by root finding, guess thetalist[i]
+            thetalist[i+1] = rf.newton_raphson(f,g,thetalist[i])
+            omegalist[i+1] = omegalist[i] - np.sin(thetalist[i+1])*h
+    
+    elif kind == 'symplectic':
+        for i in range(n):
+            omegalist[i+1] = omegalist[i] - h*np.sin(thetalist[i])
+            thetalist[i+1] = thetalist[i] + h*omegalist[i+1]
+    
+    else:
+        print("Error: 3rd argument 'kind' must be 'explicit', 'implicit' or 'symplectic'")
+    
+    return tlist,thetalist,omegalist
+\end{lstlisting}
+\end{adjustwidth*}
