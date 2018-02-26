@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="349px" height="316px" viewBox="0 0 349 316" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>hohmann_moon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="hohmann_moon" transform="translate(0.000000, 1.000000)">
+            <g id="labels" transform="translate(0.000000, 2.722034)">
+                <text id="Δv-earth" fill="#00B400" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="12.5" font-weight="normal">
+                    <tspan x="0.8" y="222.32734">Δv</tspan>
+                    <tspan x="15.7875" y="222.32734" font-size="8">Earth</tspan>
+                </text>
+                <text id="Point-2" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="15" font-weight="normal">
+                    <tspan x="289.158475" y="202.003496">2</tspan>
+                </text>
+                <text id="Point-1" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="15" font-weight="normal">
+                    <tspan x="21.4822034" y="202.003496">1</tspan>
+                </text>
+                <text id="Elliptical-transfer-orbit" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="15" font-weight="normal">
+                    <tspan x="70.3309827" y="152.061543">Elliptical transfer orbit</tspan>
+                </text>
+                <text id="Earth" fill="#000000" font-family="TeXGyreAdventor-Bold, TeX Gyre Adventor" font-size="15" font-weight="bold">
+                    <tspan x="100.037664" y="203.028606">Earth</tspan>
+                </text>
+                <text id="Moon" fill="#000000" font-family="TeXGyreAdventor-Bold, TeX Gyre Adventor" font-size="15" font-weight="bold">
+                    <tspan x="307.690457" y="203.028606">Moon</tspan>
+                </text>
+                <text id="Moon-orbit" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="15" font-weight="normal">
+                    <tspan x="220.741288" y="17.1874463">Moon orbit</tspan>
+                </text>
+                <text id="m-earth" fill="#4A4A4A" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="12.5" font-weight="normal">
+                    <tspan x="72.8024302" y="186">m</tspan>
+                    <tspan x="84.5274302" y="186" font-size="8">E</tspan>
+                </text>
+                <text id="Δv-moon" fill="#B40000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="12.5" font-weight="normal">
+                    <tspan x="306.059412" y="219.102941">Δv</tspan>
+                    <tspan x="321.046912" y="219.102941" font-size="8">Moon</tspan>
+                </text>
+            </g>
+            <g id="moon" transform="translate(204.637288, 12.406780)">
+                <path d="M0.383795593,0.367308915 C96.6741726,68.5446984 127.730884,197.409699 73.0698199,301.966675" id="moon-orbit" stroke-opacity="0.47058824" stroke="#000000"></path>
+                <circle stroke="#000000" stroke-width="0.07173786" fill="#4D4D4D" fill-rule="nonzero" cx="99.8949153" cy="192.754458" r="2.22508931"></circle>
+                <polygon id="Δv-moon-arrowhead" stroke="#B40000" fill="#B40000" transform="translate(99.862712, 222.293220) scale(1, -1) translate(-99.862712, -222.293220) " points="99.8627119 219.79322 101.362712 224.79322 98.3627119 224.79322"></polygon>
+                <path d="M99.7491525,220.09322 L99.7491525,193.183051" id="Δv-moon" stroke="#B40000" stroke-width="0.80000001" fill="#00B400"></path>
+            </g>
+            <g id="earth" transform="translate(35.386441, 173.694915)">
+                <circle stroke="#000000" fill="#0000FF" fill-rule="nonzero" cx="34.0169492" cy="31.4663227" r="12.4067797"></circle>
+                <circle id="earth-orbit" stroke="#000000" cx="34.0169492" cy="31.4663227" r="31.0169492"></circle>
+                <path d="M3,71.1680176 L3,27.7442888" id="Δv-earth" stroke="#00B400" stroke-width="0.80000001" fill="#00B400"></path>
+                <path d="M3.13859572,27.4522409 L5.38859572,35.4950009 C4.63859572,35.0268434 3.88859572,34.7927647 3.13859572,34.7927647 C2.38859572,34.7927647 1.63859572,35.0268434 0.888595724,35.4950009 L3.13859572,27.4522409 Z" id="down-earth" stroke="#000000" fill="#000000" transform="translate(3.138596, 31.473621) scale(1, -1) translate(-3.138596, -31.473621) "></path>
+                <polygon id="Δv-earth-arrowhead" stroke="#00B400" fill="#00B400" transform="translate(3.113559, 72.805085) scale(1, -1) translate(-3.113559, -72.805085) " points="3.11355932 70.3050847 4.61355932 75.3050847 1.61355932 75.3050847"></polygon>
+            </g>
+            <g id="ellipse" transform="translate(36.386441, 167.491525)">
+                <g id="ellipse-rulers" transform="translate(0.000000, 38.000000)">
+                    <text id="2a=r1+r2" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="12.5" font-weight="normal">
+                        <tspan x="100.958036" y="89.6070131">2a = r</tspan>
+                        <tspan x="134.683036" y="89.6070131" font-size="8">1</tspan>
+                        <tspan x="139.115036" y="89.6070131">+r</tspan>
+                        <tspan x="150.452536" y="89.6070131" font-size="8">2</tspan>
+                    </text>
+                    <text id="r1" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="12.5" font-weight="normal">
+                        <tspan x="9.68349153" y="60.5676911">r</tspan>
+                        <tspan x="13.4459915" y="60.5676911" font-size="8">1</tspan>
+                    </text>
+                    <text id="r2" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="12.5" font-weight="normal">
+                        <tspan x="126.913428" y="60.3195555">r</tspan>
+                        <tspan x="130.675928" y="60.3195555" font-size="8">2</tspan>
+                    </text>
+                    <path d="M0,74.6120854 C266.745763,74.6120854 266.745763,74.6120854 266.745763,74.6120854" id="2a-ruler" stroke="#000000" stroke-width="0.7"></path>
+                    <path d="M31.1135593,50.1 L0.413398683,50.1101695" id="left-r" stroke="#000000" fill="#000000" transform="translate(15.763479, 50.105085) scale(-1, 1) translate(-15.763479, -50.105085) "></path>
+                    <path id="left-r-decoration-1" d="M31.1145531,53.0999998 L31.1125656,47.1000002" stroke="#000000" fill="#000000"></path>
+                    <path id="left-r-decoration-2" d="M0.414392439,53.1101693 L0.412404927,47.1101697" stroke="#000000" fill="#000000"></path>
+                    <path d="M268.400321,50 L31.286762,50" id="right-r" stroke="#000000" fill="#000000" transform="translate(149.700161, 50.000000) scale(-1, 1) translate(-149.700161, -50.000000) "></path>
+                    <path id="right-r-decoration-1" d="M268.400321,53 L268.400321,47" stroke="#000000" fill="#000000"></path>
+                    <path id="right-r-decoration-2" d="M31.286762,53 L31.286762,47" stroke="#000000" fill="#000000"></path>
+                    <path d="M31.0752489,0.354669053 L31.0752489,49.9817877" id="r-dotted-earth" stroke="#000000" stroke-dasharray="1,1"></path>
+                </g>
+                <path d="M2.03834936,37.6697125 C2.038347,27.808436 16.0533725,18.3510514 41.0002799,11.3780757 C65.9471874,4.40509994 99.7824558,0.487722915 135.062712,0.487722915 C170.342968,0.487722915 204.178236,4.40509994 229.125144,11.3780757 C254.072051,18.3510514 268.087077,27.808436 268.087074,37.6697125" id="ellipse-upper" stroke="#000000" stroke-width="1.06200004" stroke-dasharray="6.37200022,6.37200022"></path>
+                <path d="M268.087074,37.6697125 C268.087073,50.9535561 242.732776,63.2283337 201.574899,69.8702561 C160.417015,76.5121797 109.708409,76.5121797 68.5505244,69.8702561 C27.3926479,63.2283337 2.03835051,50.9535561 2.03834936,37.6697125" id="ellipse-lower" stroke="#000000" stroke-width="1.06181872"></path>
+                <path d="M134,70.8303188 L136.25,78.8730788 C135.5,78.4049213 134.75,78.1708425 134,78.1708425 C133.25,78.1708425 132.5,78.4049213 131.75,78.8730788 L134,70.8303188 Z" id="right-elliptical" stroke="#000000" fill="#000000" transform="translate(134.000000, 74.851699) scale(1, -1) rotate(90.000000) translate(-134.000000, -74.851699) "></path>
+            </g>
+            <g id="moon-zoombox" transform="translate(21.016949, 0.000000)">
+                <path d="M27.2949153,1.69005773 C27.2949153,1.69005773 29.7762712,46.3391533 29.7762712,68.6866679" id="s-orbit-upper" stroke="#000000" stroke-width="0.5" stroke-dasharray="3,3"></path>
+                <text id="2" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="15" font-weight="normal">
+                    <tspan x="14.8540169" y="73.1190528">2</tspan>
+                </text>
+                <text id="r-moon" fill="#000000" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="15" font-weight="normal">
+                    <tspan x="43.1817966" y="127.532098">r</tspan>
+                </text>
+                <path d="M29.7762712,68.6866679 C29.7762712,91.0341813 27.2949153,135.683272 27.2949153,135.683272" id="s-oribt-lower" stroke="#000000" stroke-width="0.5"></path>
+                <polyline id="moon-orbit" stroke-opacity="0.47058824" stroke="#000000" stroke-width="1.00688875" points="73.2 0.449379763 73.2 136.295038 73.2 136.295038"></polyline>
+                <path d="M147.640678,112.110391 C169.035524,132.192203 211.484701,109.181547 253.098305,136.92395 C271.708475,149.330729 221.874448,205.161238 240.691525,205.161238 L265.505085,205.161238" id="zoombox-dotted" stroke="#646464" stroke-dasharray="0.5,0.5"></path>
+                <rect id="zoombox" stroke="#000000" stroke-width="2.03566337" x="0.0221212881" y="0.506898834" width="141.357649" height="136.359541"></rect>
+                <circle id="moon" stroke="#000000" stroke-width="1.48124444" fill="#4D4D4D" fill-rule="nonzero" cx="73.2" cy="68.6866679" r="22.0912203"></circle>
+                <circle id="moon-orbit" stroke="#000000" cx="73.2" cy="68.6866679" r="43.4237288"></circle>
+                <text id="m-moon" fill="#4A4A4A" font-family="TeXGyreAdventor-Regular, TeX Gyre Adventor" font-size="12.5" font-weight="normal">
+                    <tspan x="81.6327393" y="46.1665757">m</tspan>
+                    <tspan x="93.3577393" y="46.1665757" font-size="8">M</tspan>
+                </text>
+                <path d="M29.7762712,118.31378 L73.2,118.31378" id="zoombox-r-ruler" stroke="#000000" stroke-width="0.7"></path>
+                <g id="arrowheads" transform="translate(25.000000, 63.000000)" fill="#000000" stroke="#000000">
+                    <path d="M91.5442908,0 L93.7942908,8.04276001 C93.0442908,7.5746025 92.2942908,7.34052374 91.5442908,7.34052374 C90.7942908,7.34052374 90.0442908,7.5746025 89.2942908,8.04276001 L91.5442908,0 Z" id="up"></path>
+                    <path d="M4.75,0 L7,8.04276001 C6.25,7.5746025 5.5,7.34052374 4.75,7.34052374 C4,7.34052374 3.25,7.5746025 2.5,8.04276001 L4.75,0 Z" id="down" transform="translate(4.750000, 4.021380) scale(1, -1) translate(-4.750000, -4.021380) "></path>
+                    <path d="M2.65143258,61.4694747 L4.90143258,69.5122347 C4.15143258,69.0440772 3.40143258,68.8099984 2.65143258,68.8099984 C1.90143258,68.8099984 1.15143258,69.0440772 0.401432577,69.5122347 L2.65143258,61.4694747 Z" id="incoming" transform="translate(2.651433, 65.490855) rotate(4.000000) translate(-2.651433, -65.490855) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
