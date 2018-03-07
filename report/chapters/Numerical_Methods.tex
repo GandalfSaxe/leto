@@ -9,10 +9,10 @@ The simplest numerical integration is the first order linear approximation known
 We will now solve the restricted 3-body problem equations of motion, \crefrange{eq:H-x}{eq:H-py}. First we discretize the equations
 
 \begin{align}
-\Delta x &= +\dfrac{\partial H}{\partial p_x}\Delta t = (p_x + y)\Delta t \\[0.2cm]
-\Delta y &= +\dfrac{\partial H}{\partial p_y}\Delta t = (p_y - x)\Delta t \\[0.2cm]
-\Delta p_x &= -\dfrac{\partial H}{\partial x}\Delta t = \left(p_y - \dfrac{(1-k)(k+x)}{((k+x)^2+y^2)^{3/2}} + \dfrac{k(1-k-x)}{((1-k-x)^2+y^2)^{3/2}}\right)\Delta t \\[0.2cm]
-\Delta p_y &= -\dfrac{\partial H}{\partial y}\Delta t = \left(-p_x - \dfrac{(1-k)y}{((k+x)^2+y^2)^{3/2}} - \dfrac{k y}{((1-k-x)^2+y^2)^{3/2}}\right)\Delta t
+\Delta x &= +\dfrac{\partial H}{\partial p_x}\Delta t = (p_x + y)\Delta t, \\[0.2cm]
+\Delta y &= +\dfrac{\partial H}{\partial p_y}\Delta t = (p_y - x)\Delta t, \\[0.2cm]
+\Delta p_x &= -\dfrac{\partial H}{\partial x}\Delta t = \left(p_y - \dfrac{(1-k)(k+x)}{((k+x)^2+y^2)^{3/2}} + \dfrac{k(1-k-x)}{((1-k-x)^2+y^2)^{3/2}}\right)\Delta t, \\[0.2cm]
+\Delta p_y &= -\dfrac{\partial H}{\partial y}\Delta t = \left(-p_x - \dfrac{(1-k)y}{((k+x)^2+y^2)^{3/2}} - \dfrac{k y}{((1-k-x)^2+y^2)^{3/2}}\right)\Delta t.
 \end{align}
 
 From now on we will use $h$ instead of $\Delta t$ for the time step size.
@@ -20,10 +20,10 @@ From now on we will use $h$ instead of $\Delta t$ for the time step size.
 \section{Explicit Euler algorithm}
 All new values $(x,y,p_x,p_y)_{i+1}$ refer to known values from the previous timestep $(x,y,p_x,p_y)_i$.
 \begin{align}
-x_{i+1} &= (p_{x,i} + y_i)h + x_i \\[0.2cm]
-y_{i+1} &= (p_{y,i} - x_i)h + y_i \\[0.2cm]
-p_{x,i+1} &= \left(p_{y,i} - \dfrac{(1-k)(k+x_i)}{((k+x_i)^2+y_i^2)^{3/2}} + \dfrac{k(1-k-x_i)}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{x,i} \\[0.2cm]
-p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac{k y_i}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{y,i}
+x_{i+1} &= (p_{x,i} + y_i)h + x_i, \\[0.2cm]
+y_{i+1} &= (p_{y,i} - x_i)h + y_i, \\[0.2cm]
+p_{x,i+1} &= \left(p_{y,i} - \dfrac{(1-k)(k+x_i)}{((k+x_i)^2+y_i^2)^{3/2}} + \dfrac{k(1-k-x_i)}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{x,i}, \\[0.2cm]
+p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac{k y_i}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{y,i}.
 \end{align}
 
 \section{Implicit Euler algorithm}
@@ -32,15 +32,15 @@ Same as explicite Euler, except that all variables in the right-hand side refers
 \section{Symplectic Euler algorithm}
 New values of $(x,y)_{i+1}$ refer to unknown values from the same timestep $(x,y,p_x,p_y)_{i+1}$ but all new values of $(p_x,p_y)_{i+1}$ refer only to known values from the previous timestep $(x,y,p_x,p_y)_i$.
 \begin{align}
-x_{i+1} &= (p_{x,i+1} + y_{i+1})h + x_i \label{eq:euler-s-x}\\[0.2cm]
-y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_i \label{eq:euler-s-y}\\[0.2cm]
-p_{x,i+1} &= \left(p_{y,i} - \dfrac{(1-k)(k+x_i)}{((k+x_i)^2+y_i^2)^{3/2}} + \dfrac{k(1-k-x_i)}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{x,i} \label{eq:euler-s-px} \\[0.2cm]
-p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac{k y_i}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{y,i} \label{eq:euler-s-py}
+x_{i+1} &= (p_{x,i+1} + y_{i+1})h + x_i \label{eq:euler-s-x}, \\[0.2cm]
+y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_i \label{eq:euler-s-y}, \\[0.2cm]
+p_{x,i+1} &= \left(p_{y,i} - \dfrac{(1-k)(k+x_i)}{((k+x_i)^2+y_i^2)^{3/2}} + \dfrac{k(1-k-x_i)}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{x,i} \label{eq:euler-s-px}, \\[0.2cm]
+p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac{k y_i}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{y,i}. \label{eq:euler-s-py}
 \end{align}
 As opposed to implicit Euler, this can easily be solved by solving \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y} for $x_{i+1}$ and $y_{y+1}$
 \begin{align}
-x_{i+1} &= \dfrac{x_i + h(h p_{y,i+1} + p_{x,i+1} + y_i)}{1+h^2} \label{eq:euler_s_x2} \\[0.5cm]
-y_{i+1} &= \dfrac{y_i - h(h p_{x,i+1} - p_{y,i} + x_i)}{1+h^2} \label{eq:euler_s_y2} ,
+x_{i+1} &= \dfrac{x_i + h(h p_{y,i+1} + p_{x,i+1} + y_i)}{1+h^2}, \label{eq:euler_s_x2} \\[0.5cm]
+y_{i+1} &= \dfrac{y_i - h(h p_{x,i+1} - p_{y,i} + x_i)}{1+h^2}, \label{eq:euler_s_y2}
 \end{align}
 and then we can run the algorithm in the order \eqref{eq:euler-s-px}, \eqref{eq:euler-s-py}, \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y}.
 
@@ -90,7 +90,7 @@ PY0=0.5
             \includegraphics[scale=0.411]{fig/r3b-testing/r3b_H(t)_euler_symplectic.pdf}
             \label{fig:r3b_H(t)_euler_symplectic}
         }
-        \caption{Symplectic Euler trajectory and Hamiltonian. The first half trajectory is colored red, the last half is blue. First we note the approximate ellipctical orbit as expected. The $H(t)$ shows dips is the spacecraft passes the Earth, but on average over an orbit, $H(t)$ is approximately constant.}
+        \caption{Symplectic Euler trajectory and Hamiltonian. The first half trajectory is colored red, the last half is blue. First we note the approximate ellipctical orbit as expected. The $H(t)$ shows dips is the spacecraft passes the Earth, but on average over an orbit, $H(t)$ is approximately constant}
         \label{fig:r3b_symplectic_euler}
 \end{figure}
 Having $H$ conserved on average over an orbit is fine for a closed orbit, but for chaotic orbits around both Earth and Moon, it's not nearly good enough. We want a higher order method to conserve $H$ better, to better gauge the numerical errors, and to allow an adaptive numerical method.
@@ -100,36 +100,36 @@ Making the algorithm select a stepsize adaptively decreases the runtime of a giv
 \section{Symplectic Störmer-Verlet}
 We will now describe the second-order Störmer-Verlet method \cite{Hochbruck2008}:
 \begin{align}
-q_{i+1/2} &= q_i + \dfrac{h}{2}H_p(q_{i+1/2}, p_i) \\
-p_{i+1} &= p_i + \dfrac{h}{2}(H_q(q_{i+1/2}, p_i) + H_q(q_{i+1/2}, p_{i+1})) \\
-q_{i+1} &= q_{i+1/2} + \dfrac{h}{2}H_p(q_{n+1/2}, p_{i+1/2})
+q_{i+1/2} &= q_i + \dfrac{h}{2}H_p(q_{i+1/2}, p_i), \\
+p_{i+1} &= p_i + \dfrac{h}{2}(H_q(q_{i+1/2}, p_i) + H_q(q_{i+1/2}, p_{i+1})), \\
+q_{i+1} &= q_{i+1/2} + \dfrac{h}{2}H_p(q_{n+1/2}, p_{i+1/2}).
 \end{align}
 where $H_q$ and $H_p$ denotes the partial derivatives of $H$. Implemented for our equations we get
 \begin{align}
-x_{i+1/2} &= (p_{x,i} + y_{i+1/2})\dfrac{h}{2} + x_i \\[0.3cm]
-y_{i+1/2} &= (p_{y,i} - x_{i+1/2})\dfrac{h}{2} + y_i \\[0.8cm]
+x_{i+1/2} &= (p_{x,i} + y_{i+1/2})\dfrac{h}{2} + x_i, \\[0.3cm]
+y_{i+1/2} &= (p_{y,i} - x_{i+1/2})\dfrac{h}{2} + y_i, \\[0.8cm]
 %
 %
-p_{x,i+1} &= \left[-H_{x,i} + (p_{x,i+1} + y_{i+1/2}) \right]\dfrac{\Delta t}{2} + p_{x,i} \\[0.3cm]
+p_{x,i+1} &= \left[-H_{x,i} + (p_{x,i+1} + y_{i+1/2}) \right]\dfrac{\Delta t}{2} + p_{x,i}, \\[0.3cm]
 %
-p_{y,i+1} &= \left[-H_{y,i} + (p_{y,i+1} -x_{i+1/2}) \right]\dfrac{\Delta t}{2} + p_{y,i}\\[0.8cm]
+p_{y,i+1} &= \left[-H_{y,i} + (p_{y,i+1} -x_{i+1/2}) \right]\dfrac{\Delta t}{2} + p_{y,i},\\[0.8cm]
 %
 %
-x_{i_1} &= (p_{x,i+1} + y_{i+1/2})\dfrac{h}{2} \\[0.3cm]
-y_{i_1} &= (p_{y,i+1} - x_{i+1/2})\dfrac{h}{2} \ ,
+x_{i_1} &= (p_{x,i+1} + y_{i+1/2})\dfrac{h}{2}, \\[0.3cm]
+y_{i_1} &= (p_{y,i+1} - x_{i+1/2})\dfrac{h}{2},
 \end{align}
 where
 \begin{align}
--H_{x,i} = \left(p_{y,i+1} - \dfrac{(1-k)(k+x_{i+1})}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} + \dfrac{k(1-k-x_{i+1})}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right) \\[0.5cm]
--H_{y,i} = \left(-p_{x,i+1} - \dfrac{(1-k)y_{i+1}}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} - \dfrac{k y_{i+1}}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right)
+-H_{x,i} = \left(p_{y,i+1} - \dfrac{(1-k)(k+x_{i+1})}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} + \dfrac{k(1-k-x_{i+1})}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right), \\[0.5cm]
+-H_{y,i} = \left(-p_{x,i+1} - \dfrac{(1-k)y_{i+1}}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} - \dfrac{k y_{i+1}}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right).
 \end{align}
 
 
 \section{Adaptive Symplectic Störmer-Verlet}
 Let $z$ denote a vector of the position variables of the variables $(x,y)$.
 \begin{align}
-\text{Euler step result:} \qquad z_1 = z + O(h) \\
-\text{Verlet step result:} \qquad z_2 = z + O(h^2) \ , \\
+\text{Euler step result:} \qquad z_1 = z + O(h), \\
+\text{Verlet step result:} \qquad z_2 = z + O(h^2), \\
 \end{align}
 where O(h) denotes an error term of order h. Then we take the difference
 \begin{align}

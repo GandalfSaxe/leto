@@ -26,8 +26,8 @@ Throughout a simulation run, only the trajectory with the lowest $\Delta v_{\tex
 \section{Hohmann Transfer Orbits}
 If the moon was stationary in an inertial system, we would simply shoot from the opposite side of the Earth, at $\theta = \pi$. But because we must shoot not for where the moon is, but for where the moon will be. We also know that the flight time is approximately $5$ days. We search for Hohmann orbits with simulation times of 6 days as follows:
 \begin{enumerate}
-    \item Angular position from Earth varied in 100 positions uniformly spaced around $\theta=-3\pi/4$ in range $\pm\ \pi/4$
-    \item Earth burn $\Delta v_{\text{earth}}$ varied in 200 velocities uniformly around $\SI{3.11}{\km\per\s}$ (found by trial-and-error, starting from \ref{eq:deltav-earth}) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}$
+    \item Angular position from Earth varied in 100 positions uniformly spaced around $\theta=-3\pi/4$ in range $\pm\ \pi/4.$
+    \item Earth burn $\Delta v_{\text{earth}}$ varied in 200 velocities uniformly around $\SI{3.11}{\km\per\s}$ (found by trial-and-error, starting from \ref{eq:deltav-earth}) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}.$
     \item One refinement-run on the best trajectory as initial guess, where all the ranges are set to 1/10 their previous value, and number of all three parameters set to 55.
 \end{enumerate}
 
@@ -113,8 +113,8 @@ Note from listing \ref{lst:hohmann} that $\Delta v_{\text{total}} = \SI{3.911}{\
 We searched for LETOs running simulations up to 200 days as follows:
 \begin{enumerate}
     \item Angular position from Earth varied in 55 positions uniformly spaced around $\theta=0$ in range $\pm\ \pi$, i.e. in all directions.
-    \item Earth burn $\Delta v_{\text{earth}}$ varied in 55 velocities uniformly around $\SI{3.12}{\km\per\s}$ (found by trial-and-error) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}$
-    \item Angle $\phi$ to velocity vector in circular orbit varied in 55 angles uniformly spaced around $\phi=0$ in range $\pm \pi/100$
+    \item Earth burn $\Delta v_{\text{earth}}$ varied in 55 velocities uniformly around $\SI{3.12}{\km\per\s}$ (found by trial-and-error) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}.$
+    \item Angle $\phi$ to velocity vector in circular orbit varied in 55 angles uniformly spaced around $\phi=0$ in range $\pm \pi/100.$
     \item 7 refinement-runs around the iteratively best trajectory, where all the ranges are set to 1/10 their previous value.
 \end{enumerate}
 

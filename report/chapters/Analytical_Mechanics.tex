@@ -7,10 +7,10 @@
 \section{Newtonian Mechanics}
 Since the early beginnings of classical mechanics, there have existed fundamentally two different approaches to the study of motion: vectorial (``classical'') and variational (``analytical'') treatment of mechanics. The first, a differential approach, the second, an integral approach.
 
-The vectorial treatment was pioneered by Isaac Newton and is based on two fundamental vectors: momentum and force. Analysis of the forces acting on a body yield second-order differential equations of motion by Newton's 2nd Law, equation \eqref{eq:newton2}. These differential equations can be solved to yield position and velocity at every point in time.
+The vectorial treatment was pioneered by Isaac Newton and is based on two fundamental vectors: momentum and force. Analysis of the forces acting on a body yield second-order differential equations of motion by Newton's 2nd Law, equation \eqref{eq:newton2}. These differential equations can be solved to yield position and velocity at every point in time:
 \begin{align}
 \label{eq:newton2}
-\textbf{Newton's 2nd Law} \qquad \sum{\vec{F}} = \dfrac{d \vec{p}}{dt}
+\textbf{Newton's 2nd Law} \qquad \sum{\vec{F}} = \dfrac{d \vec{p}}{dt}.
 \end{align}
 
 
@@ -19,9 +19,9 @@ The vectorial treatment was pioneered by Isaac Newton and is based on two fundam
 The first seeds of the variational approach was sown by G.W. Leibniz, a contemporary of Newton. Leibniz advocated another quantity ``vis viva '' (living force), which only differs from what we now call ``kinetic energy'' by a factor of 2. Thus Leibniz replaced Newton's ``momentum'' with ``kinetic energy'' and ``force'' with ``work of the force''. \cite[p. xxi]{Lanczos1970}. The power of the variational approach is that these two scalar quantities can completely contain all the dynamics of any system. Around 1743 Euler discovered what later became known as the Euler-Lagrange equations (equations \eqref{eq:euler-lagrange} \cite[p. 61]{Lanczos1970}) using geometrical methods \cite[p. 67]{Goldstine1980} \cite{stack-euler-lagrange}. In 1755 J.L. Lagrange re-derived Euler's results using just algebraic methods, a method that Euler dubbed ``calculus of variations'' \cite[p. xiv]{Goldstine1980} \cite{stack-euler-lagrange}. Thoughout the 18th century new developments analytical mechanics was made, culminating in Lagrange's publication ``Mécanique Analytique'' in 1788 \cite[p. 197]{Fraser1983}. The central quantity in Lagragian mechanics is called the Lagrangian \cite[p. 3]{Hjorth2015}
 \begin{align}
 \label{eq:lagrangian}
-\textbf{Lagrangian} \qquad L = T - V
+\textbf{Lagrangian} \qquad L = T - V,
 \end{align}
-, where $T$ is the total kinetic energy of the body and $V$ is the total potential energy of the system. The central equation is called the Euler-Lagrange Equation \cite{Hjorth2015}
+where $T$ is the total kinetic energy of the body and $V$ is the total potential energy of the system. The central equation is called the Euler-Lagrange Equation \cite{Hjorth2015}
 \begin{align}
 \label{eq:euler-lagrange}
 \textbf{Euler-Lagrange equation} \qquad \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_k} - \dfrac{\partial L}{\partial q_k} = 0 \quad ,\text{(k=1,2,\dots,n)}\ ,
@@ -31,16 +31,16 @@ where $q$ are the generalized coordinates (to be introduced in the next chapter)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hamiltonian Mechanics}
-Classical mechanics underwent one last important reformulation. In 1834 W.R. Hamilton reformulated classical mechanics based on Lagrange's powerful formalism \cite[p. 161]{Nakane2002}. Hamilton's formalism is a systematic, automatic way to recast the 2nd order equations of Newton and Lagrange, and make it a first-order order system. It builds on the Lagrangian but relies on a new quantity called the generalized momentum
+Classical mechanics underwent one last important reformulation. In 1834 W.R. Hamilton reformulated classical mechanics based on Lagrange's powerful formalism \cite[p. 161]{Nakane2002}. Hamilton's formalism is a systematic, automatic way to recast the 2nd order equations of Newton and Lagrange, and make it a first-order order system. It builds on the Lagrangian but relies on a new quantity called the generalized momentum:
 \begin{align}
-\textbf{Generalized momenta} \qquad p_i(\vec{q},\dot{\vec{q}}) &= \dfrac{\partial L}{\partial \dot{q_i}}, \qquad i = 1,\cdots, n \label{eq:generalized-momenta} \\[1cm]
-\textbf{Hamiltonian} \qquad H(\vec{q}, \vec{p}, t) &= \sum\limits_{i=1}^n p_i \dot{q_i} - L \label{eq:hamiltonian} \\[1cm]
+\textbf{Generalized momenta} \qquad p_i(\vec{q},\dot{\vec{q}}) &= \dfrac{\partial L}{\partial \dot{q_i}}, \qquad i = 1,\cdots, n \ , \label{eq:generalized-momenta} \\[1cm]
+\textbf{Hamiltonian} \qquad H(\vec{q}, \vec{p}, t) &= \sum\limits_{i=1}^n p_i \dot{q_i} - L \label{eq:hamiltonian}, \\[1cm]
 \textbf{Hamilton's equations} \qquad
 \begin{split}
 \label{eq:hamiltons-equations}
 \dot{q_i} &= +\dfrac{\partial H}{\partial p_i} ,
 \\[0.2cm]
-\dot{p_i} &= -\dfrac{\partial H}{\partial q_i}
+\dot{p_i} &= -\dfrac{\partial H}{\partial q_i}.
 \end{split}
 \end{align}
 \cite{Hjorth2015} Thus Lagrangian mechanics and Hamiltonian mechanics is energy-centric rather than force-centric. One of the great strengths of the variational approach is that the system can be more or less solved simply by appropriate choice of coordinates. This is due to the fact that appropriate coordinates automatically accounts for the constraints of movements (e.g. a bead on a string, a ball rolling on a surface or electrical charge moving on a surface) so we don't have to account for these constraints by complicated force analysis. These coordinates $q_i$ we call \emph{generalized coordinates}. They are ``\emph{any quantitative attributes of the system (for example, strength of the magnetic field at a particular location; angle of a pulley; position of a particle in space; or degree of excitation of a particular eigenmode in a complex system) which are functions of the independent variable(s)}'' \cite{wiki-lag}. The number of ways the system can move subject to the constrains is called the degrees of freedom. To fully describe the system, the number of generalized coordinates chosen for the system must equal the system's degrees of freedom.
@@ -58,37 +58,37 @@ We will now look at the procedure for using Hamiltonian mechanics in practice. I
 \item Determine kinetic energy $T(\vec{q},\dot{\vec{q}}, t)$ = $\frac{1}{2}m v^2$.
 \item Determine potential energy $V(\vec{q},\dot{\vec{q}}, t)$.
 \item Lagrangian: \begin{align}
-L = T - V
-\end{align}.
+L = T - V.
+\end{align}
 \end{enumerate}
 \item[Step 1 \quad Generalized momenta $p_i$] \ \\[-0.5cm]
 \begin{align}
-p_i(\vec{q},\vec{\dot{q}}, t) = \dfrac{\partial L}{\partial \dot{q_i}}
+p_i(\vec{q},\vec{\dot{q}}, t) = \dfrac{\partial L}{\partial \dot{q_i}},
 \end{align}
-, for all $i = 1 \dots n$.
+for all $i = 1 \dots n$.
 %
 \item[Step 2 \quad Transform all the $\dot{q_i}$] \ \\[0.5cm]
 Technically called a Legendre transform, this is the step that takes us from Lagrangian mechanics to Hamiltonian mechanics. We basically isolate the $\dot{q_i}$ in the $p_i$-equations from step 1, and eliminate all $\dot{q_i}$ in the equations in favor of $p_i$. Thus we go from independent variables $(\vec{q}, \vec{\dot{q}})$ to $(\vec{q}, \vec{p})$.
 \begin{align}
-\dot{q_i} = \dot{q_i}(\vec{q}, \vec{p}, t)
+\dot{q_i} = \dot{q_i}(\vec{q}, \vec{p}, t).
 \end{align}
 %
 \item[Step 3 \quad The Hamiltonian $H$] \ \\[-0.5cm]
 \begin{align}
-H(\vec{q}, \vec{p}, t) = \sum\limits_{i=1}^n p_i \dot{q_i} - L
+H(\vec{q}, \vec{p}, t) = \sum\limits_{i=1}^n p_i \dot{q_i} - L,
 \end{align}
-, for all $n=1\cdots n$, where it is understood that all the $q_i$ are substituted with expressions found in step 2.
+for all $n=1\cdots n$, where it is understood that all the $q_i$ are substituted with expressions found in step 2.
 %
 \item[Step 4 \quad Hamilton's Equations of Motion]
 \begin{align}
 \begin{split}
-\dot{q_i} &= +\dfrac{\partial H}{\partial p_i} ,
+\dot{q_i} &= +\dfrac{\partial H}{\partial p_i},
 \\[0.2cm]
-\dot{p_i} &= -\dfrac{\partial H}{\partial q_i}
+\dot{p_i} &= -\dfrac{\partial H}{\partial q_i},
 \end{split}
 \end{align}
 \end{description}
-, for $i = 1 \dots n$, which gives us $2n$ 1st order coupled PDEs of $2n$ variables $(q_1,q_2,\dots,q_n,p_1,p_2,\dots,p_n)$.
+for $i = 1 \dots n$, which gives us $2n$ 1st order coupled PDEs of $2n$ variables $(q_1,q_2,\dots,q_n,p_1,p_2,\dots,p_n)$.
 
 In general $T$ and $V$ can be time-dependent (and therefore $L$ and $H$ can too). However in many applications, including the our model problem, they are not time-dependent.
 
@@ -102,7 +102,7 @@ An important characteristic of a closed physical system is it's energy $E$. By a
 \begin{enumerate}
     \item Equations of constraints, $T$ and $V$ have no explicit time-dependency.
     \item $V$ is independent of $\vec{\dot{q}}$.
-    \item T is a homogeneous quadratic in the $\dot{q}$’s, in particular if $T(\vec{q},\vec{\dot{q}}) = \frac{1}{2} \vec{\dot{q}}^\top M(q)\vec{\dot{q}}$, where $M(q)$ is some symmetric and positive definite matrix ,
+    \item T is a homogeneous quadratic in the $\dot{q}$’s, in particular if $T(\vec{q},\vec{\dot{q}}) = \frac{1}{2} \vec{\dot{q}}^\top M(q)\vec{\dot{q}}$, where $M(q)$ is some symmetric and positive definite matrix.
 \end{enumerate}
 Meeting these conditions also implies that the generalized impulses $p_i$ will be equal to well known conserved quantities such as linear momentum, angular momentum etc. We will later see that the equations for restricted 3-body system satisfy the conditions. Another way to see if $T$ is a quadratic form is if it's a homogenous polynomial, i.e. all terms have same degree in a number of variables. For example $P(x,y) = 4x^2 + 2 x y + 3y^2$ \cite{wiki-quadratic} is quadratic.
 
@@ -129,13 +129,13 @@ I arbitrarily choose the latter option: use $(x,y)$ coordinates and find $X(x,y)
 
 The distances between spacecraft and Earth/Moon are delightfully easy to work out:
 \begin{align}
-r_{S,E} = \sqrt{(x+R)^2+y^2} \\
-r_{S,M} = \sqrt{(x-r)^2+y^2}
+r_{S,E} = \sqrt{(x+R)^2+y^2}, \\
+r_{S,M} = \sqrt{(x-r)^2+y^2}.
 \end{align}
 
 In anticipation for calculating the kinetic energy of the system, we need the quantity
 \begin{align}
-\dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2
+\dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2.
 \end{align}
 In matrix notation the coordinate transform between $(\mathscr{X},\mathscr{Y})$ and $(x,y)$ is obtained by the multiplication of the rotation matrix on the inertial frame coordinates
 \begin{align}
@@ -159,11 +159,11 @@ In matrix notation the coordinate transform between $(\mathscr{X},\mathscr{Y})$ 
 \ \mathscr{X} = x\cos{\omega t} - y\sin{\omega t} \\
 \ \mathscr{Y} = x\sin{\omega t} + y\cos{\omega t}
 \end{cases}
-\end{split}
+\end{split}.
 \end{align}
 By using the pythagorean trigonometric identity\footnote{$\cos^2{\theta} + \sin^2{\theta} = 1$} a number of times (see appendix \ref{app:coordinate-transform} for detailed derivation) we obtain
 \begin{align}
-\mathscr{\dot{\mathscr{X}}}^2 + \mathscr{\dot{\mathscr{Y}}}^2 = (\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2
+\mathscr{\dot{\mathscr{X}}}^2 + \mathscr{\dot{\mathscr{Y}}}^2 = (\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2.
 \end{align}
 Now we can really see another convenience of the $(x,y)$ coordinate system: it eliminates explicite time-dependence of $L$ that would have been there in $V$ in the $(\mathscr{X},\mathscr{Y})$ system.
 
@@ -173,44 +173,44 @@ The kinetic energy is
 \begin{align}
 \label{eq:r3b-T}
 \nonumber T &= \dfrac{1}{2} m_s (\dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2) \\
-&= \dfrac{1}{2} m_s \left[(\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2\right]
+&= \dfrac{1}{2} m_s \left[(\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2\right].
 \end{align}
 The potential energy is
 \begin{align}
 \nonumber V &= - G m_s \left(\dfrac{M}{r_{S,E}} + \dfrac{m}{r_{S,M}}\right) \\
-&= - G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right)
+&= - G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right).
 \end{align}
 The Lagrangian is
 \begin{align}
 \begin{split}
 L &= T - V \\
 &= \dfrac{1}{2} m_s \left[(\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2\right] \\
-&+ G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right)
+&+ G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right).
 \end{split}
 \end{align}
 The generalized momenta are
 \begin{align}
-p_x = \dfrac{\partial L}{\partial \dot{x}} = m_s(\dot{x} - \omega y) \\
-p_y = \dfrac{\partial L}{\partial \dot{y}} = m_s(\dot{y} + \omega x)
+p_x = \dfrac{\partial L}{\partial \dot{x}} = m_s(\dot{x} - \omega y), \\
+p_y = \dfrac{\partial L}{\partial \dot{y}} = m_s(\dot{y} + \omega x).
 \end{align}
 From which we get the $\dot{x}(x,p_x)$ and $\dot{y}(y,p_y)$
 \begin{align}
-\dot{x} = \dfrac{p_x}{m_s} + \omega y \\
-\dot{y} = \dfrac{p_y}{m_s} - \omega x
+\dot{x} = \dfrac{p_x}{m_s} + \omega y, \\
+\dot{y} = \dfrac{p_y}{m_s} - \omega x \ .
 \end{align}
 The Hamiltonian is
 \begin{align}
 H &= \sum\limits_{i=1}^n p_i \dot{q_i} - L \\[0.6cm]
 &= \dfrac{p_x^2 + p_y^2}{m_s} + p_x\omega y - p_y\omega x - \dfrac{1}{2} m_s \left[\left(\dfrac{p_x}{m_s}\right)^2 + \left(\dfrac{p_y}{m_s}\right)^2\right] \\
-&- G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right) \\[0.6cm]
-&= \dfrac{p_x^2 + p_y^2}{2 m_s} + p_x\omega y - p_y\omega x - G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right)
+&- G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right) \nonumber \\[0.6cm]
+&= \dfrac{p_x^2 + p_y^2}{2 m_s} + p_x\omega y - p_y\omega x - G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right).
 \end{align}
 so Hamilton's equations are
 \begin{align}
-\dot{x} &= +\dfrac{\partial H}{\partial p_x} = \dfrac{p_x}{m_s} + \omega y \\[0.4cm]
-\dot{y} &= +\dfrac{\partial H}{\partial p_y} = \dfrac{p_y}{m_s} - \omega x \\[0.4cm]
-\dot{p}_x &= -\dfrac{\partial H}{\partial x} = \omega p_y - G m_s \left[-\dfrac{M(x+R)}{((x+R)^2+y^2)^{3/2}} + \dfrac{m(x-r)}{((x-r)^2+y^2)^{3/2}} \right] \\[0.4cm]
-\dot{p}_y &= -\dfrac{\partial H}{\partial y} = -\omega p_x - G m_s \left[- \dfrac{M y}{((x+R)^2+y^2)^{3/2}} - \dfrac{m y}{((x-r)^2+y^2)^{3/2}}\right]
+\dot{x} &= +\dfrac{\partial H}{\partial p_x} = \dfrac{p_x}{m_s} + \omega y, \\[0.4cm]
+\dot{y} &= +\dfrac{\partial H}{\partial p_y} = \dfrac{p_y}{m_s} - \omega x, \\[0.4cm]
+\dot{p}_x &= -\dfrac{\partial H}{\partial x} = \omega p_y - G m_s \left[-\dfrac{M(x+R)}{((x+R)^2+y^2)^{3/2}} + \dfrac{m(x-r)}{((x-r)^2+y^2)^{3/2}} \right], \\[0.4cm]
+\dot{p}_y &= -\dfrac{\partial H}{\partial y} = -\omega p_x - G m_s \left[- \dfrac{M y}{((x+R)^2+y^2)^{3/2}} - \dfrac{m y}{((x-r)^2+y^2)^{3/2}}\right].
 %\end{split}
 \end{align}
 By appropriate choice of units we can render the equations dimensionless.
@@ -221,17 +221,17 @@ A characteristic distance must be the Earth-Moon distance so:
 \end{align}
 A natural choice for the characteristic time is the moon's orbital period. Because the time dimension is present in the equations as $\omega$ we use Kepler's third law to express: \cite{Murray1999}
 \begin{align}
-\text{One unit time} = \dfrac{1}{\omega} = \sqrt{\dfrac{(R+r)^3}{G(M+m)}}
+\text{One unit time} = \dfrac{1}{\omega} = \sqrt{\dfrac{(R+r)^3}{G(M+m)}}.
 \end{align}
 The momentums $p_x$ $p_y$ of the spacecraft are going to be proportional with the spacecraft's mass $m_s$, so let's choose:
 \begin{align}
-\text{One unit mass} = m_s
+\text{One unit mass} = m_s.
 \end{align}
 With these we can calculate:
 \begin{align}
 \nonumber \text{One unit momentum} &= \text{One unit velocity} = (\text{unit mass})\dfrac{\text{unit distance}}{\text{unit time}} \\[0.3cm]
 \nonumber &= m_s(R+r)\sqrt{\dfrac{G(M+m)}{(R+r)^3}} \\[0.3cm]
-&= m_s \sqrt{\dfrac{G(M+m)}{(R+r)}}
+&= m_s \sqrt{\dfrac{G(M+m)}{(R+r)}}.
 \end{align}
 We can now non-dimensionalize all the equations and get (see appendix \ref{app:non-dimensionalization})
 \begin{empheq}[box=\widefbox]{align}
@@ -259,8 +259,8 @@ For the rest of the time we will denote the non-dimensionalized units simply as 
 
 To reiterate, we have chosen units such that
 \begin{align}
-\text{unit length} &= \SI{3.85e5}{\km} \\
-\text{unit time} &= \SI{4.3484}{\days} \\
-\text{unit velocity} &= \SI{1.025}{\km/\s}
+\text{unit length} &= \SI{3.85e5}{\km}, \\
+\text{unit time} &= \SI{4.3484}{\days}, \\
+\text{unit velocity} &= \SI{1.025}{\km/\s}.
 \end{align}
 Since all of the conditions in subsection \ref{ch:HvsE} are fulfilled, we have that $H=E$ and since $H$ does not depend explicitely on time, the Hamiltonian, and thus the energy, is conserved.
