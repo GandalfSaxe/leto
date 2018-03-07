@@ -51,7 +51,7 @@ The explicit and symplectic Euler algorithm was implemented in Python. The first
     \item Is the Hamiltonian conserved?
 \end{enumerate}
 For symplectic integrators the trajectories look like we expect them to (see \ref{fig:r3b_symplectic_euler}, but not for the non-symplectic explicit Euler (see \ref{fig:r3b_explicit_euler}. The Hamiltonian is not conserved for either first order (Euler) Methods, but $H$ for the symplectic Euler was conserved on average over an orbit in a closed orbit.
-The simulations in figure \ref{fig:r3b_explicit_euler} \ref{fig:r3b_symplectic_euler} was run with the following parameters:
+The simulations in Figure \ref{fig:r3b_explicit_euler} \ref{fig:r3b_symplectic_euler} was run with the following parameters:
 \begin{adjustwidth*}{0cm}{-0.4cm}
 \begin{lstlisting}[language=Python,caption={Initial conditions, step size and duration for initial test run},label={lst:testrun}]
 # Duration and stepsize
@@ -161,7 +161,7 @@ For every single step the step size is changed either up or down, depending on t
 The non-adaptive algorithm is fixed in step size but varies in error per step.
 The adaptive algorithm varies in step size in an attempt to fix the error per step.
 
-For all simulations we have set $10^{-9}$ as the maximum tolerated error per step in the adaptive algorithm. For the non-adaptive algorithm we select a fixed stepsize, $10^{-6}$, to ensure that it's reasonably low most of the time. For comparison a simulation was run with same initial conditions using the adaptive and non-adaptive algorithm, see figures \ref{fig:non-adaptive-step_error} - \ref{fig:adaptive-step_error}. Position plot \ref{fig:adaptive-xy_XY} shown for completeness.
+For all simulations we have set $10^{-9}$ as the maximum tolerated error per step in the adaptive algorithm. For the non-adaptive algorithm we select a fixed stepsize, $10^{-6}$, to ensure that it's reasonably low most of the time. For comparison a simulation was run with same initial conditions using the adaptive and non-adaptive algorithm, see Figure \ref{fig:non-adaptive-step_error} - \ref{fig:adaptive-step_error}. Position plot \ref{fig:adaptive-xy_XY} shown for completeness.
 
 \begin{figure}
     \centering
@@ -198,11 +198,11 @@ For all simulations we have set $10^{-9}$ as the maximum tolerated error per ste
         \subbottom[Non-adaptive symplectic Verlet $(\mathscr{X},\mathscr{Y})$ trajectory.]{
             \includegraphics[scale=0.5]{fig/adaptive/X-Y_fixed_h.pdf}
         }
-        \caption{The trajectories of same initial conditions for the adaptive and non-adaptive method was visually indisinguishable. Included for context to figures \ref{fig:non-adaptive-step_error} - \ref{fig:adaptive-step_error}}
+        \caption{The trajectories of same initial conditions for the adaptive and non-adaptive method was visually indisinguishable. Included for context to Figure \ref{fig:non-adaptive-step_error} - \ref{fig:adaptive-step_error}}
         \label{fig:adaptive-xy_XY}
 \end{figure}
 
 
-Note on the stepsize figure \ref{fig:adaptive-stepsize} that the adaptive ends up with constant stepsize at the end at 40 days once captured by the Moon. Thus when we are in circular orbit around a single body, we don't gain much by using adaptive methods. However as the spacecraft are in free space far away from both Earth/Moon, we gain a lot by taking longer steps (raising the stepsize). However as we make close passes to Earth or Moon, then the step size dips sharply to maintain constant error. We see this around day 9, 21 and 33 in \ref{fig:adaptive-stepsize}. For most simulations, the adaptive method ran 10-100 times faster.
+Note on the stepsize Figure \ref{fig:adaptive-stepsize} that the adaptive ends up with constant stepsize at the end at 40 days once captured by the Moon. Thus when we are in circular orbit around a single body, we don't gain much by using adaptive methods. However as the spacecraft are in free space far away from both Earth/Moon, we gain a lot by taking longer steps (raising the stepsize). However as we make close passes to Earth or Moon, then the step size dips sharply to maintain constant error. We see this around day 9, 21 and 33 in \ref{fig:adaptive-stepsize}. For most simulations, the adaptive method ran 10-100 times faster.
 
 The code for the full Python implementation is in appendix \ref{app:code-r3b}.

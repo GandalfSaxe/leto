@@ -12,7 +12,7 @@ where $G$ is the gravitational constant, $M$ is the larger mass, $m$ is the smal
 
 So in planning- and optimizing orbital trajectories, $\Delta v$ is the quantity of interest, a quantity that we may want to optimize along with flight time. Conversely, knowing the mass and fuel capacity of a spacecraft beforehand, determines the so-called $\Delta v$ budget that the spacecraft have at its disposal for various maneuvers.
 \\
-Before we delve into the different kinds of transfer orbits, we need to introduce some terminology. We imagine a large mass $M$ placed at focus point $F$ and a body of small mass $m$ orbiting it, figure \ref{fig:ellipse} \cite{Murray1999}. Kepler's first law states that in a 2-body system with a large mass $M$ and a small negligible mass $m$, the orbit of the small body is an ellipse with the large body at one of the foci \cite{Knudsen2002}
+Before we delve into the different kinds of transfer orbits, we need to introduce some terminology. We imagine a large mass $M$ placed at focus point $F$ and a body of small mass $m$ orbiting it, Figure \ref{fig:ellipse} \cite{Murray1999}. Kepler's first law states that in a 2-body system with a large mass $M$ and a small negligible mass $m$, the orbit of the small body is an ellipse with the large body at one of the foci \cite{Knudsen2002}
 \begin{description}
     \item[$F$, $F'$ = Focus] Ellipses have two foci.
     \item[$\vec{r}$ = Position vector of smaller orbiting body.]
@@ -33,7 +33,7 @@ Before we delve into the different kinds of transfer orbits, we need to introduc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hohmann Transfer-Orbit} \label{ch:hohmann}
-The Hohmann transfer orbit is an elliptical orbit used to transfer between two circular orbits in the same plane. This is done by doing two engine impulses known as \emph{burns} along the trajectory, see figure \ref{fig:hohmann}.
+The Hohmann transfer orbit is an elliptical orbit used to transfer between two circular orbits in the same plane. This is done by doing two engine impulses known as \emph{burns} along the trajectory, see Figure \ref{fig:hohmann}.
 
 \begin{figure}[ht!]
 \centering
@@ -49,7 +49,7 @@ It has been proven that the Hohmann transfer-orbit is the most $\Delta v$-effici
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bi-elliptic Transfer-Orbit}
-The bi-elliptic transfer is two elliptical orbits used to transfer between two circular orbits. Thrust is applied at three points instead of Hohmann's two, see figure \ref{fig:bi-elliptical}. The basic idea is that the first prograde burn will bring the spacecraft close to escape velocity, then at the apoapsis another prograde burn will increase the periapsis distance (see fig \ref{fig:ellipse}) to the desired distance. Finally at periapsis a retrograde (opposite velocity vector) burn will make the orbit circular.
+The bi-elliptic transfer is two elliptical orbits used to transfer between two circular orbits. Thrust is applied at three points instead of Hohmann's two, see Figure \ref{fig:bi-elliptical}. The basic idea is that the first prograde burn will bring the spacecraft close to escape velocity, then at the apoapsis another prograde burn will increase the periapsis distance (see fig \ref{fig:ellipse}) to the desired distance. Finally at periapsis a retrograde (opposite velocity vector) burn will make the orbit circular.
 
 \begin{figure}[ht!]
 \centering
@@ -63,7 +63,7 @@ In our case $r_i = \SI{160}{\km}$ (Earth parking orbit) and $r_f = \SI{3.85e5}{\
 \begin{align}
 r_f/r_i = \dfrac{\SI{3.85e5}{\km}}{\SI{6367}{\km}+\SI{160}{\km}} \approx 59.0
 \end{align}
-The closer the velocity is to escape velocity right after the first burn at point in fig \ref{fig:bi-elliptical}, the greater the apoapsis distance $r_*$ will be, going to infinity at escape velocity. As $r_*$ increases, the flight time tends to infinity and the bi-elliptic orbit gets more efficient. Note that the $\Delta v$ of the Hohmann- and the bi-elliptic transfers converges to the same value in the limit as $r_f/r_i \to \infty$ see figure \ref{fig:hohmann_vs_bi-elliptic1}. Also note the local minimum of the ratio $\Delta v_{\text{Hohmann}}/\Delta v_{\text{bi-elliptic}}$ at $r_f/r_i = 57.19$, which is very close to the moon trip of 59.0 (caveat: $r_*$ is set to $\infty$). This means that the bi-elliptic transfer should theoretically even be most beneficial compared to Hohmann at the moon distance. Even so, we will not consider the bi-elliptic to the Moon. The reason for this is outlined below.
+The closer the velocity is to escape velocity right after the first burn at point in fig \ref{fig:bi-elliptical}, the greater the apoapsis distance $r_*$ will be, going to infinity at escape velocity. As $r_*$ increases, the flight time tends to infinity and the bi-elliptic orbit gets more efficient. Note that the $\Delta v$ of the Hohmann- and the bi-elliptic transfers converges to the same value in the limit as $r_f/r_i \to \infty$ see Figure \ref{fig:hohmann_vs_bi-elliptic1}. Also note the local minimum of the ratio $\Delta v_{\text{Hohmann}}/\Delta v_{\text{bi-elliptic}}$ at $r_f/r_i = 57.19$, which is very close to the moon trip of 59.0 (caveat: $r_*$ is set to $\infty$). This means that the bi-elliptic transfer should theoretically even be most beneficial compared to Hohmann at the moon distance. Even so, we will not consider the bi-elliptic to the Moon. The reason for this is outlined below.
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.47]{fig/hohmann_vs_bi-elliptic1.png}
@@ -90,7 +90,7 @@ We will now apply the Hohmann transfer orbit, a model for a 1-body system, as an
     \item[4. Hohmann transfer can approximate a trans-lunar injection + lunar orbit insertion] A trans-lunar injection (TLI) is a propulsive maneuver used to set a spacecraft on a trajectory that will cause it to arrive at the moon \cite{NASA1966}. We assume that a Hohmann transfer, modified to end with a velocity that matches the centripetal velocity required for circular motion around the moon, is an adequate model. Hence we neglect the gravitational attraction from the moon on the spacecraft while it is in transit, up until the point when the spacecraft is in the circular orbit around the moon.
 \end{description}
 
-Our Hohmann transfer orbit to the moon follows the same steps as the standard Hohmann transfer described in chapter \ref{ch:hohmann}, except we end with a slightly different velocity to match a circular orbit centered around the moon, see figure \ref{fig:hohmann-moon}. In fact we will see that we need to break (retrograde burn) instead of accelerating to achieve desired speed for orbit around the moon rather than around the former central body, the Earth.
+Our Hohmann transfer orbit to the moon follows the same steps as the standard Hohmann transfer described in chapter \ref{ch:hohmann}, except we end with a slightly different velocity to match a circular orbit centered around the moon, see Figure \ref{fig:hohmann-moon}. In fact we will see that we need to break (retrograde burn) instead of accelerating to achieve desired speed for orbit around the moon rather than around the former central body, the Earth.
 
 \begin{figure}[ht!]
 \centering
@@ -103,9 +103,9 @@ First we need the \emph{vis viva} equation \cite{Pisacane2005}, which is basical
 \begin{align}
 v^2 = \mu \left(\dfrac{2}{r} - \dfrac{1}{a} \right) \label{eq:vis-viva} ,
 \end{align}
-$v$ is the velocity of the smaller body relative to the central body, $\mu=G M$ is the standard gravitational parameter, $M$ is the central body mass, $r$ is distance from Earth (at focus) to spacecraft and $a$ is the semi-major axis, see figure \ref{fig:hohmann-moon}.
+$v$ is the velocity of the smaller body relative to the central body, $\mu=G M$ is the standard gravitational parameter, $M$ is the central body mass, $r$ is distance from Earth (at focus) to spacecraft and $a$ is the semi-major axis, see Figure \ref{fig:hohmann-moon}.
 
-Using figure \ref{fig:hohmann-moon} as reference, we will calculate the total $\Delta v$ to perform a Hohmann transfer orbit using figure \ref{fig:hohmann-moon} as reference, from a \SI{160}{\km} circular orbit around the earth to a \SI{100}{\km} circular orbit around the moon. We have the quantities \cite{ma}
+Using Figure \ref{fig:hohmann-moon} as reference, we will calculate the total $\Delta v$ to perform a Hohmann transfer orbit using Figure \ref{fig:hohmann-moon} as reference, from a \SI{160}{\km} circular orbit around the earth to a \SI{100}{\km} circular orbit around the moon. We have the quantities \cite{ma}
 \begin{align}
 \mu_E &= G m_E = \SI[per-mode=fraction]{6.67e-11}{\m\cubed\per\kg\per\s\squared} \cdot \SI{5.97e24}{\kg} = \SI{3.99e5}{\km\cubed\per\s\squared}, \\[0.2cm]
 \mu_M &= G m_M = \SI[per-mode=fraction]{6.67e-11}{\m\cubed\per\kg\per\s\squared} \cdot \SI{7.35e22}{\kg} = \SI{4.90e3}{\km\cubed\per\s\squared}, \\[0.2cm]
@@ -205,7 +205,7 @@ In any optimization scheme is it very useful to know the theoretical limit. For 
 Even in the simplest model, the planar circular restricted 3-body problem that we have chosen, the system is chaotic. Therefore the low-energy transfer orbits cannot be found analytically and we must apply some trial-and-error to find them. However instead of relying completely on brute force, randomly searching through all possible trajectories, we can be guided by theory some of the way by studying the energy contours of the system. To this end it is useful to introduce Lagrange points.
 
 \subsection{Lagrange Points and Low-Energy Transfer Orbits}
-For two large bodies of masses $M$ and $m$ there exists points in space where the sum of the gravitational forces from the two bodies equals the centripetal force required to orbit with them around the center of mass \cite{Murray1999}. There exists five such points denoted by $L_1 - L_5$, see figure \ref{fig:lagrange-points}.
+For two large bodies of masses $M$ and $m$ there exists points in space where the sum of the gravitational forces from the two bodies equals the centripetal force required to orbit with them around the center of mass \cite{Murray1999}. There exists five such points denoted by $L_1 - L_5$, see Figure \ref{fig:lagrange-points}.
 
 \begin{figure}[ht]
 \centering
@@ -229,4 +229,4 @@ If $M \gg m$, then the distance to $L_1$ and $L_2$ from $m$ are exactly equal to
         \caption{Visualizations of the potential. For some energy, \ref{fig:forbidden-regions} shows the allowed regions in white, forbidden in gray.}
     \label{fig:potential-visualizations}
 \end{figure}
-Looking at figure \ref{fig:potential-visualizations}, we see that the lowest energy orbits must go through the saddle point or ``neck'' with the Lagrange point $L_1$ in the middle. However if we go straight to the Moon through the neck, we've seen that we arrive at the Moon with an excess velocity and must spend energy on breaking. Using a trajectory-search program to find trajectories through a region around $L_1$, we expect to find some Moon capture trajectories with lower delta-$v$ than Hohmann.
+Looking at Figure \ref{fig:potential-visualizations}, we see that the lowest energy orbits must go through the saddle point or ``neck'' with the Lagrange point $L_1$ in the middle. However if we go straight to the Moon through the neck, we've seen that we arrive at the Moon with an excess velocity and must spend energy on breaking. Using a trajectory-search program to find trajectories through a region around $L_1$, we expect to find some Moon capture trajectories with lower delta-$v$ than Hohmann.
