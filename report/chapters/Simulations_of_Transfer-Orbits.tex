@@ -5,13 +5,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Setup and Circular Orbits}
-Our search algorithm is basically a brute force search. All orbits are found by search method that start from circular Earth Orbit 160 km altitude to circular Moon Orbit 100 km altitude.
+Our search algorithm is basically a brute force search. All orbits are found by search method that start from circular Earth orbit 160 km altitude to circular Moon Orbit 100 km altitude.
 
-A search algorithm in our program then initiates many trajectory calculations with many slightly different initial conditions in the following manner:
+A search algorithm in our program then initiates many trajectory calculations with slightly different initial conditions in the following manner:
 \begin{enumerate}
-    \item Many different initial positions in Earth parking orbit denoted by $\theta$, the angle from the positive $x$ axis, see figure \ref{fig:r3b} for reference. 
+    \item Many different initial positions in Earth parking orbit denoted by $\theta$, the angle from the positive $x$ axis, see Figure \ref{fig:r3b} for reference. 
     \item Many $\Delta v_{\text{earth}}$ around some value.
-    \item Many small variations of $\Delta \phi$, the angle between impulse $\vec{\Delta v}$ and start velocity vector $\vec{v_0}$.
+    \item Many small variations of $\Delta \phi$, the angle between impulse $\vec{\Delta v}$ and initial velocity vector $\vec{v_0}$.
 \end{enumerate}
 
 Each of the trajectories are iteratively calculated using the adaptive Verlet algorithm described in chapter \ref{ch:numerical-analysis} with the additional conditions:
@@ -19,23 +19,23 @@ Each of the trajectories are iteratively calculated using the adaptive Verlet al
     \item If we hit the earth, the trajectory is discarded.
     \item If we hit the moon at altitude $\SI[separate-uncertainty=true]{100(10)}{\km}$, the necessary $\Delta v_{\text{moon}}$ to enter circular orbit is calculated and applied.
 \end{enumerate}
-Throughout a simulation run, only the trajectory with the lowest $\Delta v_{\text{moon}}$ is saved. This effectively filters out all the trajectories hitting the Moon head-on or high velocities; the best orbit will enter the Moon's orbit on an angle approximately tangent to a $\SI{100}{\km}$ circular orbit.
+Throughout a single simulation, only the trajectory with the lowest $\Delta v_{\text{moon}}$ is saved. This effectively filters out all the trajectories hitting the Moon head-on or high velocities; the best orbit will enter the Moon's orbit on an angle approximately tangent to a $\SI{100}{\km}$ circular orbit.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hohmann Transfer Orbits}
-If the moon was stationary in an inertial system, we would simply shoot from the opposite side of the Earth, at $\theta = \pi$. But because we must shoot not for where the moon is, but for where the moon will be. We also know that the flight time is approximately $5$ days. We search for Hohmann orbits with simulation times of 6 days as follows:
+If the moon was stationary in an inertial system, we would simply shoot from the opposite side of the Earth, at $\theta = \pi$. But because we must shoot not for where the moon is, but for where the moon will be. We also know that the flight time is approximately $5$ days. We search for Hohmann orbits from a counter-clockwise parking orbit as follows:
 \begin{enumerate}
-    \item Angular position from Earth varied in 100 positions uniformly spaced around $\theta=-3\pi/4$ in range $\pm\ \pi/4$
-    \item Earth burn $\Delta v_{\text{earth}}$ varied in 200 velocities uniformly around $\SI{3.11}{\km\per\s}$ (found by trial-and-error, starting from \ref{eq:deltav-earth}) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}$
-    \item One refinement-run on the best trajectory as initial guess, where all the ranges are set to 1/10 their previous value, and number of all three parameters set to 55.
+    \item Angular position from Earth varied in 100 positions uniformly spaced around $\theta=-3\pi/4$ in range $\pm\ \pi/4.$
+    \item Earth burn $\Delta v_{\text{earth}}$ varied in 200 velocities uniformly around $\SI{3.11}{\km\per\s}$ (found by trial-and-error, starting from \ref{eq:deltav-earth}) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}.$
+    \item One refinement-run on the best trajectory as initial guess, with allv values set to 1/10 their previous value, and making 55 variations of all three parameters.
 \end{enumerate}
 
 Listing \ref{lst:hohmann} show the lowest energy Hohmann trans-lunar injection found among $100 \times 200 + 55 \times 55 \times 55  = 20000 + 3375 = 23375$ trajectories.
 
 %\begin{minipage}{\linewidth}
 \begin{adjustwidth*}{0cm}{-0.4cm}
-\begin{lstlisting}[caption={Best Hohmann orbit. \texttt{pos} = angular difference with start angle (here $\theta=-3\pi/4$), \texttt{ang} = angle to velocity vector in Earth parking orbit, \texttt{burn} = $\Delta v_{\text{earth}}$, \texttt{(x0,y0,px0,py0)} are the initial conditions.},label=lst:hohmann]
+\begin{lstlisting}[caption={Best Hohmann orbit. \texttt{pos} = angular difference with start angle (here $\theta=-3\pi/4$), \texttt{ang} = thrust angle to velocity vector in Earth parking orbit, \texttt{burn} = $\Delta v_{\text{earth}}$, \texttt{(x0,y0,px0,py0)} are the initial conditions.},label=lst:hohmann]
 # --------------------------------------------------------------------------
 duration = 5/unit_time
 pos      = -2.086814820119193
@@ -61,7 +61,7 @@ py0      = -5.289712560652044
 \end{adjustwidth*}
 %\end{minipage}
 
-See figure \ref{fig:hohmann-position} - \ref{fig:hohmann-H} for trajectory position-, entry/exit- and Hamiltonian plots.
+See Figure \ref{fig:hohmann-position} - \ref{fig:hohmann-H} for trajectory position-, entry/exit- and Hamiltonian plots.
 
 \begin{figure}[ht!]
     \centering
@@ -71,13 +71,13 @@ See figure \ref{fig:hohmann-position} - \ref{fig:hohmann-H} for trajectory posit
         \subbottom[Hohmann in $(\mathscr{X},\mathscr{Y})$, inertial system stationary on CM.]{
             \includegraphics[scale=0.4]{fig/hohmann/X-Y_Hohmann.pdf}
         }
-        \caption{Position plots of simulated Hohmann transfer-orbit. Earth in origin, moon orbit in grey, first half of trajectory is red, last half is black, green cross is first Lagrangepoint $L_1$}
+        \caption{Position plots of simulated Hohmann transfer-orbit. Earth in origin, moon orbit in grey, first half of trajectory is red, last half is black, green cross is first Lagrange point $L_1$}
         \label{fig:hohmann-position}
 \end{figure}
 
 \begin{figure}[ht!]
     \centering
-        \subbottom[Exit from circular Earth parking orbit, $\SI{100}{\km}$ altitide]{
+        \subbottom[Exit from circular Earth parking orbit, $\SI{100}{\km}$ altitude]{
             \includegraphics[scale=0.4]{fig/hohmann/earth_Hohmann.pdf}    
         }
         \subbottom[Entry to circular Moon orbit, $\SI{100}{\km}$ altitude]{
@@ -113,15 +113,15 @@ Note from listing \ref{lst:hohmann} that $\Delta v_{\text{total}} = \SI{3.911}{\
 We searched for LETOs running simulations up to 200 days as follows:
 \begin{enumerate}
     \item Angular position from Earth varied in 55 positions uniformly spaced around $\theta=0$ in range $\pm\ \pi$, i.e. in all directions.
-    \item Earth burn $\Delta v_{\text{earth}}$ varied in 55 velocities uniformly around $\SI{3.12}{\km\per\s}$ (found by trial-and-error) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}$
-    \item Angle $\phi$ to velocity vector in circular orbit varied in 55 angles uniformly spaced around $\phi=0$ in range $\pm \pi/100$
-    \item 7 refinement-runs around the iteratively best trajectory, where all the ranges are set to 1/10 their previous value.
+    \item Earth burn $\Delta v_{\text{earth}}$ varied in 55 velocities uniformly around $\SI{3.12}{\km\per\s}$ (found by trial-and-error) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}.$
+    \item Angle $\phi$ to velocity vector in circular orbit varied in 55 angles uniformly spaced around $\phi=0$ in range $\pm \pi/100.$
+    \item Seven refinement-runs around the iteratively best trajectory, where all the ranges are set to 1/10 their previous value.
 \end{enumerate}
 
-We will look at two LETOs:
+We will look at two LETOs we found:
 \begin{description}
-    \item[Short LETO] Flight time of 40.6 days and $\Delta_v{\text{total}} = \SI{3.896}{\km\per\s}$, found in simulation run with maximum duration of 41 days.
-    \item[Long LETO] Flight time of 194.3 days and $\Delta_v{\text{total}} = \SI{3.795}{\km\per\s}$, found in a simulation run of 195 days.
+    \item[Short LETO] Flight time of 40.6 days and $\Delta v_{\text{total}} = \SI{3.896}{\km\per\s}$, found in simulation run with maximum duration of 41 days.
+    \item[Long LETO] Flight time of 194.3 days and $\Delta v_{\text{total}} = \SI{3.795}{\km\per\s}$, found in a simulation run of 195 days.
 \end{description}
 Both was found with the same search parameters, except simulation duration among $55 \times 55 \times 55 \times 8 =$ 1,331,000 trajectories as described above.
 
@@ -158,7 +158,7 @@ py0      = 10.504985512873279
 \end{adjustwidth*}
 %\end{minipage}
 
-See figure \ref{fig:low_energy_short-position} - \ref{fig:low_energy_short-H} for trajectory position-, entry/exit- and Hamiltonian plots.
+See Figure \ref{fig:low_energy_short-position} - \ref{fig:low_energy_short-H} for trajectory position-, entry/exit- and Hamiltonian plots.
 
 \begin{figure}[ht!]
     \centering
@@ -168,13 +168,13 @@ See figure \ref{fig:low_energy_short-position} - \ref{fig:low_energy_short-H} fo
         \subbottom[Short LETO in $(\mathscr{X},\mathscr{Y})$, inertial system stationary on CM.]{
             \includegraphics[scale=0.4]{fig/low-energy-short/X-Y_low_energy_short.pdf}
         }
-        \caption{Position plots of short LETO. Earth in origin, moon orbit in grey, first half of trajectory is red, last half is black, green cross is first Lagrangepoint $L_1$}
+        \caption{Position plots of short LETO. Earth in origin, moon orbit in grey, first half of trajectory is red, last half is black, green cross is first Lagrange point $L_1$}
         \label{fig:low_energy_short-position}
 \end{figure}
 
 \begin{figure}[ht!]
     \centering
-        \subbottom[Exit from circular Earth parking orbit, $\SI{100}{\km}$ altitide]{
+        \subbottom[Exit from circular Earth parking orbit, $\SI{100}{\km}$ altitude]{
             \includegraphics[scale=0.40]{fig/low-energy-short/earth_low_energy_short.pdf}    
         }
         \subbottom[Entry to circular Moon orbit, $\SI{100}{\km}$ altitude]{
@@ -238,7 +238,7 @@ py0      = -8.449205705334165
 \end{adjustwidth*}
 %\end{minipage}
 
-See figure \ref{fig:low_energy_long-position} - \ref{fig:low_energy_long-H} for trajectory position-, entry/exit- and Hamiltonian plots.
+See Figure \ref{fig:low_energy_long-position} - \ref{fig:low_energy_long-H} for trajectory position-, entry/exit- and Hamiltonian plots.
 
 \begin{figure}[ht!]
     \centering
@@ -248,13 +248,13 @@ See figure \ref{fig:low_energy_long-position} - \ref{fig:low_energy_long-H} for 
         \subbottom[Long LETO in $(\mathscr{X},\mathscr{Y})$, inertial system stationary on CM.]{
             \includegraphics[scale=0.4]{fig/low-energy-long/X-Y_low_energy_long.pdf}
         }
-        \caption{Position plots of long LETO. Earth in origin, moon orbit in grey, first half of trajectory is red, last half is black, green cross is first Lagrangepoint $L_1$}
+        \caption{Position plots of long LETO. Earth in origin, moon orbit in grey, first half of trajectory is red, last half is black, green cross is first Lagrange point $L_1$}
         \label{fig:low_energy_long-position}
 \end{figure}
 
 \begin{figure}[ht!]
     \centering
-        \subbottom[Exit from circular Earth parking orbit, $\SI{100}{\km}$ altitide]{
+        \subbottom[Exit from circular Earth parking orbit, $\SI{100}{\km}$ altitude]{
             \includegraphics[scale=0.40]{fig/low-energy-long/earth_low_energy_long.pdf}    
         }
         \subbottom[Entry to circular Moon orbit, $\SI{100}{\km}$ altitude]{
@@ -289,16 +289,16 @@ See figure \ref{fig:low_energy_long-position} - \ref{fig:low_energy_long-H} for 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results Summary and Discussion}
-Table \ref{tab:results} summerizes the $\Delta v$ we found for the Hohmann, and the low-energy transfer orbts, short LETO and long LETO. In addition we've added a few more Hohmann (appendix \ref{app:more_hohmann}) to showcase the $Delta v$ vs. flight time dynamics and to compare with the Apollo missions. In early simulations, the brute force approach was good enough to find a good Hohmann transfer, but not good enough for low-energy. After some code optimization, parallelization and running sufficiently many simulations on multi-core processors yielded good resulsts even for low-energy transfers in the end.
+Table \ref{tab:results} summerizes the $\Delta v$ we found for the Hohmann and the low-energy transfer orbts, short LETO and long LETO. In addition we've added a few more Hohmann (appendix \ref{app:more_hohmann}) to showcase the delta-v vs. flight time dynamics and to compare with the Apollo missions. In early simulations, the brute force approach was good enough to find a good Hohmann transfer, but not good enough for low-energy. After some code optimization, parallelization and running sufficiently many simulations on multi-core processors yielded good resulsts even for low-energy transfers in the end.
 
 \begin{itemize}
-    \item The brute force method worked surpringsly well; we were able to find low-energy transfer orbits of lower $\Delta v$ than any of the two cited from literature.
+    \item The brute force method worked surprisingly well; we were able to find low-energy transfer orbits of lower $\Delta v$ than any of the two cited from literature.
     \item Results for the 3-day Hohmann are with 2.5\% of the Apollo $\Delta v$ and flight time, which adds to the credibility of our problem model and implementation.
-    \item It would possibly be advantagous to go up to a symplectic 4.-5.th order Runge-Kutta method, but was not implemented due to time-constraints. However we do see that the error can be kept small around $10^{-9}$ within a reasonable runtime, which can somewhat justify staying in 2nd order methods. In other words, we would not necessarily find better results, just a bit lower runtime since we could take fewer steps with a 4th order method.
+    \item It would possibly be advantagous to go up to a symplectic 4.-5.th order Runge-Kutta method, but this was not implemented due to time-constraints. However we do see that the error can be kept small around $10^{-9}$ within a reasonable runtime, which can somewhat justify staying in 2nd order methods. In other words, we would not necessarily find better results, just a bit lower runtime since we could take fewer steps with a 4th order method.
     \item In further investigations it would be interesting to include:
     \begin{enumerate}
         \item Patch together orbits in Lagrange points. This could be done by patching together brute forced trajectories from Earth to $L_1$ (integrated forwards) and $L_1$ to moon (integrated backwards).
-        \item To from 2 to 3 dimensions.
+        \item Go from 2 to 3 dimensions.
         \item Include the gravitational force from the Sun. This allows us to explot the dynamics of the Sun-Earth-Moon system. For example deliberately approach the moon from the far side ($L_2$) \cite{Koon2001}.
         \item Exploit the dynamics of the Moon resonances as described in \cite{Topputo2005}.
     \end{enumerate}
@@ -319,8 +319,6 @@ Table \ref{tab:results} summerizes the $\Delta v$ we found for the Hohmann, and 
     Apollo (Hohman)      & 3.05 days               & 4.115                     & 3.048                     & 1.067                    \\ \hline
     Hohmann - short (sim)  & 1.00 days               & 6.823                     & 3.809                     & 3.014                    \\ \hline
 \end{tabular}
-\caption{Summerized flight time and $\Delta v$ for various trajectories, sorted by $\Delta v_{\text{total}}$. Belbruno and Topputo from \cite{Juul2008} are for orbits going from \SI{167}{\km} Earth parking to \SI{100}{\km} circular moon orbit. Apollo mission data form \cite{NASA1966} \cite{apollo-timeline}.}
+\caption{Summerized flight time and $\Delta v$ for various trajectories, sorted by $\Delta v_{\text{total}}$. Belbruno and Topputo from \cite{Juul2008} are for orbits going from \SI{167}{\km} Earth parking to \SI{100}{\km} circular moon orbit. Apollo mission data form \cite{NASA1966} \cite{apollo-timeline}}
 \label{tab:results}
 \end{table}
-
-%$\si{\km\per\s}$
