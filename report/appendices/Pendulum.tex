@@ -51,7 +51,7 @@ We will now solve the pendulum's equations of motion, \eqref{eq:ho-eom}. For sim
 \end{alignat}
 This is a non-linear system of PDEs with no analytical solution. The small angle approximation $\sin{\theta} = \theta$ makes this system identical to the harmonic oscillator. However we're interested in solving the exact system where large oscillations are permitted. We will not be able to compare our numerical solutions to an analytical one (since none exists), but we can gain valuable insights nonetheless.
 
-Once again, in the explicit Euler use old timestep values $i$, implicit Euler use new timestep values $i+1$ and the symplectic Euler use mixed timestep values. As we will see, now the implicit Euler necessitates findong roots numerically.
+Once again, in the explicit Euler use old time step values $i$, implicit Euler use new time step values $i+1$ and the symplectic Euler use mixed time step values. As we will see, now the implicit Euler necessitates finding roots numerically.
 \subsection{Explicit Euler algorithm}
 \begin{align}
 \begin{split}
@@ -69,11 +69,11 @@ p_{i+1} &= - \sin{\theta_i} \Delta t + p_i
 p_{i+1} &= - \sin{\theta_{i+1}} \Delta t + p_i
 \end{split}
 \end{align}
-The new timestep $i+1$ values are then found by substituing on the the equations into the other, then solving numerically with a rootfinder algorithm. For example we can substitute the expression for $p_{i+1}$ into $\theta_{i+1}$ and solve the resulting equation
+The new time step $i+1$ values are then found by substituting on the the equations into the other, then solving numerically with a root finder algorithm. For example we can substitute the expression for $p_{i+1}$ into $\theta_{i+1}$ and solve the resulting equation
 \begin{align}
 0 = \theta_i - \theta_{i+1} + (p_i - sin{\theta_{i+1}})\Delta t
 \end{align}
-Now run rootfinding for $\theta_{i+1}$, guessing $\theta_i$ as initial guess.
+Now run root finding for $\theta_{i+1}$, guessing $\theta_i$ as initial guess.
 
 \subsection{Symplectic Euler algorithm}
 \begin{align}
@@ -168,7 +168,7 @@ Algorithms \crefrange{al:pe-euler_e}{al:pe-euler_s1} was implemented in Python (
 Things to note this time from the figures \crefrange{fig:pe_y(x)_euler}{fig:pe_phase-space_euler}:
 \begin{itemize}
     \item The initial conditions are set such that the pendulum barely has enough energy to go all the way around. Hence the implicit Euler method, known for loosing energy, does not make it all the way around, see fig \ref{fig:pe_y(x)_euler_implicit} as opposed to the explicit and symplectic, fig \ref{fig:pe_y(x)_euler_explicit} and \ref{fig:pe_y(x)_euler_symplectic}.
-    \item Symplectic once again keeps the energy $E(t)$ almost constant, and conserves it seemlingly perfectly on average over a cycle.
+    \item Symplectic once again keeps the energy $E(t)$ almost constant, and conserves it seemingly perfectly on average over a cycle.
     \item The implicit Euler is in a closed orbit in the phase-space diagram as expected from the position plot \ref{fig:pe_y(x)_euler_implicit}, but spirals inward as expected from the energy plot \ref{fig:pe_E(t)_euler_implicit}, whereas explicit and symplectic steadily increases their angles from the initial angle.
 \end{itemize}
-To summerize, we have seen that the symplectic version of the Euler method for numerical integration is superior because it conserves the quantity that we most care about the reduced 3-body system: energy. In more general terms symplectic integrators conserves the Hamiltonian $H$, which in our cases is the same is the total energy $E$ as discussed in the chapter on using Hamiltonian mechanics. Using symplectic Euler going forward, we are now ready to solve the restricted 3-body problem.
+To summarize, we have seen that the symplectic version of the Euler method for numerical integration is superior because it conserves the quantity that we most care about the reduced 3-body system: energy. In more general terms symplectic integrators conserves the Hamiltonian $H$, which in our cases is the same is the total energy $E$ as discussed in the chapter on using Hamiltonian mechanics. Using symplectic Euler going forward, we are now ready to solve the restricted 3-body problem.

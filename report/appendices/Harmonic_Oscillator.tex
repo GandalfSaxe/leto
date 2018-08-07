@@ -64,7 +64,7 @@ x_{i+1} &= p_i\Delta t + x_i \\
 p_{i+1} &= -x_i\Delta t + p_i
 \end{split}
 \end{align}
-In the explicit Euler, timestep $i+1$ only reference values from the old timestep $i$.
+In the explicit Euler, time step $i+1$ only reference values from the old time step $i$.
 
 \subsection{Implicit Euler algorithm}
 \begin{align}
@@ -73,7 +73,7 @@ x_{i+1} &= p_{i+1}\Delta t + x_i \\
 p_{i+1} &= -x_{i+1}\Delta t + p_i
 \end{split}
 \end{align}
-In the implicit Euler, timestep $i+1$ only reference the new values from the same timestep. In general this leads to a system of equations that may not have an analytical solutions, and function roots would have to be found numerically using e.g. Newton Raphson. In the case of the harmonic oscillator we have a system of linear equations that can be solved analytically for $(x_{i+1},p_{i+1}$
+In the implicit Euler, time step $i+1$ only reference the new values from the same time step. In general this leads to a system of equations that may not have an analytical solutions, and function roots would have to be found numerically using e.g. Newton Raphson. In the case of the harmonic oscillator we have a system of linear equations that can be solved analytically for $(x_{i+1},p_{i+1}$
 \begin{align}
 \nonumber &x_{i+1} = p_{i+1}\Delta t + x_i \\
 \nonumber &p_{i+1} = -x_{i+1}\Delta t + p_i \\[0.4cm]
@@ -125,9 +125,9 @@ x_{i+1} &= p_{i}\Delta t + x_i  \\
 p_{i+1} &= -x_{i+1}\Delta t + p_i
 \end{split}
 \end{align}
-In the symplectic Euler, timestep $i+1$ reference the new values one the coordinate equation and the old $i$ value in the momentum equation. This mixing of timestep values makes the Euler method symplectic, i.e. energy conserving.
+In the symplectic Euler, time step $i+1$ reference the new values one the coordinate equation and the old $i$ value in the momentum equation. This mixing of time step values makes the Euler method symplectic, i.e. energy conserving.
 
-In the first version \eqref{al:ho-euler_s1}, clearly $p_{i+1}$ needs to be run before $x_{i+1}$ in each timestep. We can also do it the other way around as in \eqref{al:ho-euler_s2}. They give essential identical solutions. In this case the only difference is a phase shift of the momentum error by $\pi$ (appendix \ref{app:symplectic_difference}).
+In the first version \eqref{al:ho-euler_s1}, clearly $p_{i+1}$ needs to be run before $x_{i+1}$ in each time step. We can also do it the other way around as in \eqref{al:ho-euler_s2}. They give essential identical solutions. In this case the only difference is a phase shift of the momentum error by $\pi$ (appendix \ref{app:symplectic_difference}).
 
 Algorithms \crefrange{al:ho-euler_e}{al:ho-euler_s1} was implemented in Python (appendix \ref{app:ho}).
 
@@ -244,7 +244,7 @@ Things to note about the integrators from the figures \crefrange{fig:ho_x(t)_eul
 \begin{itemize}
     \item Explicit and implicit drift in position amplitude but stay true in phase.
     \item Symplectic drift in phase but stay true in amplitude (and thereby energy).
-    \item In terms of energy, symplectic stays close to the analytic solution for much longer time. This is what defines a sympletic integrator and it is it's primary benefit.
+    \item In terms of energy, symplectic stays close to the analytic solution for much longer time. This is what defines a symplectic integrator and it is it's primary benefit.
     \item Explicit tends to add energy to the system (spiral outwards in phase-space plot), implicit ends to remove energy from the system (spiral inward in phase-space plot). Symplectic stays in the same orbit in phase-space, i.e. conserves the energy.
 \end{itemize}
 

@@ -16,7 +16,7 @@ The vectorial treatment was pioneered by Isaac Newton and is based on two fundam
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lagrangian Mechanics}
-The first seeds of the variational approach was sown by G.W. Leibniz, a contemporary of Newton. Leibniz advocated another quantity ``vis viva '' (living force), which only differs from what we now call ``kinetic energy'' by a factor of 2. Thus Leibniz replaced Newton's ``momentum'' with ``kinetic energy'' and ``force'' with ``work of the force''. \cite[p. xxi]{Lanczos1970}. The power of the variational approach is that these two scalar quantities can completely contain all the dynamics of any system. Around 1743 Euler discovered what later became known as the Euler-Lagrange equations (equations \eqref{eq:euler-lagrange} \cite[p. 61]{Lanczos1970}) using geometrical methods \cite[p. 67]{Goldstine1980} \cite{stack-euler-lagrange}. In 1755 J.L. Lagrange re-derived Euler's results using just algebraic methods, a method that Euler dubbed ``calculus of variations'' \cite[p. xiv]{Goldstine1980} \cite{stack-euler-lagrange}. Thoughout the 18th century new developments analytical mechanics was made, culminating in Lagrange's publication ``Mécanique Analytique'' in 1788 \cite[p. 197]{Fraser1983}. The central quantity in Lagragian mechanics is called the Lagrangian \cite[p. 3]{Hjorth2015}
+The first seeds of the variational approach was sown by G.W. Leibniz, a contemporary of Newton. Leibniz advocated another quantity ``vis viva '' (living force), which only differs from what we now call ``kinetic energy'' by a factor of 2. Thus Leibniz replaced Newton's ``momentum'' with ``kinetic energy'' and ``force'' with ``work of the force''. \cite[p. xxi]{Lanczos1970}. The power of the variational approach is that these two scalar quantities can completely contain all the dynamics of any system. Around 1743 Euler discovered what later became known as the Euler-Lagrange equations (equations \eqref{eq:euler-lagrange} \cite[p. 61]{Lanczos1970}) using geometrical methods \cite[p. 67]{Goldstine1980} \cite{stack-euler-lagrange}. In 1755 J.L. Lagrange re-derived Euler's results using just algebraic methods, a method that Euler dubbed ``calculus of variations'' \cite[p. xiv]{Goldstine1980} \cite{stack-euler-lagrange}. Throughout the 18th century new developments analytical mechanics was made, culminating in Lagrange's publication ``Mécanique Analytique'' in 1788 \cite[p. 197]{Fraser1983}. The central quantity in Lagrangian mechanics is called the Lagrangian \cite[p. 3]{Hjorth2015}
 \begin{align}
 \label{eq:lagrangian}
 \textbf{Lagrangian} \qquad L = T - V,
@@ -45,7 +45,7 @@ Classical mechanics underwent one last important reformulation. In 1834 W.R. Ham
 \end{align}
 Thus Lagrangian mechanics and Hamiltonian mechanics is energy-centric rather than force-centric. One of the great strengths of the variational approach is that the system can be more or less solved simply by appropriate choice of coordinates. This is due to the fact that appropriate coordinates automatically accounts for the constraints of movements (e.g. a bead on a string, a ball rolling on a surface or electrical charge moving on a surface) so we don't have to account for these constraints by complicated force analysis. These coordinates $q_i$ we call \emph{generalized coordinates}. They are ``\emph{any quantitative attributes of the system (for example, strength of the magnetic field at a particular location; angle of a pulley; position of a particle in space; or degree of excitation of a particular eigenmode in a complex system) which are functions of the independent variable(s)}'' \cite{wiki-lag}. The number of ways the system can move subject to the constrains is called the degrees of freedom. To fully describe the system, the number of generalized coordinates chosen for the system must be equal the system's degrees of freedom.
 
-Thus instead of analyzing forces, including troublesome forces of contraints, we instead define and use coordinates that only describe states of the system that satisfies the constraints. Then, using the Euler-Lagrange's equations \eqref{eq:euler-lagrange} or Hamilton's equations \eqref{eq:hamiltons-equations}, we immediately obtain the equations of motion. Another advantage of the Hamiltonian method is that the underlying symmetries in the system are often more evident in first-order differential equations. On a theoretical level this is important due to Noether's Theorem which states: ``Each symmetry of a system leads to a physically conserved quantity'' \cite{noethers}. It's also convenient on a practical level with regards to solving 1st order equations equations numerically. Thus, we prefer $2 n$ first-order ordinary differential equations (ODE) to $n$ second-order ODEs.
+Thus instead of analyzing forces, including troublesome forces of constraints, we instead define and use coordinates that only describe states of the system that satisfies the constraints. Then, using the Euler-Lagrange's equations \eqref{eq:euler-lagrange} or Hamilton's equations \eqref{eq:hamiltons-equations}, we immediately obtain the equations of motion. Another advantage of the Hamiltonian method is that the underlying symmetries in the system are often more evident in first-order differential equations. On a theoretical level this is important due to Noether's Theorem which states: ``Each symmetry of a system leads to a physically conserved quantity'' \cite{noethers}. It's also convenient on a practical level with regards to solving 1st order equations equations numerically. Thus, we prefer $2 n$ first-order ordinary differential equations (ODE) to $n$ second-order ODEs.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,7 +92,7 @@ for $i = 1 \dots n$, which gives us $2n$ 1st order coupled PDEs of $2n$ variable
 
 In general $T$ and $V$ can be time-dependent (and therefore $L$ and $H$ can too). However in many applications, including the our model problem, they are not time-dependent.
 
-An important property of the Hamiltonian is that if it is not explicitely time dependent then it is conserved $\mathrm{d}H/\mathrm{d}t = 0$ along the $(\vec{p}(t),\vec{q(t)})$ flow \cite{Hjorth2015}.
+An important property of the Hamiltonian is that if it is not explicitly time dependent then it is conserved $\mathrm{d}H/\mathrm{d}t = 0$ along the $(\vec{p}(t),\vec{q(t)})$ flow \cite{Hjorth2015}.
 
 
 \subsection{$H$ vs. $E$} \label{ch:HvsE}
@@ -115,7 +115,7 @@ We make the same first three assumptions as in chapter \ref{ch:hohmann-moon}: Th
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.75]{fig/r3b.pdf}
-\caption{Restricted three-body problem. Two coordinate systems both with center of mass as origin: $(\mathscr{X},\mathscr{Y})$ is a stationary interial frame, $(x,y)$ is a co-rotating non-interial frame that rotates with the moon at angular frequency $\omega$. $M =$ mass of Earth, $m =$ mass of Moon, $\vec{R} =$ vector from CM to earth, $\vec{r} =$ vector from CM to Moon, $m_s =$ mass of spacecraft, $r_{S,E} =$ distance from spacecraft to Earth, $r_{S,M} =$ distance from spacecraft to Moon. In the dimensionless variables we introduce later, unit distance is $R+r$, which makes the dimensionsless constant $k = \text{the CM-Earth distance} = \dfrac{R}{R+r} = $ and $1-k = \text{the CM-Moon distance} = \dfrac{r}{R+r}$}
+\caption{Restricted three-body problem. Two coordinate systems both with center of mass as origin: $(\mathscr{X},\mathscr{Y})$ is a stationary inertial frame, $(x,y)$ is a co-rotating non-inertial frame that rotates with the moon at angular frequency $\omega$. $M =$ mass of Earth, $m =$ mass of Moon, $\vec{R} =$ vector from CM to earth, $\vec{r} =$ vector from CM to Moon, $m_s =$ mass of spacecraft, $r_{S,E} =$ distance from spacecraft to Earth, $r_{S,M} =$ distance from spacecraft to Moon. In the dimensionless variables we introduce later, unit distance is $R+r$, which makes the dimensionless constant $k = \text{the CM-Earth distance} = \dfrac{R}{R+r} = $ and $1-k = \text{the CM-Moon distance} = \dfrac{r}{R+r}$}
 \label{fig:r3b}
 \end{figure}
 We define two cartesian coordinate systems, both with their origin in the Moon-Earth center of mass (CM). The $(\mathscr{X},\mathscr{Y})$ system is a stationary inertial frame, and the $(x,y)$ system is co-rotating with the Earth and the Moon in their orbits, see Figure \ref{fig:r3b}.
@@ -166,7 +166,7 @@ By using the pythagorean trigonometric identity\footnote{$\cos^2{\theta} + \sin^
 \begin{align}
 \mathscr{\dot{\mathscr{X}}}^2 + \mathscr{\dot{\mathscr{Y}}}^2 = (\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2.
 \end{align}
-Now we can really see another convenience of the $(x,y)$ coordinate system: it eliminates explicite time-dependence of $L$ that would have been there in $V$ in the $(\mathscr{X},\mathscr{Y})$ system.
+Now we can really see another convenience of the $(x,y)$ coordinate system: it eliminates explicit time-dependence of $L$ that would have been there in $V$ in the $(\mathscr{X},\mathscr{Y})$ system.
 
 We are now ready to derive the equations of motion using the procedure from chapter 3.4.
 \subsection{Equations of Motion}
@@ -264,4 +264,4 @@ To reiterate, we have chosen units such that
 \text{unit time} &= \SI{4.3484}{\days}, \\
 \text{unit velocity} &= \SI{1.025}{\km/\s}.
 \end{align}
-Since all of the conditions in subsection \ref{ch:HvsE} are fulfilled, we have that $H=E$ and since $H$ does not depend explicitely on time, the Hamiltonian, and thus the energy, is conserved.
+Since all of the conditions in subsection \ref{ch:HvsE} are fulfilled, we have that $H=E$ and since $H$ does not depend explicitly on time, the Hamiltonian, and thus the energy, is conserved.

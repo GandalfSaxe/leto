@@ -2,7 +2,7 @@
 \chapter{Miscellaneous} \label{app:misc}
 
 \section{Implicit Euler algorithm} \label{app:implicit_euler}
-All new values $(x,y,p_x,p_y)_{i+1}$ refer to the same unknown values in the same timestep $(x,y,p_x,p_y)_{i+1}$.
+All new values $(x,y,p_x,p_y)_{i+1}$ refer to the same unknown values in the same time step $(x,y,p_x,p_y)_{i+1}$.
 \begin{align}
 x_{i+1} &= (p_{x,i+1} + y_{i+1})h + x_{i+1} \\[0.2cm]
 y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_{i+1} \\[0.2cm]
@@ -14,7 +14,6 @@ p_{y,i+1} &= \left(-p_{x,i+1} - \dfrac{(1-k)y_{i+1}}{((k+x_{i+1})^2+y_{i+1}^2)^{
 \begin{figure}[h!]
 \centering 
 \includegraphics[scale=0.8]{appendices/Miscellaneous/symplectic_euler_derivation.pdf}
-%\caption{}
 \end{figure}
 
 \newpage

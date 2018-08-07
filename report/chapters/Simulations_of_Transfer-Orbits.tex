@@ -289,21 +289,21 @@ See Figure \ref{fig:low_energy_long-position} - \ref{fig:low_energy_long-H} for 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results Summary and Discussion}
-Table \ref{tab:results} summerizes the $\Delta v$ we found for the Hohmann and the low-energy transfer orbts, short LETO and long LETO. In addition we've added a few more Hohmann (appendix \ref{app:more_hohmann}) to showcase the delta-v vs. flight time dynamics and to compare with the Apollo missions. In early simulations, the brute force approach was good enough to find a good Hohmann transfer, but not good enough for low-energy. After some code optimization, parallelization and running sufficiently many simulations on multi-core processors yielded good resulsts even for low-energy transfers in the end.
-
+Table \ref{tab:results} summarizes the $\Delta v$ we found for the Hohmann and the low-energy transfer orbits, short LETO and long LETO. In addition we've added a few more Hohmann (appendix \ref{app:more_hohmann}) to showcase the delta-v vs. flight time dynamics and to compare with the Apollo missions. In early simulations, the brute force approach was good enough to find a good Hohmann transfer, but not good enough for low-energy. After some code optimization, parallelization and running sufficiently many simulations on multi-core processors yielded good results even for low-energy transfers in the end.
+% cSpell:disable spellcheck-off
 \begin{itemize}
     \item The brute force method worked surprisingly well; we were able to find low-energy transfer orbits of lower $\Delta v$ than any of the two cited from literature.
     \item Results for the 3-day Hohmann are with 2.5\% of the Apollo $\Delta v$ and flight time, which adds to the credibility of our problem model and implementation.
-    \item It would possibly be advantagous to go up to a symplectic 4.-5.th order Runge-Kutta method, but this was not implemented due to time-constraints. However we do see that the error can be kept small around $10^{-9}$ within a reasonable runtime, which can somewhat justify staying in 2nd order methods. In other words, we would not necessarily find better results, just a bit lower runtime since we could take fewer steps with a 4th order method.
+    \item It would possibly be advantageous to go up to a symplectic 4.-5.th order Runge-Kutta method, but this was not implemented due to time-constraints. However we do see that the error can be kept small around $10^{-9}$ within a reasonable runtime, which can somewhat justify staying in 2nd order methods. In other words, we would not necessarily find better results, just a bit lower runtime since we could take fewer steps with a 4th order method.
     \item In further investigations it would be interesting to include:
     \begin{enumerate}
         \item Patch together orbits in Lagrange points. This could be done by patching together brute forced trajectories from Earth to $L_1$ (integrated forwards) and $L_1$ to moon (integrated backwards).
         \item Go from 2 to 3 dimensions.
-        \item Include the gravitational force from the Sun. This allows us to explot the dynamics of the Sun-Earth-Moon system. For example deliberately approach the moon from the far side ($L_2$) \cite{Koon2001}.
+        \item Include the gravitational force from the Sun. This allows us to exploit the dynamics of the Sun-Earth-Moon system. For example deliberately approach the moon from the far side ($L_2$) \cite{Koon2001}.
         \item Exploit the dynamics of the Moon resonances as described in \cite{Topputo2005}.
     \end{enumerate}
 \end{itemize}
-
+% cSpell:enable spellcheck-on
 \begin{table}
     \begin{tabular}{|l|l|l|l|l|}
     \hline
@@ -316,9 +316,9 @@ Table \ref{tab:results} summerizes the $\Delta v$ we found for the Hohmann and t
     Hohmann - long (sim)   & 4.3 days                & 3.912                     & 3.111                     & 0.801                    \\ \hline
     Hohmann - (model)      & 5.0 days                & 3.946                     & 3.144                     & 0.802                    \\ \hline
     Hohmann - medium (sim) & 3.00 days               & 4.015                     & 3.136                     & 0.880                    \\ \hline
-    Apollo (Hohman)      & 3.05 days               & 4.115                     & 3.048                     & 1.067                    \\ \hline
+    Apollo (Hohmann)      & 3.05 days               & 4.115                     & 3.048                     & 1.067                    \\ \hline
     Hohmann - short (sim)  & 1.00 days               & 6.823                     & 3.809                     & 3.014                    \\ \hline
 \end{tabular}
-\caption{Summerized flight time and $\Delta v$ for various trajectories, sorted by $\Delta v_{\text{total}}$. Belbruno and Topputo from \cite{Juul2008} are for orbits going from \SI{167}{\km} Earth parking to \SI{100}{\km} circular moon orbit. Apollo mission data form \cite{NASA1966} \cite{apollo-timeline}}
+\caption{Summarized flight time and $\Delta v$ for various trajectories, sorted by $\Delta v_{\text{total}}$. Belbruno and Topputo from \cite{Juul2008} are for orbits going from \SI{167}{\km} Earth parking to \SI{100}{\km} circular moon orbit. Apollo mission data form \cite{NASA1966} \cite{apollo-timeline}}
 \label{tab:results}
 \end{table}

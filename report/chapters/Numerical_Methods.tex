@@ -4,7 +4,7 @@
 
 Some systems can be solved analytically in terms of time-dependent coordinates. Other systems are non-linear and the vast majority cannot be solved analytically. This is the case for the restricted three-body problem, \crefrange{eq:H-x}{eq:H-py}. To solve these equations of motion, we must use numerical methods.
 
-The simplest numerical integration is the first order linear approximation known as the Euler method. There are three variants of the Euler method: explicit, implicit and sympletic. As we will see, the explicit Euler will typically increase the energy, implicit Euler will decrease the energy and the symplectic Euler will oscillate the energy slightly but on average conserve pretty well.
+The simplest numerical integration is the first order linear approximation known as the Euler method. There are three variants of the Euler method: explicit, implicit and symplectic. As we will see, the explicit Euler will typically increase the energy, implicit Euler will decrease the energy and the symplectic Euler will oscillate the energy slightly but on average conserve pretty well.
 
 We will now solve the restricted three-body problem equations of motion, \crefrange{eq:H-x}{eq:H-py}. First we discretize the equations with a linear approximation:
 
@@ -110,13 +110,13 @@ x_{i+1/2} &= (p_{x,i} + y_{i+1/2})\dfrac{h}{2} + x_i, \\[0.3cm]
 y_{i+1/2} &= (p_{y,i} - x_{i+1/2})\dfrac{h}{2} + y_i, \\[0.8cm]
 %
 %
-p_{x,i+1} &= \left[-H_{x,i} + (p_{x,i+1} + y_{i+1/2}) \right]\dfrac{\Delta t}{2} + p_{x,i}, \\[0.3cm]
+p_{x,i+1} &= \left[-H_{x,i} + (p_{x,i+1} + y_{i+1/2}) \right]\dfrac{h}{2} + p_{x,i}, \\[0.3cm]
 %
-p_{y,i+1} &= \left[-H_{y,i} + (p_{y,i+1} -x_{i+1/2}) \right]\dfrac{\Delta t}{2} + p_{y,i},\\[0.8cm]
+p_{y,i+1} &= \left[-H_{y,i} + (p_{y,i+1} -x_{i+1/2}) \right]\dfrac{h}{2} + p_{y,i},\\[0.8cm]
 %
 %
-x_{i_1} &= (p_{x,i+1} + y_{i+1/2})\dfrac{h}{2}, \\[0.3cm]
-y_{i_1} &= (p_{y,i+1} - x_{i+1/2})\dfrac{h}{2},
+x_{i+1} &= (p_{x,i+1} + y_{i+1/2})\dfrac{h}{2}, \\[0.3cm]
+y_{i+1} &= (p_{y,i+1} - x_{i+1/2})\dfrac{h}{2},
 \end{align}
 where
 \begin{align}
@@ -139,7 +139,7 @@ where O(h) denotes an error term of order h. Then we take the difference
 since $O(h) \gg O(h^2)$. Thus we approximate the error difference between the Euler and Verlet method as the actual error we make at step size $h$. The idea is to make both an Euler and a Verlet step for every time-step to assess the error and adjust the step size accordingly as implemented in listing \ref{lst:adaptive}
 \begin{adjustwidth*}{0cm}{-0.4cm}
 \begin{lstlisting}[language=Python,caption=Adaptive method implemented in python. We accept the Verlet step only if the error is no more than a given tolerance \texttt{tol}. Subsequently we estimate a new \texttt{h} that will yield an error of \texttt{tol} in the next step and use \texttt{0.8} of this value to avoid frequent rejects. If the step is rejected we reduce the step size by half,label=lst:adaptive]
-if err < tol or h <= hmin:
+if err < tol or h <= h_min:
 
     # Accept step
     x = x2
@@ -149,11 +149,11 @@ if err < tol or h <= hmin:
 
     # Forward time by step
     t = t+h
-    h = max(hmin, h*max(0.1, 0.8*sqrt(tol/err)))
+    h = max(h_min, h*max(0.1, 0.8*sqrt(tol/err)))
 
 else:
     # No accept, reduce h to half
-    h = max(hmin, 0.5*h)
+    h = max(h_min, 0.5*h)
 \end{lstlisting}
 \end{adjustwidth*}
 For every single step the step size is changed either up or down, depending on the errors and tolerance. As a result we always stay near the same error in every step, only taking as small steps as necessary in each iteration.
@@ -186,7 +186,7 @@ For all simulations we have set $10^{-9}$ as the maximum tolerated error per ste
         \subbottom[Adaptive symplectic Verlet error per step.]{
             \includegraphics[scale=0.41]{fig/adaptive/err_adaptive.pdf}
         }
-        \caption{The adaptive method constantly varies the step-size to ensure a constant error around $10^{-9}$. As a result it takes longer steps when there is less change in the variabels, in the space far from the bodies, and shorter steps when passing close by the Earth or Moon}
+        \caption{The adaptive method constantly varies the step-size to ensure a constant error around $10^{-9}$. As a result it takes longer steps when there is less change in the variables, in the space far from the bodies, and shorter steps when passing close by the Earth or Moon}
         \label{fig:adaptive-step_error}
 \end{figure}
 
