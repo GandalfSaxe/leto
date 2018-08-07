@@ -28,7 +28,7 @@ If the moon was stationary in an inertial system, we would simply shoot from the
 \begin{enumerate}
     \item Angular position from Earth varied in 100 positions uniformly spaced around $\theta=-3\pi/4$ in range $\pm\ \pi/4.$
     \item Earth burn $\Delta v_{\text{earth}}$ varied in 200 velocities uniformly around $\SI{3.11}{\km\per\s}$ (found by trial-and-error, starting from \ref{eq:deltav-earth}) in range $\pm 0.1*\texttt{unit\_velocity} = \SI{0.102}{\km\per\s}.$
-    \item One refinement-run on the best trajectory as initial guess, with allv values set to 1/10 their previous value, and making 55 variations of all three parameters.
+    \item One refinement-run on the best trajectory as initial guess, with all values set to 1/10 their previous value, and making 55 variations of all three parameters.
 \end{enumerate}
 
 Listing \ref{lst:hohmann} show the lowest energy Hohmann trans-lunar injection found among $100 \times 200 + 55 \times 55 \times 55  = 20000 + 3375 = 23375$ trajectories.
