@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<svg width="35px" height="13px" viewBox="0 0 35 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
-    <title>Earth</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="TeXGyreAdventor-Bold, TeX Gyre Adventor" font-size="15" font-weight="bold">
-        <g id="hohmann_moon2" transform="translate(-104.000000, -194.000000)" fill="#000000">
-            <g id="labels" transform="translate(0.000000, 2.722034)">
-                <text id="Earth">
-                    <tspan x="103.037664" y="203.028606">Earth</tspan>
-                </text>
-=======
 <svg width="349px" height="316px" viewBox="0 0 349 316" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
     <title>hohmann_moon</title>
@@ -117,7 +104,6 @@
                     <path d="M4.75,0 L7,8.04276001 C6.25,7.5746025 5.5,7.34052374 4.75,7.34052374 C4,7.34052374 3.25,7.5746025 2.5,8.04276001 L4.75,0 Z" id="down" transform="translate(4.750000, 4.021380) scale(1, -1) translate(-4.750000, -4.021380) "></path>
                     <path d="M2.65143258,61.4694747 L4.90143258,69.5122347 C4.15143258,69.0440772 3.40143258,68.8099984 2.65143258,68.8099984 C1.90143258,68.8099984 1.15143258,69.0440772 0.401432577,69.5122347 L2.65143258,61.4694747 Z" id="incoming" transform="translate(2.651433, 65.490855) rotate(4.000000) translate(-2.651433, -65.490855) "></path>
                 </g>
->>>>>>> msc-thesis-revision
             </g>
         </g>
     </g>
