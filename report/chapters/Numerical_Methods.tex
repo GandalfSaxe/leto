@@ -37,7 +37,7 @@ y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_i \label{eq:euler-s-y}, \\[0.2cm]
 p_{x,i+1} &= \left(p_{y,i} - \dfrac{(1-k)(k+x_i)}{((k+x_i)^2+y_i^2)^{3/2}} + \dfrac{k(1-k-x_i)}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{x,i} \label{eq:euler-s-px}, \\[0.2cm]
 p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac{k y_i}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{y,i}. \label{eq:euler-s-py}
 \end{align}
-As opposed to implicit Euler, this can easily be solved by solving \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y} for $x_{i+1}$ and $y_{y+1}$
+As opposed to implicit Euler, this can easily be solved by solving \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y} for $x_{i+1}$ and $y_{y+1}$ (see Appendix \ref{app:r3b-symplectic-euler} for Mathematica notebook):
 \begin{align}
 x_{i+1} &= \dfrac{x_i + h(h p_{y,i+1} + p_{x,i+1} + y_i)}{1+h^2}, \label{eq:euler_s_x2} \\[0.5cm]
 y_{i+1} &= \dfrac{y_i - h(h p_{x,i+1} - p_{y,i} + x_i)}{1+h^2}, \label{eq:euler_s_y2}
