@@ -27,7 +27,7 @@ p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac
 \end{align}
 
 \section{Implicit Euler algorithm}
-Same as explicit Euler, except that all variables on the right-hand side involved in the time step refers to variables in the new time step, $i+1$. This algorithm would involve finding four roots simultaneously and numerically. Since we know the symplectic to be more correct, we skip the implicit Euler (formula included in appendix \ref{app:implicit_euler}).
+Same as explicit Euler, except that all variables on the right-hand side involved in the time step refers to variables in the new time step, $i+1$. This algorithm would involve finding four roots simultaneously and numerically. Since we know the symplectic to be more correct, we skip the implicit Euler (formula included in Appendix \ref{app:implicit_euler}).
 
 \section{Symplectic Euler algorithm}
 This algorithm manifests as a mixture between explicit and implicit Euler. New values of $(x,y)_{i+1}$ refer to unknown values from the new time step $(x,y,p_x,p_y)_{i+1}$ but all new values of $(p_x,p_y)_{i+1}$ refer only to known values from the current time step $(x,y,p_x,p_y)_i$:
@@ -124,7 +124,7 @@ where
 -H_{y,i} = \left(-p_{x,i+1} - \dfrac{(1-k)y_{i+1}}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} - \dfrac{k y_{i+1}}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right).
 \end{align}
 
-% TODO: Fill in final equations of motion and refer to appendix D for derivation.
+% TODO: Fill in final equations of motion and refer to Appendix D for derivation.
 
 \section{Adaptive Symplectic Störmer-Verlet}
 Let $z$ denote a vector of the position variables $(x,y)$.
@@ -206,4 +206,4 @@ For all simulations we have set $10^{-9}$ as the maximum tolerated error per ste
 
 Note on the step size Figure \ref{fig:adaptive-step size} that the adaptive ends up with constant step size at the end at 40 days once captured by the Moon. Thus when we are in circular orbit around a single body, we don't gain much by using adaptive methods. However as the spacecraft are in free space far away from both Earth/Moon, we gain a lot by taking longer steps (raising the step size). However as we make close passes to Earth or Moon, then the step size dips sharply to maintain constant error. We see this around day 9, 21 and 33 in \ref{fig:adaptive-step size}. For most simulations, the adaptive method ran 10-100 times faster.
 
-The code for the full Python implementation is in appendix \ref{app:code-r3b}.
+The code for the full Python implementation is in Appendix \ref{app:code-r3b}.

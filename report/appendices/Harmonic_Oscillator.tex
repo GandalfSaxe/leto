@@ -127,9 +127,9 @@ p_{i+1} &= -x_{i+1}\Delta t + p_i
 \end{align}
 In the symplectic Euler, time step $i+1$ reference the new values one the coordinate equation and the old $i$ value in the momentum equation. This mixing of time step values makes the Euler method symplectic, i.e. energy conserving.
 
-In the first version \eqref{al:ho-euler_s1}, clearly $p_{i+1}$ needs to be run before $x_{i+1}$ in each time step. We can also do it the other way around as in \eqref{al:ho-euler_s2}. They give essential identical solutions. In this case the only difference is a phase shift of the momentum error by $\pi$ (appendix \ref{app:symplectic_difference}).
+In the first version \eqref{al:ho-euler_s1}, clearly $p_{i+1}$ needs to be run before $x_{i+1}$ in each time step. We can also do it the other way around as in \eqref{al:ho-euler_s2}. They give essential identical solutions. In this case the only difference is a phase shift of the momentum error by $\pi$ (Appendix \ref{app:symplectic_difference}).
 
-Algorithms \crefrange{al:ho-euler_e}{al:ho-euler_s1} was implemented in Python (appendix \ref{app:ho}).
+Algorithms \crefrange{al:ho-euler_e}{al:ho-euler_s1} was implemented in Python (Appendix \ref{app:ho}).
 
 \section{Plots}
 \begin{figure}
