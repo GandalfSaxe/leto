@@ -27,10 +27,10 @@ p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac
 \end{align}
 
 \section{Implicit Euler algorithm}
-Same as explicit Euler, except that all variables on the right-hand side refers to variables in the current time step, $i+1$. This algorithm would involve finding four roots simultaneously and numerically. Since we know the symplectic to be more correct, we skip the implicit Euler (formula included in appendix \ref{app:implicit_euler}).
+Same as explicit Euler, except that all variables on the right-hand side involved in the time step refers to variables in the new time step, $i+1$. This algorithm would involve finding four roots simultaneously and numerically. Since we know the symplectic to be more correct, we skip the implicit Euler (formula included in appendix \ref{app:implicit_euler}).
 
 \section{Symplectic Euler algorithm}
-This algorithm manifests as a mixture between explicit and implicit Euler. New values of $(x,y)_{i+1}$ refer to unknown values from the same time step $(x,y,p_x,p_y)_{i+1}$ but all new values of $(p_x,p_y)_{i+1}$ refer only to known values from the previous time step $(x,y,p_x,p_y)_i$:
+This algorithm manifests as a mixture between explicit and implicit Euler. New values of $(x,y)_{i+1}$ refer to unknown values from the new time step $(x,y,p_x,p_y)_{i+1}$ but all new values of $(p_x,p_y)_{i+1}$ refer only to known values from the current time step $(x,y,p_x,p_y)_i$:
 \begin{align}
 x_{i+1} &= (p_{x,i+1} + y_{i+1})h + x_i \label{eq:euler-s-x}, \\[0.2cm]
 y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_i \label{eq:euler-s-y}, \\[0.2cm]
@@ -124,6 +124,7 @@ where
 -H_{y,i} = \left(-p_{x,i+1} - \dfrac{(1-k)y_{i+1}}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} - \dfrac{k y_{i+1}}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right).
 \end{align}
 
+% TODO: Fill in final equations of motion and refer to appendix D for derivation.
 
 \section{Adaptive Symplectic Störmer-Verlet}
 Let $z$ denote a vector of the position variables $(x,y)$.

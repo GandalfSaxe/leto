@@ -4,8 +4,8 @@
 \section{Implicit Euler algorithm} \label{app:implicit_euler}
 All new values $(x,y,p_x,p_y)_{i+1}$ refer to the same unknown values in the same time step $(x,y,p_x,p_y)_{i+1}$.
 \begin{align}
-x_{i+1} &= (p_{x,i+1} + y_{i+1})h + x_{i+1} \\[0.2cm]
-y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_{i+1} \\[0.2cm]
+x_{i+1} &= (p_{x,i+1} + y_{i+1})h + x_{i} \\[0.2cm]
+y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_{i} \\[0.2cm]
 p_{x,i+1} &= \left(p_{y,i+1} - \dfrac{(1-k)(k+x_{i+1})}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} + \dfrac{k(1-k-x_{i+1})}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right)h + p_{x,i} \\[0.2cm]
 p_{y,i+1} &= \left(-p_{x,i+1} - \dfrac{(1-k)y_{i+1}}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} - \dfrac{k y_{i+1}}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right)h + p_{y,i}
 \end{align}
