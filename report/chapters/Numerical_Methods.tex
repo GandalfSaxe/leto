@@ -42,7 +42,7 @@ As opposed to implicit Euler, this can easily be solved by solving \eqref{eq:eul
 x_{i+1} &= \dfrac{x_i + h(h p_{y,i+1} + p_{x,i+1} + y_i)}{1+h^2}, \label{eq:euler_s_x2} \\[0.5cm]
 y_{i+1} &= \dfrac{y_i - h(h p_{x,i+1} - p_{y,i} + x_i)}{1+h^2}, \label{eq:euler_s_y2}
 \end{align}
-and then we can run the algorithm in the order \eqref{eq:euler-s-px}, \eqref{eq:euler-s-py}, \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y}.
+and then we can run the algorithm in the order \eqref{eq:euler-s-px}, \eqref{eq:euler-s-py}, \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y}. % FIXME: This algorithm order isn't correct, change later when understood.
 
 \section{First Test Runs with First-Order Euler Methods}
 The explicit and symplectic Euler algorithm was implemented in Python. The first two things we want to investigate are:
