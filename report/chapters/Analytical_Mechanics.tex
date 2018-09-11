@@ -140,7 +140,7 @@ In anticipation for calculating the kinetic energy of the system, we need the qu
 \end{align}
 In matrix notation the coordinate transform between $(\mathscr{X},\mathscr{Y})$ and $(x,y)$ is obtained by the multiplication of the rotation matrix on the inertial frame coordinates
 \begin{align}
-\nonumber &\begin{bmatrix}
+\notag &\begin{bmatrix}
   \mathscr{X} \\
   \mathscr{Y}
 \end{bmatrix}
@@ -173,12 +173,12 @@ We are now ready to derive the equations of motion using the procedure from chap
 The kinetic energy is
 \begin{align}
 \label{eq:r3b-T}
-\nonumber T &= \dfrac{1}{2} m_s (\dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2) \\
+\notag T &= \dfrac{1}{2} m_s (\dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2) \\
 &= \dfrac{1}{2} m_s \left[(\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2\right].
 \end{align}
 The potential energy is
 \begin{align}
-\nonumber V &= - G m_s \left(\dfrac{M}{r_{S,E}} + \dfrac{m}{r_{S,M}}\right) \\
+\notag V &= - G m_s \left(\dfrac{M}{r_{S,E}} + \dfrac{m}{r_{S,M}}\right) \\
 &= - G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right).
 \end{align}
 The Lagrangian is
@@ -203,7 +203,7 @@ The Hamiltonian is
 \begin{align}
 H &= \sum\limits_{i=1}^n p_i \dot{q_i} - L \\[0.6cm]
 &= \dfrac{p_x^2 + p_y^2}{m_s} + p_x\omega y - p_y\omega x - \dfrac{1}{2} m_s \left[\left(\dfrac{p_x}{m_s}\right)^2 + \left(\dfrac{p_y}{m_s}\right)^2\right] \\
-&- G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right) \nonumber \\[0.6cm]
+&- G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right) \notag \\[0.6cm]
 &= \dfrac{p_x^2 + p_y^2}{2 m_s} + p_x\omega y - p_y\omega x - G m_s \left(\dfrac{M}{\sqrt{(x+R)^2+y^2}} + \dfrac{m}{\sqrt{(x-r)^2+y^2}}\right).
 \end{align}
 so Hamilton's equations are
@@ -230,8 +230,8 @@ The momentums $p_x$, $p_y$ of the spacecraft are going to be proportional with t
 \end{align}
 With these we can calculate:
 \begin{align}
-\nonumber \text{One unit momentum} &= \text{One unit velocity} = (\text{unit mass})\dfrac{\text{unit distance}}{\text{unit time}} \\[0.3cm]
-\nonumber &= m_s(R+r)\sqrt{\dfrac{G(M+m)}{(R+r)^3}} \\[0.3cm]
+\notag \text{One unit momentum} &= \text{One unit velocity} = (\text{unit mass})\dfrac{\text{unit distance}}{\text{unit time}} \\[0.3cm]
+\notag &= m_s(R+r)\sqrt{\dfrac{G(M+m)}{(R+r)^3}} \\[0.3cm]
 &= m_s \sqrt{\dfrac{G(M+m)}{(R+r)}}.
 \end{align}
 We can now nondimensionalize all the equations and get (see Appendix \ref{app:non-dimensionalization})

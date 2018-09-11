@@ -23,8 +23,8 @@ $\dot{x} = \dot{x}(x, p) = \dfrac{p}{k}$
 
 \item[Step 3 \quad The Hamiltonian $H(\vec{q}, \vec{p}, t) = \sum\limits_{i=1}^n p_i \dot{q_i} - L$] \ \\
 \begin{align}
-\nonumber H &= p \cdot \dot{x} - \left(\frac{1}{2} m \dot{x}^2 - \frac{1}{2} k x^2\right) \\
-\nonumber  &= p \cdot \dfrac{p}{m} - \left(\frac{1}{2} m \left(\frac{p}{m}\right)^2 - \frac{1}{2} k x^2\right) \\
+\notag H &= p \cdot \dot{x} - \left(\frac{1}{2} m \dot{x}^2 - \frac{1}{2} k x^2\right) \\
+\notag  &= p \cdot \dfrac{p}{m} - \left(\frac{1}{2} m \left(\frac{p}{m}\right)^2 - \frac{1}{2} k x^2\right) \\
 &= \dfrac{p^2}{2m} + \dfrac{1}{2}k x^2
 \end{align}
 , which we recognize simply as the total energy. The first term is the kinetic energy in terms of the momentum $p$ and the second term is the potential energy $V$.
@@ -75,13 +75,13 @@ p_{i+1} &= -x_{i+1}\Delta t + p_i
 \end{align}
 In the implicit Euler, time step $i+1$ only reference the new values from the same time step. In general this leads to a system of equations that may not have an analytical solutions, and function roots would have to be found numerically using e.g. Newton Raphson. In the case of the harmonic oscillator we have a system of linear equations that can be solved analytically for $(x_{i+1},p_{i+1}$
 \begin{align}
-\nonumber &x_{i+1} = p_{i+1}\Delta t + x_i \\
-\nonumber &p_{i+1} = -x_{i+1}\Delta t + p_i \\[0.4cm]
-\nonumber & \Downarrow \\[0.4cm]
-\nonumber &x_{i+1} - p_{i+1}\Delta t = x_i \\
-\nonumber &p_{i+1} + x_{i+1}\Delta t = p_i \\[0.4cm]
-\nonumber &\Downarrow \\[0.4cm]
-\nonumber &\begin{bmatrix}
+\notag &x_{i+1} = p_{i+1}\Delta t + x_i \\
+\notag &p_{i+1} = -x_{i+1}\Delta t + p_i \\[0.4cm]
+\notag & \Downarrow \\[0.4cm]
+\notag &x_{i+1} - p_{i+1}\Delta t = x_i \\
+\notag &p_{i+1} + x_{i+1}\Delta t = p_i \\[0.4cm]
+\notag &\Downarrow \\[0.4cm]
+\notag &\begin{bmatrix}
   1 & -\Delta t \\
   \Delta t & 1
 \end{bmatrix}
@@ -93,7 +93,7 @@ In the implicit Euler, time step $i+1$ only reference the new values from the sa
   x_i \\
   p_i
 \end{bmatrix} \\[0.4cm]
-\nonumber &\Downarrow \\[0.4cm]
+\notag &\Downarrow \\[0.4cm]
 &\begin{bmatrix} \label{al:ho-euler_i}
   x_{i+1} \\
   y_{i+1}

@@ -2,7 +2,7 @@
 \chapter{Detailed Derivation: Coordinate Velocity Transform} \label{app:coordinate-transform}
 Recall $(\mathscr{X},\mathscr{Y})$ is the inertial frame coordinates and $(x,y)$ is the rotating frame coordinates \ref{fig:r3b}. The goal is to go from $\mathscr{X}(x,y)$ and $\mathscr{Y}(x,y)$ to $(\dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2)(x,y)$. This is used in \eqref{eq:r3b-T} to obtain the kinetic energy $T(x,y)$ From equation \eqref{eq:coordinate-transform} we had
 \begin{align}
-\nonumber
+\notag
 \begin{cases}
 \ \mathscr{X} = x\cos{\omega t} - y\sin{\omega t} \\
 \ \mathscr{Y} = x\sin{\omega t} + y\cos{\omega t}
@@ -133,11 +133,11 @@ so we have
 \end{split}
 \end{align}
 \begin{align}
-\nonumber &\tikz\node [fill=green!20,draw,circle]{};\ \text{Terms that add in $\mathscr{X}^2 + \mathscr{Y}^2$} \\
-\nonumber &\tikz\node [fill=red!20,draw,circle]{};\ \text{Terms that cancel in $\mathscr{X}^2 + \mathscr{Y}^2$} \\[1cm]
+\notag &\tikz\node [fill=green!20,draw,circle]{};\ \text{Terms that add in $\mathscr{X}^2 + \mathscr{Y}^2$} \\
+\notag &\tikz\node [fill=red!20,draw,circle]{};\ \text{Terms that cancel in $\mathscr{X}^2 + \mathscr{Y}^2$} \\[1cm]
 \end{align}
 Cancelling terms and repeated use of $\cos^2{t} + \sin^2{t} = 1$ finally gives us
 \begin{align}
-\nonumber \dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2 &= \dot{x}^2 + \dot{y}^2 + \omega^2 x^2 + \omega^2 y^2 - 2 \omega \dot{x} y + 2 \omega x \dot{y} \\[0.2cm]
+\notag \dot{\mathscr{X}}^2 + \dot{\mathscr{Y}}^2 &= \dot{x}^2 + \dot{y}^2 + \omega^2 x^2 + \omega^2 y^2 - 2 \omega \dot{x} y + 2 \omega x \dot{y} \\[0.2cm]
 &= (\dot{x}-\omega y)^2 + (\dot{y}+\omega x)^2
 \end{align}
