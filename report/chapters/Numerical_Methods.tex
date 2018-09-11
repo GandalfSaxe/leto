@@ -2,11 +2,11 @@
 \chapter{Numerical Analysis} \label{ch:numerical-analysis}
 \epigraph{``\itshape{A computer lets you make more mistakes faster than any invention in human history - with the possible exceptions of handguns and tequila.}"}{--- \textup{Mitch Ratliffe}, Technology Review, April 1992}
 
-Some systems can be solved analytically in terms of time-dependent coordinates. Other systems are non-linear and the vast majority cannot be solved analytically. This is the case for the restricted three-body problem, \crefrange{eq:H-x}{eq:H-py}. To solve these equations of motion, we must use numerical methods.
+Some systems can be solved analytically in terms of time-dependent coordinates. Other systems are non-linear and the vast majority cannot be solved analytically. This is the case for the restricted three-body problem, \crefrange{eq:Xdot}{eq:Pdot_Y}. To solve these equations of motion, we must use numerical methods.
 
 The simplest numerical integration is the first order linear approximation known as the Euler method. There are three variants of the Euler method: explicit, implicit and symplectic. As we will see, the explicit Euler will typically increase the energy, implicit Euler will decrease the energy and the symplectic Euler will oscillate the energy slightly but on average conserve pretty well.
 
-We will now solve the restricted three-body problem equations of motion, \crefrange{eq:H-x}{eq:H-py}. First we discretize the equations with a linear approximation:
+We will now solve the restricted three-body problem equations of motion, \crefrange{eq:Xdot}{eq:Pdot_Y}. First we discretize the equations with a linear approximation:
 
 \begin{align}
 \Delta X &= +\dfrac{\partial H}{\partial P_X}\Delta t = (P_X + Y)\Delta t, \\[0.2cm]
@@ -107,7 +107,7 @@ q_{i+1/2} &= q_i + \dfrac{h}{2}H_p(q_{i+1/2}, P_i), \\
 P_{i+1} &= P_i + \dfrac{h}{2}(H_q(q_{i+1/2}, P_i) + H_q(q_{i+1/2}, P_{i+1})), \\
 q_{i+1} &= q_{i+1/2} + \dfrac{h}{2}H_p(q_{n+1/2}, P_{i+1/2}).
 \end{align}
-where $H_q$ and $H_p$ denotes the partial derivatives of $H$, which can be expressed in terms of $q_i$ and $P_i$ by Hamilton's equations. Implemented for our equations (using~\cref{eq:H-X,eq:H-Y,eq:H-pX,eq:H-py} to express $H_q$ and $H_p$) we get:
+where $H_q$ and $H_p$ denotes the partial derivatives of $H$, which can be expressed in terms of $q_i$ and $P_i$ by Hamilton's equations. Implemented for our equations (using~\cref{eq:H-X,eq:H-Y,eq:H-pX,eq:Pdot_Y} to express $H_q$ and $H_p$) we get:
 \begin{align}
 x_{i+1/2} &= (P_{X,i} + Y_{i+1/2})\dfrac{h}{2} + X_i, \\[0.3cm]
 Y_{i+1/2} &= (P_{Y,i} - X_{i+1/2})\dfrac{h}{2} + Y_i, \\[0.8cm]

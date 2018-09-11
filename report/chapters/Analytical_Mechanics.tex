@@ -243,27 +243,25 @@ We can now nondimensionalize all the equations and get (see Appendix \ref{app:no
 And the equations of motion:
 
 \begin{empheq}[box=\widefbox]{align}
-\label{eq:H-x}
+\label{eq:Xdot}
 \dot{X} = P_x + Y
 \end{empheq}
 
 \begin{empheq}[box=\widefbox]{align}
-\label{eq:H-y}
+\label{eq:Ydot}
 \dot{Y} = P_Y - X
 \end{empheq}
 
 \begin{empheq}[box=\widefbox]{align}
-\label{eq:H-px}
+\label{eq:Pdot_X}
 \dot{P}_X = P_Y - \dfrac{(1-k)(X+k)}{((X+k)^2+Y^2)^{3/2}} - \dfrac{k(X-1+k))}{((X-1+k))^2+Y^2)^{3/2}}
 \end{empheq}
 
 \begin{empheq}[box=\widefbox]{align}
-\label{eq:H-py}
+\label{eq:Pdot_Y}
 \dot{P}_Y = -P_X - \dfrac{(1-k)Y}{((X+k)^2+Y^2)^{3/2}} - \dfrac{k Y}{((X-1+k))^2+Y^2)^{3/2}}
 \end{empheq}
-where $T$, $X$, $Y$, $P_x$ and $P_y$ are our dimensionless variables, see Appendix \ref{app:non-dimensionalization} for details.
-
-For the rest of the time we will denote the nondimensionalized units simply as $x,y,p_x,p_y$ instead of $X,Y,P_x,P_y$ for readability.
+where $T$, $X$, $Y$, $P_x$ and $P_y$ are the corresponding dimensionless variables of time, position, and generalized impulse. \(k = \dfrac{m}{M+m} = \dfrac{R}{R+r}\) is a dimensionless constant that simplifies the equations due to relations of center of mass. See Appendix \ref{app:non-dimensionalization} for details.
 
 To reiterate, we have chosen units such that
 \begin{align}
