@@ -38,6 +38,8 @@
         "eigenmode",
         "equipotential",
         "integrators",
+        "nondimensionalize",
+        "nondimensionalized",
         "parallelization",
         "periapsis",
         "pericenter",

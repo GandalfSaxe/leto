@@ -9,40 +9,43 @@ The simplest numerical integration is the first order linear approximation known
 We will now solve the restricted three-body problem equations of motion, \crefrange{eq:H-x}{eq:H-py}. First we discretize the equations with a linear approximation:
 
 \begin{align}
-\Delta x &= +\dfrac{\partial H}{\partial p_x}\Delta t = (p_x + y)\Delta t, \\[0.2cm]
-\Delta y &= +\dfrac{\partial H}{\partial p_y}\Delta t = (p_y - x)\Delta t, \\[0.2cm]
-\Delta p_x &= -\dfrac{\partial H}{\partial x}\Delta t = \left(p_y - \dfrac{(1-k)(k+x)}{((k+x)^2+y^2)^{3/2}} + \dfrac{k(1-k-x)}{((1-k-x)^2+y^2)^{3/2}}\right)\Delta t, \\[0.2cm]
-\Delta p_y &= -\dfrac{\partial H}{\partial y}\Delta t = \left(-p_x - \dfrac{(1-k)y}{((k+x)^2+y^2)^{3/2}} - \dfrac{k y}{((1-k-x)^2+y^2)^{3/2}}\right)\Delta t.
+\Delta X &= +\dfrac{\partial H}{\partial P_X}\Delta t = (P_X + Y)\Delta t, \\[0.2cm]
+\Delta Y &= +\dfrac{\partial H}{\partial P_Y}\Delta t = (P_Y - X)\Delta t, \\[0.2cm]
+\Delta P_X &= -\dfrac{\partial H}{\partial X}\Delta t = \left(P_Y - \dfrac{(1-k)(k+x)}{((k+x)^2+y^2)^{3/2}} + \dfrac{k(X-1+k)}{((X-1+k)^2+y^2)^{3/2}}\right)\Delta t, \\[0.2cm]
+\Delta P_Y &= -\dfrac{\partial H}{\partial Y}\Delta t = \left(-P_X - \dfrac{(1-k)y}{((k+x)^2+y^2)^{3/2}} - \dfrac{k y}{((X-1+k)^2+y^2)^{3/2}}\right)\Delta t.
 \end{align}
 
 From now on we will use $h$ instead of $\Delta t$ for the time step size.
 
-\section{Explicit Euler algorithm}
-All new values $(x,y,p_x,p_y)_{i+1}$ refer to known values from the previous time step $(x,y,p_x,p_y)_i$.
+\section{Explicit Euler Algorithm}
+All new values $(X,Y,P_X,P_Y)_{i+1}$ refer to known values from the previous time step \\ $(X,Y,P_X,P_Y)_i$.
 \begin{align}
-x_{i+1} &= (p_{x,i} + y_i)h + x_i, \\[0.2cm]
-y_{i+1} &= (p_{y,i} - x_i)h + y_i, \\[0.2cm]
-p_{x,i+1} &= \left(p_{y,i} - \dfrac{(1-k)(k+x_i)}{((k+x_i)^2+y_i^2)^{3/2}} + \dfrac{k(1-k-x_i)}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{x,i}, \\[0.2cm]
-p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac{k y_i}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{y,i}.
+X_{i+1} &= X_i + (P_{X,i} + Y_i)h, \\[0.2cm]
+Y_{i+1} &= Y_i + (P_{Y,i} - X_i)h , \\[0.2cm]
+P_{X,i+1} &= P_{X,i} + \left(P_{Y,i} - \dfrac{(1-k)(k+X_i)}{((k+X_i)^2+Y_i^2)^{3/2}} + \dfrac{k(X_i-1+k)}{((X_i-1+k)^2+Y_i^2)^{3/2}}\right)h, \\[0.2cm]
+P_{Y,i+1} &= P_{Y,i} + \left(-P_{X,i} - \dfrac{(1-k)Y_i}{((k+X_i)^2+Y_i^2)^{3/2}} - \dfrac{k Y_i}{((X_i-1+k)^2+Y_i^2)^{3/2}}\right)h.
 \end{align}
 
-\section{Implicit Euler algorithm}
+\section{Implicit Euler Algorithm}
 Same as explicit Euler, except that all variables on the right-hand side involved in the time step refers to variables in the new time step, $i+1$. This algorithm would involve finding four roots simultaneously and numerically. Since we know the symplectic to be more correct, we skip the implicit Euler (formula included in Appendix \ref{app:implicit_euler}).
 
-\section{Symplectic Euler algorithm}
-This algorithm manifests as a mixture between explicit and implicit Euler. New values of $(x,y)_{i+1}$ refer to unknown values from the new time step $(x,y,p_x,p_y)_{i+1}$ but all new values of $(p_x,p_y)_{i+1}$ refer only to known values from the current time step $(x,y,p_x,p_y)_i$:
+\section{Symplectic Euler Algorithm}
+This algorithm manifests as a mixture between explicit and implicit Euler. In the symplectic Euler, we choose either all $q_{i+1}$ and $p_i$ for all quantities in the term multiplied by $h$ or vice versa \cite{Hairer}. We choose $q_{i+1}$ and $p_i$, resulting in the equations:
 \begin{align}
-x_{i+1} &= (p_{x,i+1} + y_{i+1})h + x_i \label{eq:euler-s-x}, \\[0.2cm]
-y_{i+1} &= (p_{y,i+1} - x_{i+1})h + y_i \label{eq:euler-s-y}, \\[0.2cm]
-p_{x,i+1} &= \left(p_{y,i} - \dfrac{(1-k)(k+x_i)}{((k+x_i)^2+y_i^2)^{3/2}} + \dfrac{k(1-k-x_i)}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{x,i} \label{eq:euler-s-px}, \\[0.2cm]
-p_{y,i+1} &= \left(-p_{x,i} - \dfrac{(1-k)y_i}{((k+x_i)^2+y_i^2)^{3/2}} - \dfrac{k y_i}{((1-k-x_i)^2+y_i^2)^{3/2}}\right)h + p_{y,i}. \label{eq:euler-s-py}
+    X_{i+1} &= X_i + (P_{X,i} + Y_{i+1})h, \label{eq:euler-s-x} \\[0.2cm]
+    Y_{i+1} &= Y_i + (P_{Y,i} - X_{i+1})h , \label{eq:euler-s-y} \\[0.2cm]
+    P_{X,i+1} &= P_{X,i} + \left(P_{Y,i} - \dfrac{(1-k)(k+X_{i+1})}{((k+X_{i+1})^2+Y_{i+1}^2)^{3/2}} + \dfrac{k(X_{i+1}-1+k)}{((X_{i+1}-1+k)^2+Y_{i+1}^2)^{3/2}}\right)h, \label{eq:euler-s-px} \\[0.2cm]
+    P_{Y,i+1} &= P_{Y,i} + \left(-P_{X,i} - \dfrac{(1-k)Y_{i+1}}{((k+X_{i+1})^2+Y_{i+1}^2)^{3/2}} - \dfrac{k Y_{i+1}}{((X_{i+1}-1+k)^2+Y_{i+1}^2)^{3/2}}\right)h. \label{eq:euler-s-py}
 \end{align}
-As opposed to implicit Euler, this can easily be solved by solving \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y} for $x_{i+1}$ and $y_{y+1}$ (see Appendix \ref{app:r3b-symplectic-euler} for Mathematica notebook):
+We can first solve \cref{eq:euler-s-x,eq:euler-s-y} for $X_{i+1}$ and $Y_{y+1}$ (see Appendix \ref{app:r3b-symplectic-euler} for Mathematica notebook):
 \begin{align}
-x_{i+1} &= \dfrac{x_i + h(h p_{y,i+1} + p_{x,i+1} + y_i)}{1+h^2}, \label{eq:euler_s_x2} \\[0.5cm]
-y_{i+1} &= \dfrac{y_i - h(h p_{x,i+1} - p_{y,i} + x_i)}{1+h^2}, \label{eq:euler_s_y2}
+X_{i+1} &= \dfrac{X_i + (Y_i + P_{X,i} + P_{Y,i} h) h}{1+h^2}, \label{eq:euler_s_x2} , \\[0.5cm]
+Y_{i+1} &= \dfrac{Y_i - (X_i - P_{Y,i} + P_{X,i} h) h}{1+h^2}, \label{eq:euler_s_y2}.
 \end{align}
-and then we can run the algorithm in the order \eqref{eq:euler-s-px}, \eqref{eq:euler-s-py}, \eqref{eq:euler-s-x} and \eqref{eq:euler-s-y}. % FIXME: This algorithm order isn't correct, change later when understood.
+We can now start by running \cref{eq:euler_s_x2}. Next we can freely choose between running \cref{eq:euler-s-y} and \cref{eq:euler_s_y2} as both are valid. We will run \cref{eq:euler-s-y} since it is faster computationally. Then we can run the impulse equations as is.
+
+
+In summary, we run the symplectic Euler algorithm in the order: \cref{eq:euler_s_x2}, \cref{eq:euler-s-y}, \cref{,eq:euler-s-px}, \cref{eq:euler-s-py}.
 
 \section{First Test Runs with First-Order Euler Methods}
 The explicit and symplectic Euler algorithm was implemented in Python. The first two things we want to investigate are:
@@ -68,7 +71,7 @@ PY0=0.5
 
 \begin{figure}
     \centering
-        \subbottom[Explicit Euler $(\mathscr{X},\mathscr{Y})$ trajectory. Earth in origin, moon orbit in grey, first half of spacecraft trajectory is red, last half is blue.]{
+        \subbottom[Explicit Euler $(\mathscr{X},\mathscr{Y})$ trajectory. Earth in origin, moon orbit in greY, first half of spacecraft trajectory is red, last half is blue.]{
             \includegraphics[scale=0.41]{fig/r3b-testing/r3b_y(x)_euler_explicit.pdf}
             \label{fig:r3b_y(x)_euler_explicit}
         }
@@ -82,7 +85,7 @@ PY0=0.5
 
 \begin{figure}
     \centering
-        \subbottom[Symplectic Euler $(\mathscr{X},\mathscr{Y})$ trajectory. Earth in origin, moon orbit in grey, first half of spacecraft trajectory is red, last half is blue.]{
+        \subbottom[Symplectic Euler $(\mathscr{X},\mathscr{Y})$ trajectory. Earth in origin, moon orbit in greY, first half of spacecraft trajectory is red, last half is blue.]{
             \includegraphics[scale=0.41]{fig/r3b-testing/r3b_y(x)_euler_symplectic.pdf}
             \label{fig:r3b_y(x)_euler_symplectic}
         }
@@ -90,7 +93,7 @@ PY0=0.5
             \includegraphics[scale=0.411]{fig/r3b-testing/r3b_H(t)_euler_symplectic.pdf}
             \label{fig:r3b_H(t)_euler_symplectic}
         }
-        \caption{Symplectic Euler trajectory and Hamiltonian. The first half trajectory is red, the last half is blue. First we note the approximate elliptical orbit as expected. The $H(t)$ shows dips is the spacecraft passes the Earth, but on average over an orbit, $H(t)$ is approximately constant}
+        \caption{Symplectic Euler trajectory and Hamiltonian. The first half trajectory is red, the last half is blue. First we note the approximate elliptical orbit as expected. The $H(t)$ shows dips is the spacecraft passes the Earth, but on average over an orbit, $H(t)$ is approximately constant} % FIXME: No it's not constant looking - this needs to be fixed.
         \label{fig:r3b_symplectic_euler}
 \end{figure}
 Having $H$ conserved on average over an orbit is fine for a closed orbit, but for chaotic orbits around both Earth and Moon, it's not nearly good enough. We want a higher order method to conserve $H$ better, to better gauge the numerical errors, and to allow an adaptive numerical method.
@@ -100,34 +103,34 @@ Making the algorithm select a step size adaptively decreases the run time of a g
 \section{Symplectic Störmer-Verlet}
 We will now describe the second-order Störmer-Verlet method \cite{Hochbruck2008}:
 \begin{align}
-q_{i+1/2} &= q_i + \dfrac{h}{2}H_p(q_{i+1/2}, p_i), \\
-p_{i+1} &= p_i + \dfrac{h}{2}(H_q(q_{i+1/2}, p_i) + H_q(q_{i+1/2}, p_{i+1})), \\
-q_{i+1} &= q_{i+1/2} + \dfrac{h}{2}H_p(q_{n+1/2}, p_{i+1/2}).
+q_{i+1/2} &= q_i + \dfrac{h}{2}H_p(q_{i+1/2}, P_i), \\
+P_{i+1} &= P_i + \dfrac{h}{2}(H_q(q_{i+1/2}, P_i) + H_q(q_{i+1/2}, P_{i+1})), \\
+q_{i+1} &= q_{i+1/2} + \dfrac{h}{2}H_p(q_{n+1/2}, P_{i+1/2}).
 \end{align}
-where $H_q$ and $H_p$ denotes the partial derivatives of $H$, which can be expressed in terms of $q_i$ and $p_i$ by Hamilton's equations. Implemented for our equations (using~\cref{eq:H-x,eq:H-y,eq:H-px,eq:H-py} to express $H_q$ and $H_p$) we get:
+where $H_q$ and $H_p$ denotes the partial derivatives of $H$, which can be expressed in terms of $q_i$ and $P_i$ by Hamilton's equations. Implemented for our equations (using~\cref{eq:H-X,eq:H-Y,eq:H-pX,eq:H-py} to express $H_q$ and $H_p$) we get:
 \begin{align}
-x_{i+1/2} &= (p_{x,i} + y_{i+1/2})\dfrac{h}{2} + x_i, \\[0.3cm]
-y_{i+1/2} &= (p_{y,i} - x_{i+1/2})\dfrac{h}{2} + y_i, \\[0.8cm]
+x_{i+1/2} &= (P_{X,i} + Y_{i+1/2})\dfrac{h}{2} + X_i, \\[0.3cm]
+Y_{i+1/2} &= (P_{Y,i} - X_{i+1/2})\dfrac{h}{2} + Y_i, \\[0.8cm]
 %
 %
-p_{x,i+1} &= \left[-H_{x,i} + (p_{x,i+1} + y_{i+1/2}) \right]\dfrac{h}{2} + p_{x,i}, \\[0.3cm]
+P_{X,i+1} &= \left[-H_{X,i} + (P_{X,i+1} + Y_{i+1/2}) \right]\dfrac{h}{2} + P_{X,i}, \\[0.3cm]
 %
-p_{y,i+1} &= \left[-H_{y,i} + (p_{y,i+1} -x_{i+1/2}) \right]\dfrac{h}{2} + p_{y,i},\\[0.8cm]
+P_{Y,i+1} &= \left[-H_{Y,i} + (P_{Y,i+1} -x_{i+1/2}) \right]\dfrac{h}{2} + P_{Y,i},\\[0.8cm]
 %
 %
-x_{i+1} &= (p_{x,i+1} + y_{i+1/2})\dfrac{h}{2}, \\[0.3cm]
-y_{i+1} &= (p_{y,i+1} - x_{i+1/2})\dfrac{h}{2},
+X_{i+1} &= (P_{X,i+1} + Y_{i+1/2})\dfrac{h}{2}, \\[0.3cm]
+Y_{i+1} &= (P_{Y,i+1} - X_{i+1/2})\dfrac{h}{2},
 \end{align}
 where
 \begin{align}
--H_{x,i} = \left(p_{y,i+1} - \dfrac{(1-k)(k+x_{i+1})}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} + \dfrac{k(1-k-x_{i+1})}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right), \\[0.5cm]
--H_{y,i} = \left(-p_{x,i+1} - \dfrac{(1-k)y_{i+1}}{((k+x_{i+1})^2+y_{i+1}^2)^{3/2}} - \dfrac{k y_{i+1}}{((1-k-x_{i+1})^2+y_{i+1}^2)^{3/2}}\right).
+-H_{X,i} = \left(P_{Y,i+1} - \dfrac{(1-k)(k+X_{i+1})}{((k+X_{i+1})^2+Y_{i+1}^2)^{3/2}} + \dfrac{k(X-1+k_{i+1})}{((X-1+k_{i+1})^2+Y_{i+1}^2)^{3/2}}\right), \\[0.5cm]
+-H_{Y,i} = \left(-P_{X,i+1} - \dfrac{(1-k)Y_{i+1}}{((k+X_{i+1})^2+Y_{i+1}^2)^{3/2}} - \dfrac{k Y_{i+1}}{((X-1+k_{i+1})^2+Y_{i+1}^2)^{3/2}}\right).
 \end{align}
 
 % TODO: Fill in final equations of motion and refer to Appendix D for derivation.
 
 \section{Adaptive Symplectic Störmer-Verlet}
-Let $z$ denote a vector of the position variables $(x,y)$.
+Let $z$ denote a vector of the position variables $(X,y)$.
 \begin{align}
 \text{Euler step result:} \qquad z_1 = z + O(h), \\
 \text{Verlet step result:} \qquad z_2 = z + O(h^2), \\
@@ -162,48 +165,48 @@ For every single step the step size is changed either up or down, depending on t
 The non-adaptive algorithm is fixed in step size but varies in error per step.
 The adaptive algorithm varies in step size in an attempt to fix the error per step.
 
-For all simulations we have set $10^{-9}$ as the maximum tolerated error per step in the adaptive algorithm. For the non-adaptive algorithm we select a fixed step size, $10^{-6}$, to ensure that it's reasonably low most of the time. For comparison a simulation was run with same initial conditions using the adaptive and non-adaptive algorithm, see Figure \ref{fig:non-adaptive-step_error} - \ref{fig:adaptive-step_error}. Position plot \ref{fig:adaptive-xy_XY} shown for completeness.
+For all simulations we have set $10^{-9}$ as the maximum tolerated error per step in the adaptive algorithm. For the non-adaptive algorithm we select a fixed step size, $10^{-6}$, to ensure that it's reasonably low most of the time. For comparison a simulation was run with same initial conditions using the adaptive and non-adaptive algorithm, see Figure \ref{fig:non-adaptive-steP_error} - \ref{fig:adaptive-steP_error}. Position plot \ref{fig:adaptive-xY_XY} shown for completeness.
 
 \begin{figure}
     \centering
         \subbottom[Non-adaptive symplectic Verlet step size.]{
-            \includegraphics[scale=0.41]{fig/adaptive/step_fixed_h.pdf}
+            \includegraphics[scale=0.41]{fig/adaptive/steP_fixed_h.pdf}
         }
         \subbottom[Non-adaptive symplectic Verlet error per step.]{
             \includegraphics[scale=0.41]{fig/adaptive/err_fixed_h.pdf}
         \label{fig:non-adaptive-error}
         }
-        \caption{Non-adaptive method step size and error per step. Step size is fixed and as a result the error varies. All the work spend on calculating the many steps with lower error than $10^{-9}$ in \ref{fig:non-adaptive-error} are wasted since the error spikes to somewhere $10^{-8}$ and $10^{-7}$ during a close fly-by, which might invalidate all decimals after the 7th decimal on the non-adaptive method. The solutions are practically identical, but the adaptive is much faster}
-        \label{fig:non-adaptive-step_error}
+        \caption{Non-adaptive method step size and error per step. Step size is fixed and as a result the error varies. All the work spend on calculating the many steps with lower error than $10^{-9}$ in \ref{fig:non-adaptive-error} are wasted since the error spikes to somewhere $10^{-8}$ and $10^{-7}$ during a close fly-bY, which might invalidate all decimals after the 7th decimal on the non-adaptive method. The solutions are practically identical, but the adaptive is much faster}
+        \label{fig:non-adaptive-steP_error}
 \end{figure}
 
 
 \begin{figure}
     \centering
         \subbottom[Adaptive symplectic Verlet step size.]{
-            \includegraphics[scale=0.41]{fig/adaptive/step_adaptive.pdf}
+            \includegraphics[scale=0.41]{fig/adaptive/steP_adaptive.pdf}
         \label{fig:adaptive-step size}    
         }
         \subbottom[Adaptive symplectic Verlet error per step.]{
             \includegraphics[scale=0.41]{fig/adaptive/err_adaptive.pdf}
         }
         \caption{The adaptive method constantly varies the step-size to ensure a constant error around $10^{-9}$. As a result it takes longer steps when there is less change in the variables, in the space far from the bodies, and shorter steps when passing close by the Earth or Moon}
-        \label{fig:adaptive-step_error}
+        \label{fig:adaptive-steP_error}
 \end{figure}
 
 \begin{figure}
     \centering
-        \subbottom[Non-adaptive symplectic Verlet $(x,y)$ trajectory.]{
-            \includegraphics[scale=0.5]{fig/adaptive/_x-y_fixed_h.pdf}
+        \subbottom[Non-adaptive symplectic Verlet $(X,y)$ trajectory.]{
+            \includegraphics[scale=0.5]{fig/adaptive/_X-Y_fixed_h.pdf}
         }
         \subbottom[Non-adaptive symplectic Verlet $(\mathscr{X},\mathscr{Y})$ trajectory.]{
             \includegraphics[scale=0.5]{fig/adaptive/X-Y_fixed_h.pdf}
         }
-        \caption{The trajectories of same initial conditions for the adaptive and non-adaptive method was visually indistinguishable. Included for context to Figure \ref{fig:non-adaptive-step_error} - \ref{fig:adaptive-step_error}}
-        \label{fig:adaptive-xy_XY}
+        \caption{The trajectories of same initial conditions for the adaptive and non-adaptive method was visually indistinguishable. Included for context to Figure \ref{fig:non-adaptive-steP_error} - \ref{fig:adaptive-steP_error}}
+        \label{fig:adaptive-xY_XY}
 \end{figure}
 
 
-Note on the step size Figure \ref{fig:adaptive-step size} that the adaptive ends up with constant step size at the end at 40 days once captured by the Moon. Thus when we are in circular orbit around a single body, we don't gain much by using adaptive methods. However as the spacecraft are in free space far away from both Earth/Moon, we gain a lot by taking longer steps (raising the step size). However as we make close passes to Earth or Moon, then the step size dips sharply to maintain constant error. We see this around day 9, 21 and 33 in \ref{fig:adaptive-step size}. For most simulations, the adaptive method ran 10-100 times faster.
+Note on the step size Figure \ref{fig:adaptive-step size} that the adaptive ends up with constant step size at the end at 40 days once captured by the Moon. Thus when we are in circular orbit around a single bodY, we don't gain much by using adaptive methods. However as the spacecraft are in free space far away from both Earth/Moon, we gain a lot by taking longer steps (raising the step size). However as we make close passes to Earth or Moon, then the step size dips sharply to maintain constant error. We see this around day 9, 21 and 33 in \ref{fig:adaptive-step size}. For most simulations, the adaptive method ran 10-100 times faster.
 
 The code for the full Python implementation is in Appendix \ref{app:code-r3b}.

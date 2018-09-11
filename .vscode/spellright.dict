@@ -14,3 +14,8 @@ py
 Tuppoto
 Mécanique
 Analytique''
+tol
+sqrt tol
+Dimensionalization
+nondimensionalize
+eigenmode
