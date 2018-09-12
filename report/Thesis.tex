@@ -8,6 +8,22 @@
 
 \addbibresource{library.bib}
 
+% Fixes _ and ~ in URLs from Mendeley (https://tex.stackexchange.com/a/309995/39354)
+\DeclareSourcemap{
+    \maps{
+        \map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
+            \step[fieldsource=url,
+                  match=\regexp{\{\\\_\}|\{\_\}|\\\_},
+                  replace=\regexp{\_}]
+        }
+        \map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
+            \step[fieldsource=url,
+                  match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
+                  replace=\regexp{\~}]
+        }
+    }
+}
+
 \begin{document}
 
 \prefrontmatter
